@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Checkout Seguro | Protocolo Reset Anti-Inflamatório</title>
+    <link rel="stylesheet" href="./style.css" />
+    <style>
+      body {
+        background-color: #f7faf8; /* Fundo mais claro para o checkout */
+        color: #333;
+      }
+      .checkout-container {
+        max-width: 800px;
+        margin: 2rem auto;
+        display: grid;
+        grid-template-columns: 1.2fr 1fr;
+        gap: 2rem;
+      }
+      .checkout-form, .checkout-summary {
+        background: #fff;
+        padding: 2rem;
+        border-radius: 12px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+      }
+      .checkout-form h2 {
+        color: var(--color-primary);
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+      }
+      .input-group {
+        margin-bottom: 1rem;
+      }
+      .input-group label {
+        display: block;
+        margin-bottom: 0.5rem;
+        font-weight: 500;
+      }
+      .input-group input {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid #ddd;
+        border-radius: 6px;
+        font-family: var(--font-main);
+      }
+      
+      /* Order Bump */
+      .order-bump {
+        background-color: #fffaeb;
+        border: 2px dashed var(--color-warning);
+        border-radius: 8px;
+        padding: 1.5rem;
+        margin-top: 1.5rem;
+        animation: subtle-pulse 2s infinite;
+      }
+      @keyframes subtle-pulse {
+        0% { box-shadow: 0 0 0 0 rgba(221, 107, 32, 0.4); }
+        70% { box-shadow: 0 0 0 10px rgba(221, 107, 32, 0); }
+        100% { box-shadow: 0 0 0 0 rgba(221, 107, 32, 0); }
+      }
+      .order-bump-header {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-weight: 700;
+        color: #b75516;
+        margin-bottom: 0.5rem;
+      }
+      .order-bump-header input {
+        width: auto;
+        transform: scale(1.5);
+      }
+      .order-bump p {
+        font-size: 0.9rem;
+        color: #555;
+      }
+
+      /* Summary */
+      .checkout-summary {
+        background-color: var(--color-bg-light);
+        color: #fff;
+      }
+      .summary-item {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 1rem;
+        border-bottom: 1px solid rgba(255,255,255,0.1);
+        padding-bottom: 0.5rem;
+      }
+      .total {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: var(--color-accent-light);
+      }
+
+      /* Logo Kiwify Mockup */
+      .kiwify-mockup {
+        text-align: center;
+        margin-bottom: 1rem;
+      }
+      .kiwify-mockup span {
+        background: #00E7F9;
+        color: #000;
+        font-weight: 800;
+        padding: 4px 12px;
+        border-radius: 4px;
+        font-size: 1.2rem;
+      }
+
+      @media (max-width: 768px) {
+        .checkout-container {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    
+    <div class="container kiwify-mockup mt-8">
+      <span>kiwify</span>
+      <p style="color: #666; font-size: 0.8rem; margin-top: 5px;">Ambiente 100% Seguro</p>
+    </div>
+
+    <div class="container checkout-container">
+      
+      <!-- Formulário -->
+      <div class="checkout-form">
+        <h2>Dados Pessoais</h2>
+        <div class="input-group">
+          <label>Nome Completo</label>
+          <input type="text" placeholder="Seu nome" />
+        </div>
+        <div class="input-group">
+          <label>E-mail</label>
+          <input type="email" placeholder="Seu melhor e-mail" />
+        </div>
+        <div class="input-group">
+          <label>CPF</label>
+          <input type="text" placeholder="000.000.000-00" />
+        </div>
+
+        <h2 class="mt-8">Pagamento</h2>
+        <div class="input-group">
+          <label>Número do Cartão</label>
+          <input type="text" placeholder="0000 0000 0000 0000" />
+        </div>
+        <div style="display: flex; gap: 1rem;">
+          <div class="input-group" style="flex: 1;">
+            <label>Validade</label>
+            <input type="text" placeholder="MM/AA" />
+          </div>
+          <div class="input-group" style="flex: 1;">
+            <label>CVV</label>
+            <input type="text" placeholder="123" />
+          </div>
+        </div>
+
+        <!-- Order Bump -->
+        <div class="order-bump">
+          <div class="order-bump-header">
+            <input type="checkbox" id="bump" checked />
+            <label for="bump">🔥 SIM! Quero adicionar "A Xícara de Ouro"</label>
+          </div>
+          <p><strong>Não feche essa página!</strong> Adicione agora 15 Blends de Chás Termogênicos por apenas <strong>R$ 27,90</strong>. Este acelerador de resultados não estará disponível em nenhum outro lugar.</p>
+        </div>
+        
+        <a href="./upsell.html" class="btn btn-primary btn-pulse btn-block mt-8" style="text-align: center;">
+          COMPRAR AGORA
+        </a>
+        <p class="text-center mt-2" style="font-size: 0.8rem; color: #888;">Ao clicar, você será redirecionado para a próxima etapa.</p>
+      </div>
+
+      <!-- Resumo do Pedido -->
+      <div class="checkout-summary">
+        <h2 style="color: #fff; margin-bottom: 1.5rem;">Resumo do Pedido</h2>
+        
+        <div class="summary-item">
+          <span>Protocolo Reset Anti-Inflamatório</span>
+          <strong>R$ 147,00</strong>
+        </div>
+        
+        <div class="summary-item">
+          <span>+ 3 Bônus Exclusivos</span>
+          <strong style="color: var(--color-accent-light);">GRÁTIS</strong>
+        </div>
+
+        <div class="summary-item">
+          <span>A Xícara de Ouro (Order Bump)</span>
+          <strong>R$ 27,90</strong>
+        </div>
+
+        <div class="summary-item mt-8 total" style="border: none;">
+          <span>Total</span>
+          <span>R$ 174,90</span>
+        </div>
+        
+        <div class="mt-8 text-center">
+          <img src="https://via.placeholder.com/300x50/163621/ffffff?text=Compra+Segura+SSL" alt="Compra Segura" style="max-width: 100%; border-radius: 4px;" />
+        </div>
+      </div>
+
+    </div>
+
+  </body>
+</html>

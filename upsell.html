@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Oferta Especial | Clube Vida Leve</title>
+    <link rel="stylesheet" href="./style.css" />
+    <style>
+      /* Clean layout para upsell */
+      body {
+        background-color: #fafafa;
+        color: #111;
+      }
+      .upsell-container {
+        max-width: 800px;
+        margin: 3rem auto;
+        background: #fff;
+        padding: 3rem;
+        border-radius: 16px;
+        box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+        text-align: center;
+      }
+      .warning-bar {
+        background-color: var(--color-warning);
+        color: #fff;
+        padding: 10px;
+        font-weight: 700;
+        border-radius: 8px;
+        margin-bottom: 2rem;
+        animation: pulse-bg 2s infinite;
+      }
+      @keyframes pulse-bg {
+        0% { background-color: var(--color-warning); }
+        50% { background-color: #c05615; }
+        100% { background-color: var(--color-warning); }
+      }
+      .upsell-headline {
+        font-size: 2.2rem;
+        color: var(--color-bg-dark);
+        line-height: 1.2;
+      }
+      .upsell-headline span {
+        color: var(--color-primary);
+      }
+      .video-wrapper-upsell {
+        margin: 2rem auto;
+        border: 2px solid #eee;
+        border-radius: 8px;
+        overflow: hidden;
+      }
+      
+      .btn-decline {
+        display: inline-block;
+        margin-top: 1rem;
+        color: #888;
+        text-decoration: underline;
+        font-size: 0.9rem;
+        cursor: pointer;
+        background: none;
+        border: none;
+      }
+      .btn-decline:hover {
+        color: #555;
+      }
+    </style>
+  </head>
+  <body>
+
+    <div class="container">
+      <div class="upsell-container">
+        
+        <div class="warning-bar">
+          ESPERE! SUA COMPRA AINDA NÃO ESTÁ FINALIZADA. NÃO FECHE ESTA PÁGINA!
+        </div>
+
+        <h1 class="upsell-headline">
+          Você deu o primeiro passo. Agora, garanta que você <span>nunca mais sofra com o efeito sanfona.</span>
+        </h1>
+        <p class="mt-4" style="font-size: 1.1rem; color: #555;">
+          Assista ao vídeo abaixo para liberar seu acesso ao <strong>Clube Vida Leve: 365 Dias de Refeições Desinflamatórias</strong>.
+        </p>
+
+        <!-- Vídeo Curto Placeholder -->
+        <div class="video-wrapper-upsell video-container">
+          <iframe 
+            src="https://www.youtube.com/embed/dQw4w9WgXcQ?controls=0&modestbranding=1&rel=0" 
+            title="Apresentação Upsell" 
+            frameborder="0" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+            allowfullscreen>
+          </iframe>
+        </div>
+
+        <div class="mt-8">
+          <p style="font-weight: 700; font-size: 1.2rem; margin-bottom: 1rem;">
+            Leve 1 ano inteiro de cardápios prontos por apenas 12x de R$ 9,70
+          </p>
+          
+          <button class="btn btn-primary btn-pulse btn-block" style="font-size: 1.3rem; padding: 20px;">
+            SIM! QUERO ADICIONAR O CLUBE VIDA LEVE AO MEU PEDIDO
+          </button>
+          
+          <button class="btn-decline mt-4">
+            Não, obrigado. Eu prefiro tentar montar meus cardápios sozinho, mesmo que isso custe meu tempo e possa atrasar meus resultados.
+          </button>
+        </div>
+
+      </div>
+    </div>
+
+  </body>
+</html>
