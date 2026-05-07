@@ -4,7 +4,7 @@
   <desc>Lockup vertical canônico. Cores controladas via CSS custom properties --logo-accent e --logo-text no container pai.</desc>
   <style>
     .accent { fill: var(--logo-accent, #A88B4A); stroke: var(--logo-accent, #A88B4A); }
-    .text { fill: var(--logo-text, #1F3D2E); }
+    .text { fill: var(--logo-text, #EBE3D0); }
     .marcellus { font-family: 'Marcellus SC', serif; font-weight: 400; }
     .italiana { font-family: 'Italiana', serif; font-weight: 400; }
   </style>
