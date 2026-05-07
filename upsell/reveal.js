@@ -75,6 +75,10 @@
     player.on('seeked', (data) => {
       if (data.seconds >= THRESHOLD) reveal('seeked');
     });
+
+    player.on('ended', () => {
+      reveal('video_ended');
+    });
   }
 
   attachVimeoListener();

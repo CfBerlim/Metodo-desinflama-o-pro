@@ -89,6 +89,11 @@
       }
     });
 
+    // Safety: se o vídeo terminar antes de atingir o threshold (vídeo curto, dev, ou edição equivocada), revela mesmo assim — cliente não fica travado num lock que nunca abre
+    player.on('ended', () => {
+      reveal('video_ended');
+    });
+
     // Quartis de retenção (analytics)
     let quartilesFired = { 25: false, 50: false, 75: false, 95: false };
     player.getDuration().then(duration => {

@@ -133,32 +133,28 @@ body.revealed .upsell-lock-note {
 
 /* ==========================================================================
    REVEAL — fade-in do bloco de oferta + ações aos 1:30
+   Antes do reveal: fora do fluxo (display:none) — não consome scroll.
+   Após reveal: materializa no fluxo + animação encadeada via CSS animation.
    ========================================================================== */
 .upsell-reveal-block {
-  opacity: 0;
-  visibility: hidden;
-  pointer-events: none;
-  transform: translateY(40px);
-  transition:
-    opacity 700ms cubic-bezier(0.2, 0.7, 0.2, 1),
-    transform 700ms cubic-bezier(0.2, 0.7, 0.2, 1),
-    visibility 0s linear 700ms;
+  display: none;
 }
 body.revealed .upsell-reveal-block {
-  opacity: 1;
-  visibility: visible;
-  pointer-events: auto;
-  transform: translateY(0);
-  transition:
-    opacity 700ms cubic-bezier(0.2, 0.7, 0.2, 1),
-    transform 700ms cubic-bezier(0.2, 0.7, 0.2, 1),
-    visibility 0s;
+  display: block;
+  animation: upsellRevealFade 700ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
 }
-body.revealed .upsell-actions { transition-delay: 250ms; }
+body.revealed .upsell-actions {
+  display: flex;
+  animation-delay: 250ms;
+}
+
+@keyframes upsellRevealFade {
+  from { opacity: 0; transform: translateY(40px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
 
 @media (prefers-reduced-motion: reduce) {
-  .upsell-reveal-block { transform: none; transition-duration: 200ms; }
-  body.revealed .upsell-reveal-block { transform: none; }
+  body.revealed .upsell-reveal-block { animation: none; }
 }
 
 /* ==========================================================================
