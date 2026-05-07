@@ -67,24 +67,192 @@
          BELOW-FOLD — fase pitch (revelado aos 4:00)
          ============================================================ -->
     <div id="below-fold" tabindex="-1">
-      <!-- Seções I-V serão adicionadas em Tasks 5-9 -->
+
+      <!-- Seção I · Os 5 Módulos -->
+      <section class="section section-modulos">
+        <div class="container">
+          <div class="section-eyebrow">O QUE VOCÊ VAI APRENDER</div>
+          <h2 class="section-headline">Cinco módulos para <em>desligar o incêndio.</em></h2>
+          <p class="section-subtitulo">Vinte e seis aulas curtas, em vídeo, com locução cinematográfica.</p>
+          <div class="modulos-grid" id="modulos-grid"></div>
+        </div>
+      </section>
+
+      <!-- Seção II · Os 3 Bônus -->
+      <section class="section section-bonus">
+        <div class="container">
+          <div class="section-eyebrow">BÔNUS INCLUSOS NO MÉTODO</div>
+          <h2 class="section-headline">Três manuais para tornar tudo <em>prático.</em></h2>
+          <p class="section-subtitulo">Recebidos junto com o curso. Sem custo adicional.</p>
+          <div class="bonus-grid" id="bonus-grid"></div>
+        </div>
+      </section>
+
+      <!-- Seção III · Garantia -->
+      <section class="section section-garantia">
+        <div class="container">
+          <div class="garantia-block">
+            <div class="garantia-selo">
+              <object data="../identity/logo/monogram-seal.svg" type="image/svg+xml" aria-hidden="true"></object>
+            </div>
+            <div class="garantia-texto">
+              <div class="section-eyebrow garantia-eyebrow">GARANTIA INCONDICIONAL</div>
+              <h2 class="garantia-headline" id="garantia-headline"></h2>
+              <p class="garantia-paragrafo" id="garantia-paragrafo"></p>
+              <div class="garantia-label" id="garantia-label"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Seção IV · Stack de Oferta -->
+      <section class="section section-oferta">
+        <div class="container">
+          <div class="section-eyebrow">O INVESTIMENTO</div>
+          <h2 class="section-headline">Tudo que <em>está incluso.</em></h2>
+          <div class="oferta-card">
+            <div class="oferta-divisor"><span>O QUE VOCÊ RECEBE</span></div>
+            <ul class="oferta-stack" id="oferta-stack"></ul>
+            <div class="oferta-total-row">
+              <span class="oferta-total-label">Valor real do pacote</span>
+              <span class="oferta-total-valor" id="oferta-total-valor"></span>
+            </div>
+            <div class="oferta-preco-block">
+              <div class="oferta-contexto" id="oferta-contexto"></div>
+              <div class="oferta-parcelado" id="oferta-parcelado"></div>
+              <div class="oferta-avista" id="oferta-avista"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Seção V · CTA Principal -->
+      <section class="section section-cta">
+        <div class="container">
+          <div class="cta-block">
+            <div class="cta-eyebrow" id="cta-eyebrow"></div>
+            <a class="btn-primary-xl" id="cta-botao" href="#" rel="noopener" target="_self">
+              <span id="cta-texto"></span>
+              <span class="cta-arrow">→</span>
+            </a>
+            <ul class="cta-seguranca" id="cta-seguranca"></ul>
+          </div>
+        </div>
+      </section>
+
     </div>
+    <!-- /below-fold -->
+
+    <!-- Footer minimalista (sempre visível) -->
+    <footer class="page-footer">
+      <div class="footer-monogram">
+        <object data="../identity/logo/monogram.svg" type="image/svg+xml" aria-hidden="true"></object>
+      </div>
+      <div class="footer-tag">MÉTODO DESINFLAMAÇÃO · PRO · MMXXVI</div>
+      <div class="footer-suporte" id="footer-suporte"></div>
+      <nav class="footer-links">
+        <a href="/politica-privacidade.html">Política de Privacidade</a>
+        <span aria-hidden="true">·</span>
+        <a href="/termos-de-uso.html">Termos de Uso</a>
+      </nav>
+    </footer>
   </main>
+
+  <!-- Sticky CTA mobile (visível apenas em mobile e após reveal) -->
+  <div class="sticky-cta" aria-hidden="false">
+    <a href="#" id="sticky-cta-btn" rel="noopener">QUERO ACESSAR O MÉTODO →</a>
+  </div>
 
   <script src="content.js"></script>
 
-  <!-- Bind hero copy + iframe src via content.js -->
+  <!-- Bind copy + iframe src via content.js — todos os blocos -->
   <script>
     (function() {
-      const c = window.LANDING_COPY.hero;
+      const cfg = window.LANDING_CONFIG;
+      const COPY = window.LANDING_COPY;
+
+      // Hero
+      const c = COPY.hero;
       document.getElementById('hero-eyebrow').textContent = c.eyebrow;
       document.getElementById('hero-manchete').textContent = c.manchete;
       document.getElementById('hero-subtitulo').textContent = c.subtitulo;
       document.getElementById('hero-lock-note').textContent = c.lockNote;
 
-      const cfg = window.LANDING_CONFIG;
       const player = document.getElementById('vsl-player');
       player.src = `https://player.vimeo.com/video/${cfg.VIDEO_ID}?title=0&byline=0&portrait=0&badge=0&color=C9A876&autopause=0&dnt=1`;
+
+      // Seção I · Módulos
+      const modulosGrid = document.getElementById('modulos-grid');
+      modulosGrid.innerHTML = COPY.modulos.map(m => `
+        <article class="modulo-card">
+          <div class="modulo-roman">${m.roman}</div>
+          <h3 class="modulo-titulo">${m.titulo}</h3>
+          <p class="modulo-desc">${m.desc}</p>
+          <div class="modulo-meta">${m.aulas}</div>
+        </article>
+      `).join('');
+
+      // Seção II · Bônus
+      const bonusGrid = document.getElementById('bonus-grid');
+      const mockups = ['assets/pdf-guia.jpg', 'assets/pdf-planner.jpg', 'assets/pdf-receitas.jpg'];
+      bonusGrid.innerHTML = COPY.bonus.map((b, i) => `
+        <article class="bonus-card">
+          <div class="bonus-mockup">
+            <img src="${mockups[i]}" alt="Mockup do PDF ${b.titulo}" loading="lazy">
+          </div>
+          <div class="bonus-roman">${b.roman}</div>
+          <h3 class="bonus-titulo">${b.titulo}</h3>
+          <p class="bonus-desc">${b.desc}</p>
+          <div class="bonus-meta">${b.meta}</div>
+        </article>
+      `).join('');
+
+      // Seção III · Garantia
+      const g = COPY.garantia;
+      document.getElementById('garantia-headline').innerHTML = g.headline.replace(/Zero risco\./, '<em>Zero risco.</em>');
+      document.getElementById('garantia-paragrafo').textContent = g.texto;
+      document.getElementById('garantia-label').textContent = g.label;
+
+      // Seção IV · Oferta
+      const o = COPY.oferta;
+      document.getElementById('oferta-stack').innerHTML = o.items.map(i => `
+        <li class="oferta-item">
+          <div>
+            <div class="oferta-item-titulo">${i.titulo}</div>
+            <div class="oferta-item-desc">${i.desc}</div>
+          </div>
+          <div class="oferta-item-valor">${i.valor}</div>
+        </li>
+      `).join('');
+      document.getElementById('oferta-total-valor').textContent = o.valorTotalAncora;
+      document.getElementById('oferta-contexto').textContent = o.contexto;
+      document.getElementById('oferta-parcelado').textContent = o.parcelado;
+      document.getElementById('oferta-avista').textContent = `ou ${o.avista}`;
+
+      // Seção V · CTA Principal
+      const cta = COPY.cta;
+      document.getElementById('cta-eyebrow').textContent = cta.eyebrow;
+      document.getElementById('cta-texto').textContent = cta.botao;
+      const ctaBtn = document.getElementById('cta-botao');
+      ctaBtn.href = cfg.KIWIFY_CHECKOUT_URL;
+      document.getElementById('cta-seguranca').innerHTML = cta.seguranca.map(s => `
+        <li><span class="cta-bullet"></span> ${s}</li>
+      `).join('');
+      ctaBtn.addEventListener('click', () => {
+        if (window.fbq) { try { fbq('track', 'InitiateCheckout'); } catch (_) {} }
+        if (window.dataLayer) window.dataLayer.push({ event: 'cta_click' });
+      });
+
+      // Footer
+      document.getElementById('footer-suporte').textContent = `Suporte: ${cfg.SUPPORT_EMAIL}`;
+
+      // Sticky CTA mobile
+      const stickyBtn = document.getElementById('sticky-cta-btn');
+      stickyBtn.href = cfg.KIWIFY_CHECKOUT_URL;
+      stickyBtn.addEventListener('click', () => {
+        if (window.fbq) { try { fbq('track', 'InitiateCheckout'); } catch (_) {} }
+        if (window.dataLayer) window.dataLayer.push({ event: 'sticky_cta_click' });
+      });
     })();
   </script>
 

@@ -196,3 +196,498 @@ body.revealed .hero-lock-note {
   #below-fold > section { transform: none; transition-duration: 200ms; }
   body.revealed #below-fold > section { transform: none; }
 }
+
+/* ==========================================================================
+   SECTION BASE
+   ========================================================================== */
+.section {
+  padding: var(--space-xxxl) var(--space-xl);
+  position: relative;
+}
+.section .container {
+  max-width: 1200px; margin: 0 auto;
+}
+.section-eyebrow {
+  font-family: var(--font-marca);
+  font-size: var(--size-eyebrow);
+  letter-spacing: var(--tracking-eyebrow);
+  color: var(--accent);
+  margin-bottom: 18px;
+  text-shadow: 0 0 14px rgba(201, 168, 118, 0.30);
+  text-align: center;
+}
+.section-headline {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(32px, 4vw, 48px);
+  line-height: 1.05;
+  color: var(--text-primary);
+  letter-spacing: 0.005em;
+  margin-bottom: 18px;
+  text-align: center;
+}
+.section-headline em {
+  font-family: var(--font-editorial);
+  font-style: italic;
+  color: var(--accent);
+  text-shadow: var(--ambient-text-glow);
+}
+.section-subtitulo {
+  font-family: var(--font-editorial);
+  font-style: italic;
+  font-size: clamp(16px, 1.6vw, 20px);
+  line-height: 1.55;
+  color: rgba(239, 231, 210, 0.7);
+  max-width: 640px; margin: 0 auto 64px;
+  text-align: center;
+}
+
+/* ==========================================================================
+   SEÇÃO I — Os 5 Módulos
+   ========================================================================== */
+.modulos-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 20px;
+}
+@media (max-width: 1100px) { .modulos-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 600px)  { .modulos-grid { grid-template-columns: 1fr; } }
+
+.modulo-card {
+  background: var(--bg-lift);
+  border: 1px solid rgba(201, 168, 118, 0.18);
+  border-radius: var(--radius-card);
+  padding: 28px 24px;
+  display: flex; flex-direction: column;
+  gap: 14px;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+.modulo-card:hover {
+  border-color: var(--accent);
+  box-shadow: var(--ambient-glow);
+}
+.modulo-roman {
+  font-family: var(--font-editorial);
+  font-style: italic;
+  font-size: 56px;
+  line-height: 1;
+  color: var(--accent);
+  text-shadow: 0 0 20px rgba(201, 168, 118, 0.35);
+}
+.modulo-titulo {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 22px;
+  line-height: 1.1;
+  color: var(--text-primary);
+  letter-spacing: 0.01em;
+}
+.modulo-desc {
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 1.55;
+  color: rgba(239, 231, 210, 0.72);
+  flex: 1;
+}
+.modulo-meta {
+  font-family: var(--font-marca);
+  font-size: 9px;
+  letter-spacing: 0.4em;
+  color: rgba(201, 168, 118, 0.85);
+  margin-top: 8px;
+}
+
+/* ==========================================================================
+   SEÇÃO II — Os 3 Bônus (PDFs)
+   ========================================================================== */
+.bonus-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+}
+@media (max-width: 900px) { .bonus-grid { grid-template-columns: 1fr; } }
+
+.bonus-card {
+  display: flex; flex-direction: column;
+  gap: 12px;
+  text-align: center;
+}
+.bonus-mockup {
+  aspect-ratio: 3 / 4;
+  background: var(--bg-lift);
+  border: 1px solid rgba(201, 168, 118, 0.18);
+  border-radius: var(--radius-card);
+  overflow: hidden;
+  margin-bottom: 20px;
+  box-shadow: 0 0 40px rgba(201, 168, 118, 0.06);
+}
+.bonus-mockup img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.bonus-roman {
+  font-family: var(--font-marca);
+  font-size: var(--size-eyebrow);
+  letter-spacing: 0.5em;
+  color: var(--accent);
+}
+.bonus-titulo {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 22px;
+  line-height: 1.15;
+  color: var(--text-primary);
+}
+.bonus-desc {
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 1.6;
+  color: rgba(239, 231, 210, 0.72);
+  max-width: 280px; margin: 0 auto;
+}
+.bonus-meta {
+  font-family: var(--font-marca);
+  font-size: 9px;
+  letter-spacing: 0.4em;
+  color: rgba(201, 168, 118, 0.7);
+  margin-top: 4px;
+}
+
+/* ==========================================================================
+   SEÇÃO III — Garantia
+   ========================================================================== */
+.section-garantia {
+  padding: var(--space-xxl) var(--space-xl);
+}
+.garantia-block {
+  max-width: 880px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 180px 1fr;
+  gap: 48px;
+  align-items: center;
+  padding: 48px 0;
+  border-top: 1px solid var(--hairline);
+  border-bottom: 1px solid var(--hairline);
+}
+@media (max-width: 700px) {
+  .garantia-block { grid-template-columns: 1fr; gap: 32px; text-align: center; padding: 36px 0; }
+}
+.garantia-selo {
+  display: flex; align-items: center; justify-content: center;
+}
+.garantia-selo object {
+  width: 160px; height: 160px;
+  --logo-accent: var(--accent);
+  --logo-text: var(--accent);
+}
+.garantia-eyebrow {
+  text-align: left;
+  margin-bottom: 14px;
+}
+@media (max-width: 700px) { .garantia-eyebrow { text-align: center; } }
+.garantia-headline {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(28px, 3.5vw, 40px);
+  line-height: 1.1;
+  color: var(--text-primary);
+  margin-bottom: 18px;
+}
+.garantia-headline em {
+  font-family: var(--font-editorial);
+  font-style: italic;
+  color: var(--accent);
+  text-shadow: var(--ambient-text-glow);
+}
+.garantia-paragrafo {
+  font-family: var(--font-editorial);
+  font-style: italic;
+  font-size: clamp(15px, 1.4vw, 18px);
+  line-height: 1.65;
+  color: rgba(239, 231, 210, 0.85);
+  margin-bottom: 20px;
+}
+.garantia-label {
+  font-family: var(--font-marca);
+  font-size: var(--size-eyebrow);
+  letter-spacing: var(--tracking-eyebrow);
+  color: var(--accent);
+}
+
+/* ==========================================================================
+   SEÇÃO IV — Stack de Oferta
+   ========================================================================== */
+.oferta-card {
+  max-width: 600px;
+  margin: 48px auto 0;
+  background: var(--bg-lift);
+  border: 1px solid rgba(201, 168, 118, 0.22);
+  border-radius: var(--radius-card);
+  padding: 40px 36px;
+  box-shadow: var(--ambient-glow);
+}
+.oferta-divisor {
+  display: flex; align-items: center; gap: 14px;
+  margin-bottom: 24px;
+}
+.oferta-divisor::before, .oferta-divisor::after {
+  content: ''; flex: 1; height: 1px; background: var(--hairline);
+}
+.oferta-divisor span {
+  font-family: var(--font-marca); font-size: 9px;
+  letter-spacing: 0.42em; color: var(--accent);
+}
+.oferta-stack {
+  list-style: none;
+  margin-bottom: 24px;
+}
+.oferta-item {
+  display: flex; justify-content: space-between; align-items: baseline;
+  padding: 12px 0;
+  border-bottom: 1px dashed rgba(201, 168, 118, 0.12);
+  gap: 16px;
+}
+.oferta-item:last-child { border-bottom: none; }
+.oferta-item-titulo {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 14px;
+  color: var(--text-primary);
+}
+.oferta-item-desc {
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 12px;
+  color: rgba(239, 231, 210, 0.55);
+  margin-top: 2px;
+}
+.oferta-item-valor {
+  font-family: var(--font-marca);
+  font-size: 13px;
+  letter-spacing: 0.06em;
+  color: var(--accent);
+  white-space: nowrap;
+}
+.oferta-total-row {
+  display: flex; justify-content: space-between; align-items: baseline;
+  padding-top: 18px;
+  margin-bottom: 32px;
+  border-top: 1px solid var(--hairline);
+}
+.oferta-total-label {
+  font-family: var(--font-editorial);
+  font-style: italic;
+  font-size: 14px;
+  color: rgba(239, 231, 210, 0.65);
+}
+.oferta-total-valor {
+  font-family: var(--font-display);
+  font-size: 22px;
+  color: rgba(239, 231, 210, 0.55);
+  text-decoration: line-through;
+  text-decoration-color: rgba(201, 168, 118, 0.45);
+}
+.oferta-preco-block {
+  text-align: center;
+  padding: 28px 16px;
+  border: 1px solid var(--accent);
+  border-radius: var(--radius-card);
+  background: radial-gradient(ellipse at 50% 50%,
+    rgba(201, 168, 118, 0.08) 0%, transparent 70%);
+}
+.oferta-contexto {
+  font-family: var(--font-editorial);
+  font-style: italic;
+  font-size: 16px;
+  color: var(--accent);
+  margin-bottom: 14px;
+}
+.oferta-parcelado {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(40px, 5vw, 56px);
+  line-height: 1;
+  color: var(--text-primary);
+  letter-spacing: 0.01em;
+  margin-bottom: 8px;
+  text-shadow: var(--ambient-text-glow);
+}
+.oferta-avista {
+  font-family: var(--font-marca);
+  font-size: var(--size-body-s);
+  letter-spacing: 0.18em;
+  color: var(--accent);
+}
+
+/* ==========================================================================
+   SEÇÃO V — CTA Principal
+   ========================================================================== */
+.section-cta {
+  padding: var(--space-xxxl) var(--space-xl);
+}
+.cta-block {
+  max-width: 760px;
+  margin: 0 auto;
+  text-align: center;
+}
+.cta-eyebrow {
+  font-family: var(--font-editorial);
+  font-style: italic;
+  font-size: 22px;
+  color: var(--accent);
+  margin-bottom: 40px;
+  text-shadow: var(--ambient-text-glow);
+}
+
+.btn-primary-xl {
+  display: inline-flex; align-items: center; gap: 16px;
+  padding: 28px 80px;
+  background: var(--accent);
+  color: var(--bg-primary);
+  font-family: var(--font-marca);
+  font-size: 14px;
+  letter-spacing: var(--tracking-eyebrow);
+  text-decoration: none;
+  border-radius: var(--radius-button);
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 0 80px rgba(201, 168, 118, 0.20);
+  transition: filter 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
+}
+.btn-primary-xl:hover {
+  filter: brightness(1.08);
+  box-shadow: 0 0 100px rgba(201, 168, 118, 0.32);
+  transform: translateY(-1px);
+}
+.btn-primary-xl .cta-arrow {
+  font-family: var(--font-display);
+  font-size: 18px;
+  letter-spacing: 0;
+  transition: transform 0.25s ease;
+}
+.btn-primary-xl:hover .cta-arrow {
+  transform: translateX(4px);
+}
+
+.cta-seguranca {
+  list-style: none;
+  margin-top: 40px;
+  display: flex; flex-direction: column; gap: 8px;
+  align-items: center;
+}
+.cta-seguranca li {
+  font-family: var(--font-marca);
+  font-size: 10px;
+  letter-spacing: 0.32em;
+  color: rgba(201, 168, 118, 0.7);
+  display: flex; align-items: center; gap: 10px;
+}
+.cta-bullet {
+  display: inline-block;
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  border: 1px solid var(--accent);
+}
+
+/* ==========================================================================
+   FOOTER minimalista
+   ========================================================================== */
+.page-footer {
+  padding: var(--space-xxl) var(--space-xl);
+  background: var(--bg-deep);
+  border-top: 1px solid rgba(201, 168, 118, 0.18);
+  text-align: center;
+  display: flex; flex-direction: column; align-items: center;
+  gap: 16px;
+}
+.footer-monogram object {
+  width: 32px; height: 32px;
+  --logo-accent: var(--accent);
+  --logo-text: var(--accent);
+  opacity: 0.85;
+}
+.footer-tag {
+  font-family: var(--font-marca);
+  font-size: 9px;
+  letter-spacing: 0.42em;
+  color: rgba(201, 168, 118, 0.5);
+}
+.footer-suporte {
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 12px;
+  color: rgba(239, 231, 210, 0.45);
+}
+.footer-links {
+  display: flex; gap: 12px;
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 11px;
+}
+.footer-links a {
+  color: rgba(201, 168, 118, 0.6);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.footer-links a:hover { color: var(--accent); }
+.footer-links span { color: rgba(201, 168, 118, 0.3); }
+
+/* ==========================================================================
+   STICKY CTA MOBILE — visível apenas após reveal em viewport pequena
+   ========================================================================== */
+.sticky-cta {
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  background: linear-gradient(180deg,
+    transparent 0%,
+    rgba(7, 16, 12, 0.92) 30%,
+    rgba(7, 16, 12, 0.98) 100%);
+  padding: 20px 16px 24px;
+  text-align: center;
+  z-index: 100;
+  transform: translateY(100%);
+  transition: transform 400ms cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.sticky-cta a {
+  display: block;
+  width: 100%;
+  padding: 18px 20px;
+  background: var(--accent);
+  color: var(--bg-primary);
+  font-family: var(--font-marca);
+  font-size: 12px;
+  letter-spacing: var(--tracking-eyebrow);
+  text-decoration: none;
+  border-radius: var(--radius-button);
+  box-shadow: 0 0 40px rgba(201, 168, 118, 0.20);
+}
+body.revealed .sticky-cta {
+  transform: translateY(0);
+}
+
+@media (min-width: 901px) {
+  .sticky-cta { display: none; }
+}
+@media (max-width: 900px) {
+  body.revealed .page-footer { padding-bottom: 110px; }
+}
+
+@supports (padding: env(safe-area-inset-bottom)) {
+  .sticky-cta { padding-bottom: max(24px, env(safe-area-inset-bottom)); }
+}
+
+/* ==========================================================================
+   MOBILE — refinements gerais
+   ========================================================================== */
+@media (max-width: 700px) {
+  .section { padding: 64px 20px; }
+  .modulos-grid, .bonus-grid { gap: 16px; }
+  .oferta-card { padding: 28px 22px; }
+  .btn-primary-xl { padding: 22px 32px; font-size: 13px; width: 100%; justify-content: center; }
+  .cta-eyebrow { margin-bottom: 28px; }
+  .cta-seguranca { margin-top: 28px; }
+}
