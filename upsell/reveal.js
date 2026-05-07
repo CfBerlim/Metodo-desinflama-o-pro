@@ -8,17 +8,21 @@
 (function() {
   const cfg = window.UPSELL_CONFIG;
   if (!cfg) {
-    console.warn('UPSELL_CONFIG não definido. reveal.js abortado.');
+    console.warn('[upsell-reveal] UPSELL_CONFIG não definido. Abortado.');
     return;
   }
 
   const THRESHOLD = cfg.REVEAL_THRESHOLD_SECONDS || 90;
   let revealed = false;
+  let videoDuration = 0;
+
+  console.info(`[upsell-reveal] inicializando. Threshold padrão: ${THRESHOLD}s.`);
 
   function reveal(source) {
     if (revealed) return;
     revealed = true;
 
+    console.info(`[upsell-reveal] DISPARADO. Source: ${source}`);
     document.body.classList.add('revealed');
 
     if (window.fbq) {
@@ -34,6 +38,13 @@
         target.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }
     }, 800);
+  }
+
+  function effectiveThreshold() {
+    if (videoDuration > 0 && videoDuration < THRESHOLD) {
+      return Math.max(videoDuration * 0.95, 5);
+    }
+    return THRESHOLD;
   }
 
   if (new URLSearchParams(location.search).has('reveal')) {
@@ -60,8 +71,18 @@
     }
 
     const player = new Vimeo.Player(iframe);
+    console.info('[upsell-reveal] Vimeo Player criado, listeners ativos.');
+
+    player.getDuration().then(d => {
+      videoDuration = d;
+      console.info(`[upsell-reveal] Duração: ${d.toFixed(1)}s. Threshold efetivo: ${effectiveThreshold().toFixed(1)}s.`);
+      if (d < THRESHOLD) {
+        console.warn(`[upsell-reveal] Vídeo (${d.toFixed(1)}s) menor que threshold (${THRESHOLD}s) — auto-ajustando.`);
+      }
+    }).catch(err => console.warn('[upsell-reveal] getDuration falhou:', err));
 
     player.on('play', () => {
+      console.info('[upsell-reveal] vídeo: play');
       if (window.fbq) {
         try { fbq('trackCustom', 'UpsellPlayed'); } catch (_) {}
       }
@@ -69,14 +90,15 @@
     });
 
     player.on('timeupdate', (data) => {
-      if (data.seconds >= THRESHOLD) reveal('timeupdate');
+      if (data.seconds >= effectiveThreshold()) reveal('timeupdate');
     });
 
     player.on('seeked', (data) => {
-      if (data.seconds >= THRESHOLD) reveal('seeked');
+      if (data.seconds >= effectiveThreshold()) reveal('seeked');
     });
 
     player.on('ended', () => {
+      console.info('[upsell-reveal] vídeo: ended');
       reveal('video_ended');
     });
   }
