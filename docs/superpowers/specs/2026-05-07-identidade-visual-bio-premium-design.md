@@ -193,16 +193,41 @@ Quatro famílias, todas via Google Fonts. **Não usar nenhuma outra família em 
 | `apothecary.text.muted` | `rgba(239,231,210,0.72)` | Texto secundário |
 | `apothecary.accent` | `#C9A876` | Champagne Gold — versão mais luminosa do gold para contraste em fundo escuro |
 | `apothecary.accent.muted` | `rgba(201,168,118,0.55)` | Acentos discretos |
-| `apothecary.hairline` | `rgba(201,168,118,0.14)` | Divisores, bordas finas |
+| `apothecary.hairline` | `rgba(201,168,118,0.30)` | Divisores, bordas finas (mais luminoso que os outros modos pra dar presença ao ouro) |
+| `apothecary.bg.stage` | gradient multi-camada | Fundo cinematográfico do hero/VSL — ver "Atmosfera de stage" abaixo |
+| `apothecary.ambient.glow` | `0 0 64px rgba(201,168,118,0.12)` | Box-shadow aplicável em frames e cards pra criar halo gold |
+| `apothecary.ambient.text-glow` | `0 0 24px rgba(201,168,118,0.45)` | Text-shadow nos destaques em italic dourado (h1 em, eyebrow) |
 
 **Por que o accent muda de hex no modo Apothecary:** `#A88B4A` em fundo carbono fica com aspecto opaco e perde a aura "ouro". `#C9A876` resolve com mesma família tonal mas mais luz. É o mesmo recurso que joalherias usam — ouro fotografado em estúdio escuro recebe iluminação adicional pra parecer "ouro" e não "marrom".
 
+**Atmosfera de stage — o segredo do "padrão bilionário":**
+
+O modo Apothecary não é "preto chapado" — é **clínica de longevidade de elite com luz cênica controlada**. Diferença prática: pretos sólidos parecem dead-flat, sem profundidade, e roubam o "luxo" da página por mais que o ouro seja bonito.
+
+A solução é construir o fundo em camadas, simulando iluminação de estúdio. O token `--bg-stage` aplica três camadas de luz sobre um gradient warm vertical:
+
+1. **Glow gold central (atrás do conteúdo principal — ex: VSL player):** radial gradient com `rgba(201, 168, 118, 0.14)` no centro, fade pra transparente em 68%. É o "spot" que ilumina o vídeo.
+2. **Luz emerald inferior-esquerda:** radial gradient com `rgba(15, 61, 46, 0.42)` ancorado em `18% 100%`. Cria atmosfera quente-fria, sugere profundidade vegetal/natural.
+3. **Acento gold superior-direito (highlight cinematográfico):** radial gradient sutil em `88% 8%`. Adiciona movimento e quebra simetria.
+4. **Base:** gradient vertical `#050A07 → #0F1B15 (pico) → #060B08`. O "pico" no meio cria sensação de painel iluminado, não de buraco preto.
+
+**Tokens de glow:**
+- `--ambient-glow` — box-shadow gold halo (`0 0 64px rgba(201, 168, 118, 0.12)`). Aplicar em frames de vídeo, cards de oferta, módulos. Cria o halo de "objeto iluminado por trás".
+- `--ambient-text-glow` — text-shadow gold (`0 0 24px rgba(201, 168, 118, 0.45)`). Aplicar nas italics em destaque (`h1 em`, headlines com palavras-chave em Cormorant). Faz o ouro "acender" sem ofuscar.
+
+**Hairlines em Apothecary são MAIS luminosos que nos outros modos** (`rgba(201, 168, 118, 0.30)` vs `0.14`/`0.18`/`0.22` dos outros). É proposital — o ouro precisa estar presente nos divisores pra "amarrar" a página, não desaparecer.
+
+Adicionalmente, o stage tem hairlines luminosos no topo e na base via pseudo-elementos:
+- `::before` (topo): gradient horizontal com pico de `rgba(201, 168, 118, 0.55)` no centro, fade pras laterais — cria a sensação de "moldura iluminada por cima".
+- `::after` (base): mesmo padrão com pico de `0.22` — eco mais discreto na base.
+
 **Elementos de superfície característicos:**
-- **Eyebrow + headline + lede** em todo bloco: pequeno texto de marcação em Marcellus SC, depois headline em Italiana, depois lede em Cormorant Garamond italic. É a estrutura padrão de ritmo.
-- **Hairline divisores:** linhas finas de 1px na cor `hairline` separam seções, nunca espaço em branco sozinho.
-- **Vídeo frame:** moldura 1px em `accent.muted`, sem sombra, sem play button colorido. O play é um círculo vazio com triângulo dourado dentro.
+- **Eyebrow + headline + lede** em todo bloco: pequeno texto de marcação em Marcellus SC (com `--ambient-text-glow` aplicado), depois headline em Italiana (a parte italic em Cormorant recebe `--ambient-text-glow`), depois lede em Cormorant Garamond italic. É a estrutura padrão de ritmo.
+- **Hairline divisores:** linhas finas de 1px na cor `hairline` (0.30 opacity) separam seções, nunca espaço em branco sozinho.
+- **Vídeo frame:** moldura 1px em ouro a 0.45 de opacidade, com `--ambient-glow` (halo gold ao redor), `inset 0 1px 0` highlight bem sutil no topo, e radial gradient interno gold a 0.08 — o frame parece "acender" sozinho.
+- **Play button:** círculo dourado com box-shadow gold a 0.32 de opacidade (glow sutil), fundo radial gold suave, e drop-shadow no triângulo central. NÃO é o play opaco genérico — é uma joia iluminada.
 - **Botão de compra (oculto até 4 minutos do VSL):** retângulo levemente arredondado (radius 2px), background `#C9A876`, text color `#07100C`, font-family Marcellus SC, padding generoso (20px / 56px), letter-spacing alto. Aparece com fade-in suave de 800ms, sem bounce, sem pulse.
-- **"Lock note" abaixo do vídeo:** texto em Cormorant Garamond italic, font-size 11px, opacity 0.55. Frase: "— O acesso ao Método é revelado aos 4 minutos do vídeo —". Some quando o botão aparece.
+- **"Lock note" abaixo do vídeo:** texto em Cormorant Garamond italic, font-size 13px, color `rgba(201, 168, 118, 0.78)`. Frase: "— O acesso ao Método é revelado aos 4 minutos do vídeo —". Some quando o botão aparece.
 
 ### 4.3 Modo III · Botanique
 
@@ -302,7 +327,8 @@ Cormorant Garamond italic, 22-28px conforme contexto. Aspas ornamentais (Italian
 - Border-radius: 4px.
 - Border: 1px solid `hairline`.
 - Padding interno: 32px horizontal / 36px vertical em mobile; 40px horizontal / 48px vertical em desktop.
-- **Sem sombra.** O sistema rejeita box-shadow. Profundidade é dada pela hierarquia de bg.primary / bg.lift / bg.deep do modo.
+- **Em Heritage e Botanique: sem sombra.** Profundidade vem da hierarquia de bg.primary / bg.lift / bg.deep do modo.
+- **Em Apothecary: aplicar `--ambient-glow`** (`box-shadow: 0 0 64px rgba(201,168,118,0.12)`) em frames de vídeo, cards de oferta, módulos. É o que cria o efeito "objeto iluminado por trás" característico de clínica de longevidade. Sem o glow, o card desaparece no fundo.
 
 ### 5.8 Formulário (input, label)
 
@@ -464,6 +490,10 @@ Padrão: o site/PDF aplica `data-mode="heritage|apothecary|botanique"` em um con
   --accent: #A88B4A;
   --accent-muted: rgba(168,139,74,0.55);
   --hairline: rgba(168,139,74,0.22);
+
+  /* Heritage não tem stage cinematográfico — fundo emerald cerimonial e pronto */
+  --bg-stage: var(--bg-primary);
+  --ambient-glow: 0 0 32px rgba(168,139,74,0.18);
 }
 
 [data-mode="apothecary"] {
@@ -474,7 +504,28 @@ Padrão: o site/PDF aplica `data-mode="heritage|apothecary|botanique"` em um con
   --text-muted: rgba(239,231,210,0.72);
   --accent: #C9A876;
   --accent-muted: rgba(201,168,118,0.55);
-  --hairline: rgba(201,168,118,0.14);
+  --hairline: rgba(201,168,118,0.30);
+
+  /* Atmosfera de stage — clínica de longevidade de elite (3 camadas de luz) */
+  --bg-stage:
+    radial-gradient(ellipse 75% 50% at 50% 38%,
+      rgba(201,168,118,0.14) 0%,
+      rgba(201,168,118,0.05) 38%,
+      transparent 68%),
+    radial-gradient(ellipse 65% 55% at 18% 100%,
+      rgba(15,61,46,0.42) 0%,
+      transparent 65%),
+    radial-gradient(ellipse 50% 40% at 88% 8%,
+      rgba(201,168,118,0.05) 0%,
+      transparent 60%),
+    linear-gradient(180deg,
+      #050A07 0%,
+      #0B1612 28%,
+      #0F1B15 52%,
+      #0A1410 78%,
+      #060B08 100%);
+  --ambient-glow: 0 0 64px rgba(201,168,118,0.12);
+  --ambient-text-glow: 0 0 24px rgba(201,168,118,0.45);
 }
 
 [data-mode="botanique"] {
@@ -486,6 +537,10 @@ Padrão: o site/PDF aplica `data-mode="heritage|apothecary|botanique"` em um con
   --accent: #9C7C42;
   --accent-muted: rgba(31,61,46,0.55);
   --hairline: rgba(31,61,46,0.18);
+
+  /* Botanique = livro de luxo, parchment puro, sem cinematografia */
+  --bg-stage: var(--bg-primary);
+  --ambient-glow: none;
 }
 ```
 

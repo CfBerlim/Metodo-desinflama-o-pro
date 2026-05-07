@@ -65,6 +65,10 @@
 
   --logo-accent: #A88B4A;
   --logo-text: #EBE3D0;
+
+  /* Atmosfera de stage — em Heritage não há gradient, é cor sólida cerimonial */
+  --bg-stage: var(--bg-primary);
+  --ambient-glow: 0 0 32px rgba(168, 139, 74, 0.18);
 }
 
 /* ==========================================================================
@@ -78,10 +82,39 @@
   --text-muted: rgba(239, 231, 210, 0.72);
   --accent: #C9A876;
   --accent-muted: rgba(201, 168, 118, 0.55);
-  --hairline: rgba(201, 168, 118, 0.14);
+  --hairline: rgba(201, 168, 118, 0.30);
 
   --logo-accent: #C9A876;
   --logo-text: #EFE7D2;
+
+  /*
+     Atmosfera de stage — clínica de longevidade de elite.
+     3 camadas de luz sobre gradient warm vertical:
+       1. Glow gold central (atrás do conteúdo principal — ex: VSL player)
+       2. Luz emerald inferior-esquerda (atmosfera quente-fria)
+       3. Sutil acento gold superior-direito (highlight cinematográfico)
+     Hairline foi 0.14 → 0.30 pra dar mais presença ao ouro nos divisores.
+  */
+  --bg-stage:
+    radial-gradient(ellipse 75% 50% at 50% 38%,
+      rgba(201, 168, 118, 0.14) 0%,
+      rgba(201, 168, 118, 0.05) 38%,
+      transparent 68%),
+    radial-gradient(ellipse 65% 55% at 18% 100%,
+      rgba(15, 61, 46, 0.42) 0%,
+      transparent 65%),
+    radial-gradient(ellipse 50% 40% at 88% 8%,
+      rgba(201, 168, 118, 0.05) 0%,
+      transparent 60%),
+    linear-gradient(180deg,
+      #050A07 0%,
+      #0B1612 28%,
+      #0F1B15 52%,
+      #0A1410 78%,
+      #060B08 100%);
+
+  --ambient-glow: 0 0 64px rgba(201, 168, 118, 0.12);
+  --ambient-text-glow: 0 0 24px rgba(201, 168, 118, 0.45);
 }
 
 /* ==========================================================================
@@ -99,6 +132,10 @@
 
   --logo-accent: #9C7C42;
   --logo-text: #1F3D2E;
+
+  /* Em Botanique o stage é parchment puro — livro de luxo, sem efeitos cinematográficos */
+  --bg-stage: var(--bg-primary);
+  --ambient-glow: none;
 }
 
 /* ==========================================================================
