@@ -30,8 +30,42 @@
 
   <!-- Estilos da landing -->
   <link rel="stylesheet" href="style.css">
+
+  <!-- Schema.org JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": "Método Desinflamação Pro",
+    "description": "Protocolo de 21 dias para reverter a inflamação celular crônica. Sem dietas restritivas, sem medicamentos.",
+    "image": "https://desinflamacao.com.br/landing/assets/og-image.jpg",
+    "brand": {
+      "@type": "Brand",
+      "name": "Método Desinflamação Pro"
+    },
+    "offers": {
+      "@type": "Offer",
+      "price": "197.00",
+      "priceCurrency": "BRL",
+      "priceValidUntil": "2026-12-31",
+      "availability": "https://schema.org/InStock",
+      "url": "https://desinflamacao.com.br/"
+    }
+  }
+  </script>
+
+  <!-- Canonical -->
+  <link rel="canonical" href="https://desinflamacao.com.br/">
 </head>
 <body data-mode="apothecary">
+
+  <!-- GTM noscript fallback -->
+  <noscript>
+    <iframe
+      src="https://www.googletagmanager.com/ns.html?id=GTM-XXXXXXX"
+      height="0" width="0" style="display:none;visibility:hidden"
+      title="Google Tag Manager"></iframe>
+  </noscript>
   <main>
     <!-- ============================================================
          HERO — fase imersão (sempre visível)
@@ -256,8 +290,34 @@
     })();
   </script>
 
+  <!-- Tracking (Meta Pixel + GTM + scroll depth) -->
+  <script src="tracking.js" defer></script>
+
   <!-- Vimeo Player SDK -->
   <script src="https://player.vimeo.com/api/player.js" defer></script>
   <script src="reveal.js" defer></script>
+
+  <!-- LGPD Cookie Banner -->
+  <div class="cookie-banner" id="cookie-banner" hidden>
+    <div class="cookie-content">
+      <p>Usamos cookies para melhorar sua experiência. Ao continuar, você concorda com nossa <a href="/politica-privacidade.html">Política de Privacidade</a>.</p>
+      <button class="cookie-accept" id="cookie-accept">OK</button>
+    </div>
+  </div>
+
+  <script>
+    (function() {
+      const KEY = 'desinflamacao_cookie_consent';
+      const banner = document.getElementById('cookie-banner');
+      const btn = document.getElementById('cookie-accept');
+      if (!localStorage.getItem(KEY)) {
+        banner.hidden = false;
+      }
+      btn.addEventListener('click', () => {
+        localStorage.setItem(KEY, '1');
+        banner.hidden = true;
+      });
+    })();
+  </script>
 </body>
 </html>
