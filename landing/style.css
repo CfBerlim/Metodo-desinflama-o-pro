@@ -153,3 +153,46 @@ body {
   .hero-manchete { margin-bottom: 18px; }
   .hero-subtitulo { margin-bottom: 32px; }
 }
+
+/* ==========================================================================
+   REVEAL — transição da fase imersão para fase pitch (aos 4:00)
+   ========================================================================== */
+
+#below-fold {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 600ms ease-out;
+}
+#below-fold > section {
+  opacity: 0;
+  transform: translateY(40px);
+  transition:
+    opacity 700ms cubic-bezier(0.2, 0.7, 0.2, 1),
+    transform 700ms cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+body.revealed #below-fold {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+body.revealed #below-fold > section {
+  opacity: 1;
+  transform: translateY(0);
+}
+body.revealed #below-fold > section:nth-child(1) { transition-delay: 200ms; }
+body.revealed #below-fold > section:nth-child(2) { transition-delay: 400ms; }
+body.revealed #below-fold > section:nth-child(3) { transition-delay: 600ms; }
+body.revealed #below-fold > section:nth-child(4) { transition-delay: 800ms; }
+body.revealed #below-fold > section:nth-child(5) { transition-delay: 1000ms; }
+
+body.revealed .hero-lock-note {
+  opacity: 0;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #below-fold > section { transform: none; transition-duration: 200ms; }
+  body.revealed #below-fold > section { transform: none; }
+}
