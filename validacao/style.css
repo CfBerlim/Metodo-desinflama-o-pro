@@ -1,0 +1,86 @@
+/* ============================================================
+   VALIDAÇÃO — QA Dashboard interno
+   Mostra as 4 surfaces em iframes lado a lado.
+   ============================================================ */
+
+body {
+  background: var(--carbon-1000);
+  color: var(--ink-noir);
+  min-height: 100vh;
+  overflow-x: auto;
+}
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image:
+    radial-gradient(ellipse 80% 50% at 50% 0%, rgba(184,146,63,0.05), transparent 60%),
+    radial-gradient(rgba(201,162,90,0.018) 1px, transparent 1px);
+  background-size: auto, 4px 4px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.shell { position: relative; z-index: 1; max-width: 1700px; margin: 0 auto; padding: 40px 32px 80px; }
+
+.head { text-align: center; margin-bottom: 36px; }
+.crest-rules { display: flex; align-items: center; justify-content: center; gap: 8px; margin-bottom: 8px; }
+.crest-rules .line { width: 28px; height: 1px; background: var(--gold-500); opacity: 0.55; }
+.crest-rules .diamond { width: 4px; height: 4px; background: var(--gold-500); transform: rotate(45deg); }
+.brand-tag { font-family: var(--ff-display); font-size: 12px; letter-spacing: 0.32em; color: var(--gold-300); text-transform: uppercase; margin-bottom: 6px; }
+.small-tag { font-family: var(--ff-smallcaps); font-size: 8.5px; letter-spacing: 0.42em; color: var(--ink-noir-faint); margin-bottom: 24px; }
+.h1 { font-family: var(--ff-display); font-size: 48px; line-height: 1.05; color: var(--champagne); margin-bottom: 12px; }
+.h1 em { font-family: var(--ff-editorial); font-style: italic; color: var(--gold-300); }
+.h-sub { font-family: var(--ff-editorial); font-style: italic; font-size: 16px; color: var(--ink-noir-mute); max-width: 580px; margin: 0 auto; }
+
+.rail { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; max-width: 1100px; margin: 30px auto 50px; border-top: 1px solid var(--line-noir); border-bottom: 1px solid var(--line-noir); padding: 18px 0; }
+.rail-step { display: flex; align-items: center; gap: 10px; font-family: var(--ff-smallcaps); font-size: 9px; letter-spacing: 0.32em; color: var(--ink-noir-mute); justify-content: center; }
+.rail-step .num { font-family: var(--ff-display); font-size: 14px; color: var(--gold-400); }
+
+.frames-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+@media (max-width: 1100px) { .frames-grid { grid-template-columns: 1fr; } }
+
+.frame-card {
+  background: var(--carbon-900-solid);
+  border: 1px solid var(--line-noir);
+  overflow: hidden;
+  display: flex; flex-direction: column;
+  height: 720px;
+}
+.frame-header {
+  display: flex; align-items: center; gap: 12px;
+  padding: 14px 18px;
+  border-bottom: 1px solid var(--line-noir);
+  background: var(--carbon-800);
+  font-family: var(--ff-smallcaps);
+  font-size: 9px;
+  letter-spacing: 0.32em;
+}
+.frame-num { color: var(--gold-300); font-family: var(--ff-display); font-size: 12px; }
+.frame-name { color: var(--ink-noir); flex: 1; }
+.frame-open { color: var(--gold-400); text-decoration: none; transition: color 0.3s; }
+.frame-open:hover { color: var(--gold-200); }
+.frame-card iframe {
+  flex: 1;
+  border: 0;
+  background: var(--carbon-1000);
+  width: 100%;
+}
+
+.qa-foot {
+  margin-top: 60px;
+  padding-top: 32px;
+  border-top: 1px solid var(--line-noir);
+  text-align: center;
+}
+.qa-foot .crest-rules { margin-bottom: 14px; }
+.qa-foot-text {
+  font-family: var(--ff-editorial);
+  font-style: italic;
+  font-size: 13px;
+  color: var(--ink-noir-faint);
+}
