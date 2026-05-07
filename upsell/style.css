@@ -1,400 +1,330 @@
-/* ==========================================================================
-   UPSELL PAGE — Clube Vida Leve
-   Importa: ../identity/tokens.css (DNA + 3 modos)
-   Modo ativo: Apothecary (data-mode="apothecary" no <body>)
-   ========================================================================== */
+/* ============================================================
+   UPSELL — Clube Vida Leve · Apothecary Noir
+   Mobile-first 480px. Botões sempre visíveis (sem time-lock).
+   ============================================================ */
 
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; }
-html, body { min-height: 100vh; }
 body {
-  background: var(--bg-stage);
-  color: var(--text-primary);
-  font-family: var(--font-body);
-  font-weight: 300;
-  line-height: 1.65;
-  -webkit-font-smoothing: antialiased;
+  background:
+    radial-gradient(ellipse 70% 50% at 50% 0%, #1c1a14 0%, #14130f 35%, #0d0c0a 70%),
+    #0d0c0a;
+  color: var(--ink-noir);
+  min-height: 100vh;
   overflow-x: hidden;
 }
-
-/* ==========================================================================
-   TOPBAR — sinaliza que o pedido foi aprovado (status visual)
-   ========================================================================== */
-.upsell-topbar {
-  display: flex; justify-content: space-between; align-items: center;
-  padding: 16px 32px;
-  border-bottom: 1px solid rgba(201, 168, 118, 0.30);
-  position: relative; z-index: 2;
-}
-.upsell-topbar .mini-lockup {
-  display: flex; align-items: center; gap: 14px;
-}
-.upsell-topbar .mini-monogram {
-  width: 32px; height: 32px;
-  border-radius: 50%;
-  border: 1px solid var(--accent);
-  display: flex; align-items: center; justify-content: center;
-  color: var(--accent);
-  font-family: var(--font-display);
-  font-size: 18px; line-height: 1;
-}
-.upsell-topbar .mini-wordmark {
-  font-family: var(--font-display);
-  font-size: 18px; color: var(--text-primary);
-  letter-spacing: 0.02em;
-}
-.upsell-status {
-  font-family: var(--font-marca);
-  font-size: 10px;
-  letter-spacing: 0.32em;
-  color: var(--accent);
-  text-shadow: 0 0 12px rgba(201, 168, 118, 0.30);
-}
-@media (max-width: 700px) {
-  .upsell-topbar { padding: 14px 18px; flex-direction: column; gap: 10px; align-items: flex-start; }
-}
-
-/* ==========================================================================
-   HERO — manchete + sub + player + lock note
-   ========================================================================== */
-.upsell-hero {
-  padding: 56px 32px 40px;
-  display: flex; flex-direction: column; align-items: center;
-  text-align: center;
-  position: relative;
-}
-.upsell-hero .eyebrow {
-  font-family: var(--font-marca);
-  font-size: var(--size-eyebrow);
-  letter-spacing: var(--tracking-eyebrow);
-  color: var(--accent);
-  margin-bottom: 22px;
-  text-shadow: var(--ambient-text-glow);
-}
-.upsell-hero .manchete {
-  font-family: var(--font-display);
-  font-weight: 400;
-  font-size: clamp(34px, 5vw, 56px);
-  line-height: 1.05;
-  color: var(--text-primary);
-  letter-spacing: var(--tracking-display);
-  max-width: 880px;
-  margin-bottom: 22px;
-  text-shadow: 0 0 32px rgba(201, 168, 118, 0.10);
-}
-.upsell-hero .sub {
-  font-family: var(--font-editorial);
-  font-style: italic;
-  font-size: clamp(15px, 1.8vw, 20px);
-  line-height: 1.55;
-  color: rgba(239, 231, 210, 0.78);
-  max-width: 720px;
-  margin-bottom: 40px;
-}
-
-.upsell-video-wrapper {
-  width: 100%;
-  max-width: 880px;
-  margin-bottom: 24px;
-}
-.upsell-video-frame {
-  position: relative;
-  aspect-ratio: 16 / 9;
-  border: 1px solid rgba(201, 168, 118, 0.45);
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
   background:
-    radial-gradient(ellipse at 50% 50%,
-      rgba(201, 168, 118, 0.08) 0%,
-      transparent 70%),
-    rgba(201, 168, 118, 0.025);
+    radial-gradient(ellipse 90% 55% at 50% -10%, rgba(216,184,120,0.20), rgba(184,146,63,0.09) 30%, transparent 65%),
+    radial-gradient(ellipse 60% 45% at 50% 35%, rgba(216,184,120,0.12), transparent 60%),
+    radial-gradient(ellipse 70% 60% at 50% 100%, rgba(23,58,40,0.32), transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image:
+    radial-gradient(rgba(216,184,120,0.025) 1px, transparent 1px),
+    linear-gradient(180deg, transparent 0%, rgba(216,184,120,0.04) 50%, transparent 100%);
+  background-size: 4px 4px, auto;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.7;
+}
+
+.crest-name,
+.upsell-eyebrow,
+.upsell-headline em,
+.offer-product em,
+.price-installment-up,
+.offer-tagline {
+  text-shadow: 0 0 24px rgba(216,184,120,0.28);
+}
+.upsell-player {
+  box-shadow: 0 0 80px -10px rgba(216,184,120,0.32), 0 40px 80px -30px rgba(0,0,0,0.7);
+}
+.price-card {
+  box-shadow: 0 0 60px -10px rgba(216,184,120,0.22), 0 30px 60px -30px rgba(0,0,0,0.6);
+}
+.btn-accept {
   box-shadow:
-    0 0 80px rgba(201, 168, 118, 0.14),
-    0 0 0 1px rgba(201, 168, 118, 0.18),
-    inset 0 1px 0 rgba(239, 231, 210, 0.06);
+    inset 0 1px 0 rgba(216,184,120,0.3),
+    0 0 60px -10px rgba(216,184,120,0.4),
+    0 30px 60px -20px rgba(23,58,40,0.5) !important;
+}
+
+.page {
+  position: relative;
+  z-index: 1;
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 0 20px 60px;
+  text-align: center;
+}
+
+.confirm {
+  margin-top: 28px;
+  padding: 14px 18px;
+  border: 1px solid rgba(62, 129, 96, 0.4);
+  background: rgba(23, 58, 40, 0.25);
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--ff-smallcaps);
+  font-size: 9px;
+  letter-spacing: 0.32em;
+  color: var(--emerald-400);
+}
+.confirm svg { width: 14px; height: 14px; }
+.confirm-wrap { text-align: center; margin-bottom: 12px; }
+
+.crest-block { margin-top: 10px; margin-bottom: 24px; }
+.crest-rules {
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  margin-bottom: 6px;
+}
+.crest-rules .line { width: 28px; height: 1px; background: var(--gold-500); opacity: 0.55; }
+.crest-rules .diamond { width: 4px; height: 4px; background: var(--gold-500); transform: rotate(45deg); }
+.crest-name {
+  font-family: var(--ff-display);
+  font-size: 12px;
+  letter-spacing: 0.32em;
+  color: var(--gold-300);
+  text-transform: uppercase;
+}
+
+.upsell-eyebrow {
+  font-family: var(--ff-smallcaps);
+  font-size: 9.5px;
+  letter-spacing: 0.5em;
+  color: var(--gold-400);
+  margin-bottom: 18px;
+}
+.upsell-headline {
+  font-family: var(--ff-display);
+  font-size: 36px;
+  line-height: 1.1;
+  color: var(--champagne);
+  margin-bottom: 12px;
+  text-wrap: balance;
+}
+.upsell-headline em {
+  font-family: var(--ff-editorial);
+  font-style: italic;
+  color: var(--gold-300);
+}
+.upsell-sub {
+  font-family: var(--ff-editorial);
+  font-style: italic;
+  font-size: 16px;
+  color: var(--ink-noir-mute);
+  max-width: 380px;
+  margin: 0 auto 28px;
+  line-height: 1.5;
+}
+
+.upsell-player {
+  aspect-ratio: 16 / 9;
+  background: #000;
+  border: 1px solid var(--line-noir-strong);
+  position: relative;
+  margin-bottom: 28px;
   overflow: hidden;
 }
-.upsell-video-frame iframe {
+.upsell-player::before, .upsell-player::after {
+  content: ''; position: absolute; width: 14px; height: 14px;
+}
+.upsell-player::before {
+  top: -1px; left: -1px;
+  border-top: 1px solid var(--gold-500);
+  border-left: 1px solid var(--gold-500);
+}
+.upsell-player::after {
+  bottom: -1px; right: -1px;
+  border-bottom: 1px solid var(--gold-500);
+  border-right: 1px solid var(--gold-500);
+}
+.upsell-corner-tr, .upsell-corner-bl {
+  position: absolute; width: 14px; height: 14px;
+}
+.upsell-corner-tr {
+  top: -1px; right: -1px;
+  border-top: 1px solid var(--gold-500);
+  border-right: 1px solid var(--gold-500);
+}
+.upsell-corner-bl {
+  bottom: -1px; left: -1px;
+  border-bottom: 1px solid var(--gold-500);
+  border-left: 1px solid var(--gold-500);
+}
+.upsell-player .content {
   position: absolute; inset: 0;
-  width: 100%; height: 100%;
-  border: 0;
+  display: flex; align-items: center; justify-content: center;
+  background: radial-gradient(ellipse at center, rgba(23,58,40,0.35), rgba(7,9,10,0.95));
 }
-.upsell-lock-note {
-  font-family: var(--font-editorial);
-  font-style: italic;
-  font-size: 13px;
-  color: rgba(201, 168, 118, 0.78);
-  text-align: center;
-  margin-top: 6px;
-  transition: opacity 400ms ease-out;
+.upsell-player .grid-bg {
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(rgba(201,162,90,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(201,162,90,0.04) 1px, transparent 1px);
+  background-size: 24px 24px;
+  opacity: 0.5;
 }
-body.revealed .upsell-lock-note {
-  opacity: 0;
-  pointer-events: none;
+.upsell-play-btn {
+  position: relative; z-index: 2;
+  display: flex; flex-direction: column; align-items: center; gap: 12px;
+  background: none; border: none;
+  color: var(--gold-300);
+  cursor: pointer;
+  transition: transform 0.4s var(--ease-elegant);
 }
-
-/* ==========================================================================
-   REVEAL — fade-in do bloco de oferta + ações aos 1:30
-   Antes do reveal: fora do fluxo (display:none) no container pai #upsell-below.
-   Após reveal: container materializa, e cada section filho anima com stagger.
-   Usa ID no container (especificidade 0,1,0) pra vencer as regras de classe
-   das sections filhas (0,0,1) independente de source order.
-   ========================================================================== */
-#upsell-below {
-  display: none;
+.upsell-play-btn:hover { transform: scale(1.04); }
+.upsell-play-circle {
+  width: 60px; height: 60px;
+  border: 1px solid var(--gold-500);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(7,9,10,0.6);
 }
-body.revealed #upsell-below {
-  display: block;
+.upsell-play-tri {
+  width: 0; height: 0;
+  border-left: 12px solid var(--gold-300);
+  border-top: 8px solid transparent;
+  border-bottom: 8px solid transparent;
+  margin-left: 4px;
 }
-body.revealed #upsell-below > section {
-  animation: upsellRevealFade 700ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
-}
-body.revealed #upsell-below > section:nth-child(2) {
-  animation-delay: 250ms;
-}
-
-@keyframes upsellRevealFade {
-  from { opacity: 0; transform: translateY(40px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  body.revealed #upsell-below > section { animation: none; }
+.upsell-play-label {
+  font-family: var(--ff-smallcaps);
+  font-size: 9px;
+  letter-spacing: 0.4em;
+  color: var(--gold-300);
 }
 
-/* ==========================================================================
-   OFERTA — Clube Vida Leve detail block
-   ========================================================================== */
-.upsell-oferta {
-  padding: 80px 32px 40px;
-  display: flex; justify-content: center;
-}
-.upsell-oferta .container {
-  max-width: 720px;
-  width: 100%;
-  background: var(--bg-lift);
-  border: 1px solid rgba(201, 168, 118, 0.22);
-  border-radius: var(--radius-card);
-  padding: 56px 48px;
-  box-shadow: var(--ambient-glow);
-  text-align: center;
-}
-.upsell-oferta .eyebrow {
-  font-family: var(--font-marca);
-  font-size: var(--size-eyebrow);
-  letter-spacing: var(--tracking-eyebrow);
-  color: var(--accent);
-  margin-bottom: 18px;
-  text-shadow: var(--ambient-text-glow);
-}
-.upsell-oferta .titulo {
-  font-family: var(--font-display);
-  font-weight: 400;
-  font-size: clamp(32px, 4vw, 44px);
-  line-height: 1.05;
-  color: var(--text-primary);
-  letter-spacing: 0.005em;
+.upsell-offer { margin-bottom: 24px; }
+.offer-product {
+  font-family: var(--ff-display);
+  font-size: 26px;
+  color: var(--champagne);
+  line-height: 1.15;
   margin-bottom: 6px;
 }
-.upsell-oferta .titulo-italic {
-  font-family: var(--font-editorial);
+.offer-product em {
+  font-family: var(--ff-editorial);
   font-style: italic;
-  font-size: clamp(20px, 2.4vw, 26px);
-  color: var(--accent);
-  margin-bottom: 28px;
+  color: var(--gold-300);
 }
-.upsell-oferta .descricao {
-  font-family: var(--font-body);
-  font-weight: 300;
-  font-size: 16px;
-  line-height: 1.7;
-  color: rgba(239, 231, 210, 0.85);
-  margin-bottom: 32px;
-  text-align: left;
+.offer-tagline {
+  font-family: var(--ff-smallcaps);
+  font-size: 9.5px;
+  letter-spacing: 0.42em;
+  color: var(--gold-400);
+  margin-bottom: 22px;
 }
 
-.upsell-inclui-titulo {
-  font-family: var(--font-marca);
-  font-size: 10px;
-  letter-spacing: 0.32em;
-  color: var(--accent);
-  margin-bottom: 14px;
-  text-align: left;
-}
-.upsell-inclui {
-  list-style: none;
-  text-align: left;
-  margin-bottom: 36px;
-}
-.upsell-inclui li {
+.price-card {
+  border: 1px solid var(--gold-700);
+  background: linear-gradient(180deg, rgba(184,146,63,0.06), rgba(12,15,16,0.7));
+  padding: 28px 22px 26px;
+  margin-bottom: 22px;
   position: relative;
-  padding-left: 22px;
-  margin-bottom: 10px;
-  font-family: var(--font-body);
-  font-weight: 300;
-  font-size: 15px;
-  line-height: 1.55;
-  color: rgba(239, 231, 210, 0.82);
 }
-.upsell-inclui li::before {
-  content: '–';
-  position: absolute;
-  left: 0; top: 0;
-  color: var(--accent);
-  font-weight: 400;
+.price-card::before, .price-card::after {
+  content: ''; position: absolute;
+  width: 16px; height: 16px;
+  border: 1px solid var(--gold-500);
 }
-
-/* Pricing block */
-.upsell-pricing {
-  border-top: 1px solid var(--hairline);
-  border-bottom: 1px solid var(--hairline);
-  padding: 28px 0;
-  margin-bottom: 28px;
-}
-.upsell-pricing .contexto {
-  font-family: var(--font-editorial);
+.price-card::before { top: 6px; left: 6px; border-right: none; border-bottom: none; }
+.price-card::after { bottom: 6px; right: 6px; border-left: none; border-top: none; }
+.price-was {
+  font-family: var(--ff-editorial);
   font-style: italic;
   font-size: 16px;
-  color: var(--accent);
-  margin-bottom: 8px;
-}
-.upsell-pricing .anchor {
-  font-family: var(--font-body);
-  font-weight: 300;
-  font-size: 14px;
-  color: rgba(239, 231, 210, 0.5);
+  color: var(--ink-noir-mute);
   text-decoration: line-through;
-  text-decoration-color: rgba(201, 168, 118, 0.4);
-  margin-bottom: 18px;
+  text-decoration-color: rgba(201, 162, 90, 0.6);
+  margin-bottom: 4px;
 }
-.upsell-pricing .parcelado {
-  font-family: var(--font-display);
-  font-weight: 400;
-  font-size: clamp(40px, 5.5vw, 56px);
-  line-height: 1;
-  color: var(--text-primary);
-  letter-spacing: 0.01em;
-  margin-bottom: 6px;
-  text-shadow: var(--ambient-text-glow);
-}
-.upsell-pricing .avista {
-  font-family: var(--font-marca);
-  font-size: var(--size-body-s);
-  letter-spacing: 0.18em;
-  color: var(--accent);
-  margin-bottom: 18px;
-}
-.upsell-pricing .economia {
-  font-family: var(--font-editorial);
-  font-style: italic;
-  font-size: 15px;
-  color: rgba(239, 231, 210, 0.75);
-}
-
-.upsell-garantia {
-  font-family: var(--font-editorial);
-  font-style: italic;
-  font-size: 14px;
-  line-height: 1.55;
-  color: rgba(239, 231, 210, 0.65);
-  text-align: center;
-}
-
-/* ==========================================================================
-   ACTIONS — botões sim/não
-   ========================================================================== */
-.upsell-actions {
-  padding: 40px 32px 96px;
-  display: flex; flex-direction: column; align-items: center;
-  gap: 20px;
-}
-
-.btn-yes {
-  display: inline-flex; flex-direction: column; align-items: center; gap: 8px;
-  padding: 28px 64px;
-  background: var(--accent);
-  color: var(--bg-primary);
-  font-family: var(--font-marca);
-  font-size: 14px;
-  letter-spacing: var(--tracking-eyebrow);
-  text-decoration: none;
-  border-radius: var(--radius-button);
-  border: none;
-  cursor: pointer;
-  max-width: 720px;
-  text-align: center;
-  box-shadow: 0 0 100px rgba(201, 168, 118, 0.28);
-  transition: filter 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
-  animation: gentlePulse 3s ease-in-out infinite;
-}
-.btn-yes:hover {
-  filter: brightness(1.08);
-  box-shadow: 0 0 120px rgba(201, 168, 118, 0.40);
-  transform: translateY(-2px);
-}
-.btn-yes .sub {
-  font-family: var(--font-body);
-  font-weight: 400;
-  font-size: 11px;
-  letter-spacing: 0.12em;
-  text-transform: none;
-  color: rgba(7, 16, 12, 0.85);
-}
-@keyframes gentlePulse {
-  0%, 100% { box-shadow: 0 0 100px rgba(201, 168, 118, 0.28); }
-  50%      { box-shadow: 0 0 130px rgba(201, 168, 118, 0.40); }
-}
-
-.btn-no {
-  display: inline-block;
-  padding: 14px 24px;
-  background: transparent;
-  color: rgba(239, 231, 210, 0.55);
-  font-family: var(--font-body);
-  font-weight: 300;
-  font-size: 13px;
-  text-decoration: underline;
-  text-underline-offset: 4px;
-  text-decoration-color: rgba(239, 231, 210, 0.25);
-  cursor: pointer;
-  transition: color 0.2s, text-decoration-color 0.2s;
-}
-.btn-no:hover {
-  color: rgba(239, 231, 210, 0.85);
-  text-decoration-color: rgba(239, 231, 210, 0.55);
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .btn-yes { animation: none; }
-}
-
-/* ==========================================================================
-   FOOTER minimalista
-   ========================================================================== */
-.upsell-footer {
-  padding: 36px 32px;
-  background: var(--bg-deep);
-  border-top: 1px solid rgba(201, 168, 118, 0.18);
-  text-align: center;
-  font-family: var(--font-body);
-  font-weight: 300;
-  font-size: 11px;
-  color: rgba(239, 231, 210, 0.4);
-}
-.upsell-footer .tag {
-  font-family: var(--font-marca);
+.price-line-sm {
+  font-family: var(--ff-smallcaps);
   font-size: 9px;
   letter-spacing: 0.42em;
-  color: rgba(201, 168, 118, 0.5);
+  color: var(--gold-400);
   margin-bottom: 8px;
 }
+.price-installment-up {
+  font-family: var(--ff-display);
+  font-size: 48px;
+  line-height: 1;
+  color: var(--gold-300);
+  margin-bottom: 4px;
+}
+.price-installment-up .small { font-size: 22px; color: var(--gold-400); margin-right: 4px; }
+.price-installment-up .cents { font-size: 26px; color: var(--gold-400); }
+.price-cash-up {
+  font-family: var(--ff-editorial);
+  font-style: italic;
+  font-size: 13px;
+  color: var(--ink-noir-mute);
+}
 
-/* ==========================================================================
-   MOBILE — refinements gerais
-   ========================================================================== */
-@media (max-width: 700px) {
-  .upsell-hero { padding: 32px 18px 28px; }
-  .upsell-oferta { padding: 48px 18px 24px; }
-  .upsell-oferta .container { padding: 36px 24px; }
-  .upsell-actions { padding: 28px 18px 64px; }
-  .btn-yes { padding: 22px 32px; width: 100%; max-width: none; }
-  .btn-yes .sub { font-size: 10px; }
+.upsell-actions {
+  display: flex; flex-direction: column; gap: 12px;
+}
+.btn-accept {
+  display: block; width: 100%;
+  padding: 22px 24px;
+  background: linear-gradient(180deg, var(--emerald-500), var(--emerald-700));
+  color: var(--champagne);
+  border: 1px solid var(--gold-500);
+  text-decoration: none;
+  font-family: var(--ff-smallcaps);
+  font-size: 12px;
+  letter-spacing: 0.3em;
+  cursor: pointer;
+  transition: all 0.4s var(--ease-elegant);
+}
+.btn-accept:hover {
+  background: linear-gradient(180deg, var(--emerald-400), var(--emerald-600));
+  transform: translateY(-1px);
+}
+.btn-accept .arrow {
+  display: inline-block; margin-left: 10px;
+  transition: transform 0.4s var(--ease-elegant);
+}
+.btn-accept:hover .arrow { transform: translateX(4px); }
+
+.btn-decline {
+  display: block; width: 100%;
+  padding: 16px 20px;
+  background: transparent;
+  color: var(--ink-noir-mute);
+  border: 1px solid var(--line-noir);
+  text-decoration: none;
+  font-family: var(--ff-smallcaps);
+  font-size: 9.5px;
+  letter-spacing: 0.32em;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+.btn-decline:hover {
+  color: var(--ink-noir);
+  border-color: var(--line-noir-strong);
+}
+
+.one-click-note {
+  margin-top: 18px;
+  font-family: var(--ff-editorial);
+  font-style: italic;
+  font-size: 12.5px;
+  color: var(--ink-noir-faint);
+}
+
+@media (min-width: 768px) {
+  .page { max-width: 640px; padding: 0 40px 80px; }
+  .upsell-headline { font-size: 48px; }
+  .offer-product { font-size: 36px; }
+  .price-installment-up { font-size: 64px; }
 }
