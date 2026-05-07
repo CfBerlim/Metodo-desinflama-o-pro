@@ -1,0 +1,16 @@
+{
+  "prompt": "Cinematic editorial product still life shot in the style of Aman Resorts product photography combined with Augustinus Bader's signature lighting. Single antique pharmaceutical glass vial with hand-cut faceted shoulders, filled with translucent amber-honey colored botanical infusion, a single cork stopper visible at top with thin wax seal in deep emerald. Resting on weathered piece of dark slate stone with visible mineral grain. Single warm gold key light from upper-left at 45 degrees creating sharp specular highlight along the vial's edge and cork, with soft falloff into deep mahogany shadow on the right side. Background is layered: deep emerald-tinted carbon (#0a1f15 fading to #050a07) with subtle volumetric haze suggesting cool forest air at twilight inside an Alpine longevity retreat library. Visible imperfections: tiny dust particles drifting suspended in the gold light beam, micro-scratches on the vial's anodized cap, a faint fingerprint smudge on the lower glass curve, mild condensation droplets near the vial's base, slight bubbles trapped in the amber liquid. Shot on Hasselblad H6D-100c, 80mm Macro Planar lens at f/2.8, ISO 200, shallow depth of field with focus locked precisely on the vial label area. Rich shadow detail with deep blacks not crushed (lifted to maintain shadow information), highlights soft-rolled to hold detail in the gold reflections. Mood is silent expensive longevity clinic at dusk, the kind of object found only in private apothecary collections. No human, no smiling face, no fitness equipment, no bright colored food, no commercial gloss, no smoothie bowls. Documentary realism, restrained, slow, Aesop-Lab inspired but more refined.",
+  "negative_prompt": "no human, no smile, no fitness gym equipment, no smoothie bowls, no bright colored food, no clinical antibiotic clean surfaces, no plastic surfaces, plastic skin, skin smoothing, beautification filters, airbrushed texture, oversaturated colors, depth flattening, CGI, cartoon, illustration, painting, blurry, distorted, overexposed, no studio key light unless described, no glossy reflections unless described, no perfectly clean surfaces, watermark, text overlay, logo overlay, more realistic reinterpretation, generic stock photo, commercial product shot",
+  "api_parameters": {
+    "resolution": "2K",
+    "output_format": "jpg",
+    "aspect_ratio": "16:9"
+  },
+  "settings": {
+    "style": "cinematic editorial product photography Aman x Augustinus Bader Bio-Premium",
+    "lighting": "single warm gold key light upper-left 45 degrees, deep mahogany falloff right side",
+    "camera_angle": "slight tabletop high-angle 15 degrees",
+    "depth_of_field": "shallow f/2.8 focus on vial label",
+    "quality": "high detail, rich shadow detail, deep blacks not crushed, soft-rolled highlights"
+  }
+}

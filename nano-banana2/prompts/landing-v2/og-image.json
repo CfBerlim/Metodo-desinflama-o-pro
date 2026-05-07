@@ -1,0 +1,16 @@
+{
+  "prompt": "Cinematic horizontal composition for social media share, exactly 1200x630 aspect ratio. Asymmetric editorial layout: lower-left third occupied by a single small antique apothecary glass vial with translucent amber-honey botanical infusion, weathered cork stopper, sitting on weathered dark slate. Upper-right two-thirds is intentional negative space with subtle volumetric haze and a soft gold radial glow at center-top suggesting an unseen overhead light source. The composition leaves a clean rectangular zone on the right for typography overlay (which will be added in post-production with the brand wordmark). No text in the image itself. Single warm gold key light at 45 degrees from upper-left, deep emerald-tinted shadow on right side. Background gradient flows from upper-left (#0f1b15) to lower-right (#050a07). Visible imperfections: dust particles drifting in the light beam, subtle film grain, micro-scratches on cork, mild condensation on vial. Shot on Hasselblad H6D-100c, 80mm f/2.8, ISO 200, shallow DOF focus on vial. Rich shadow detail with deep blacks not crushed. Mood: silent expensive longevity clinic at twilight, restrained, slow, exhibition-quality product still life. No human, no fitness equipment, no smile, no commercial product gloss.",
+  "negative_prompt": "no human, no smile, no fitness gym equipment, no text overlay, no logo, no watermark, no commercial product photography, plastic skin, skin smoothing, beautification filters, airbrushed texture, oversaturated colors, depth flattening, CGI, cartoon, illustration, painting, blurry, distorted, overexposed, more realistic reinterpretation",
+  "api_parameters": {
+    "resolution": "2K",
+    "output_format": "jpg",
+    "aspect_ratio": "16:9"
+  },
+  "settings": {
+    "style": "cinematic editorial composition for social share, asymmetric subject placement",
+    "lighting": "single warm gold key light upper-left, gold radial glow upper-center",
+    "camera_angle": "slight tabletop high-angle, asymmetric off-center composition",
+    "depth_of_field": "shallow, f/2.8, focus on vial",
+    "quality": "high detail, rich shadow detail, clean negative space for text overlay, deep blacks not crushed"
+  }
+}

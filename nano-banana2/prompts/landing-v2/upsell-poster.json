@@ -1,0 +1,16 @@
+{
+  "prompt": "Cinematic editorial still life: triangular composition of small antique apothecary jars and ceramic vessels of varying sizes (5-7 vessels visible), each containing different botanical ingredients in slow visual rhythm — dried saffron threads, ground turmeric, whole cardamom pods, dried rose petals, ceylon cinnamon sticks, raw honey crystals, dried green herbs. Vessels arranged on a weathered dark slate stone surface in loose triangular composition suggesting abundance and curated collection. Single warm gold key light from upper-left at 45 degrees, deep emerald-tinted shadow falloff to the right. Background is deep gradient from emerald-tinted carbon (#0a1f15) at top fading to near-black (#050a07) at bottom. Volumetric haze in the air suggesting cool forest atmosphere at twilight. Visible imperfections: tiny dust particles drifting suspended in light beam, micro-scratches on glass, age patina on ceramic, slight tarnish on metal lids, dried herb particles scattered around vessels. Shot on Hasselblad H6D-100c, 80mm f/2.8 lens, ISO 200, shallow depth of field with focus locked on the central jar. Rich shadow detail, deep blacks not crushed. Mood: rare apothecary collection at the end of a long curation day, the kind found in a Swiss longevity retreat library at twilight. No human, no text overlay, no fitness equipment, no commercial gloss, restrained, documentary realism.",
+  "negative_prompt": "no human, no smile, no text overlay, no logo, no fitness equipment, no smoothie, no bright colored food, plastic skin, beautification filters, airbrushed texture, oversaturated colors, depth flattening, CGI, cartoon, illustration, painting, blurry, distorted, overexposed, more realistic reinterpretation, generic stock photo",
+  "api_parameters": {
+    "resolution": "2K",
+    "output_format": "jpg",
+    "aspect_ratio": "16:9"
+  },
+  "settings": {
+    "style": "cinematic editorial abundance still life Bio-Premium",
+    "lighting": "single warm gold key light upper-left 45 degrees, deep falloff",
+    "camera_angle": "slight tabletop high-angle, triangular composition",
+    "depth_of_field": "shallow f/2.8 focus on central jar",
+    "quality": "high detail, rich shadow detail, deep blacks not crushed"
+  }
+}

@@ -1,144 +1,136 @@
 /* ==========================================================================
-   REVEAL.JS — detector do segundo 240 do Vimeo + revelação das seções
-   Trigger: timeupdate >= effectiveThreshold (auto-ajustado se vídeo < threshold)
-   Dev mode: ?reveal=true na URL força revelação imediata
-   Fallback 1: player.on('ended') — vídeo terminou antes do threshold
-   Fallback 2: setTimeout de 6min — guard de última instância
+   REVEAL.JS — Player simulado de VSL
+   8 minutos de duração total, reveal aos 4:00.
+   Persistência via localStorage. Dev mode (?dev=true) mostra controles skip/reset.
+   Quando o vídeo real estiver no Vimeo, trocar player simulado por iframe
+   e plugar timeupdate no Vimeo Player SDK.
    ========================================================================== */
 
 (function() {
-  const cfg = window.LANDING_CONFIG;
-  if (!cfg) {
-    console.warn('[reveal] LANDING_CONFIG não definido. Abortado.');
+  const STORAGE_KEY = 'mdp:vsl:time';
+  const TOTAL_SECONDS = 480;
+  const REVEAL_AT = 240;
+
+  const player = document.getElementById('player');
+  const playerContent = document.getElementById('playerContent');
+  const playBtn = document.getElementById('playBtn');
+  const progressFill = document.getElementById('progressFill');
+  const timeDisplay = document.getElementById('timeDisplay');
+  const playerMeta = document.getElementById('playerMeta');
+  const revealZone = document.getElementById('revealZone');
+
+  if (!player) {
+    console.warn('[reveal] player element não encontrado. Abortado.');
     return;
   }
 
-  const THRESHOLD = cfg.REVEAL_THRESHOLD_SECONDS || 240;
-  let revealed = false;
-  let videoDuration = 0;  // populado quando getDuration resolve
+  let currentTime = parseInt(localStorage.getItem(STORAGE_KEY) || '0', 10);
+  let playing = false;
+  let interval = null;
+  let revealFiredOnce = false;
 
-  console.info(`[reveal] inicializando. Threshold padrão: ${THRESHOLD}s.`);
+  const metaScript = [
+    { at: 0,   text: 'Capítulo I · O incêndio invisível' },
+    { at: 45,  text: 'Capítulo II · Por que sua dieta falhou' },
+    { at: 95,  text: 'Capítulo III · A descoberta dos compostos bioativos' },
+    { at: 160, text: 'Capítulo IV · O método em 5 atos' },
+    { at: 210, text: 'Capítulo V · A revelação' },
+    { at: 240, text: 'Acesso liberado — leia abaixo' },
+    { at: 360, text: 'Considerações finais' },
+  ];
 
-  function reveal(source) {
-    if (revealed) return;
-    revealed = true;
-
-    console.info(`[reveal] DISPARADO. Source: ${source}`);
-    document.body.classList.add('revealed');
-
-    if (window.fbq) {
-      try { fbq('trackCustom', 'VSLReveal', { source }); } catch (_) {}
-    }
-    if (window.dataLayer) {
-      window.dataLayer.push({ event: 'vsl_reveal', source });
-    }
-
-    setTimeout(() => {
-      const target = document.getElementById('below-fold');
-      if (target) {
-        target.focus({ preventScroll: true });
-        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
-    }, 800);
+  function fmt(s) {
+    const m = Math.floor(s / 60).toString().padStart(2, '0');
+    const r = Math.floor(s % 60).toString().padStart(2, '0');
+    return `${m}:${r}`;
   }
 
-  // Calcula o threshold efetivo a cada chamada de timeupdate.
-  // Se a duração do vídeo for menor que o THRESHOLD configurado,
-  // ajusta para 95% da duração (cobre dev/placeholder e edição curta acidental).
-  function effectiveThreshold() {
-    if (videoDuration > 0 && videoDuration < THRESHOLD) {
-      return Math.max(videoDuration * 0.95, 5);
+  function updateMeta() {
+    let active = metaScript[0];
+    for (const m of metaScript) if (currentTime >= m.at) active = m;
+    if (playerMeta.dataset.last !== active.text) {
+      playerMeta.style.opacity = '0';
+      setTimeout(() => {
+        playerMeta.textContent = active.text;
+        playerMeta.dataset.last = active.text;
+        playerMeta.style.opacity = '1';
+      }, 220);
     }
-    return THRESHOLD;
   }
 
-  // Modo dev: ?reveal=true força reveal imediato
-  if (new URLSearchParams(location.search).has('reveal')) {
-    reveal('dev_mode');
-    return;
+  function tick() {
+    currentTime = Math.min(currentTime + 1, TOTAL_SECONDS);
+    localStorage.setItem(STORAGE_KEY, currentTime);
+    render();
+    if (currentTime >= TOTAL_SECONDS) pause();
   }
 
-  // Aguarda Vimeo SDK carregar
-  function attachVimeoListener() {
-    if (typeof Vimeo === 'undefined') {
-      // SDK ainda não carregou — tenta de novo em 200ms (max 50 tentativas = 10s)
-      attachVimeoListener.attempts = (attachVimeoListener.attempts || 0) + 1;
-      if (attachVimeoListener.attempts > 50) {
-        console.error('Vimeo SDK não carregou em 10s. Aplicando fallback timeout.');
-        setTimeout(() => reveal('fallback_no_sdk'), 360_000);
-        return;
+  function render() {
+    progressFill.style.width = (currentTime / TOTAL_SECONDS * 100) + '%';
+    timeDisplay.textContent = fmt(currentTime);
+    updateMeta();
+    if (currentTime >= REVEAL_AT) {
+      revealZone.classList.add('unlocked');
+      revealZone.setAttribute('aria-hidden', 'false');
+      if (!revealFiredOnce) {
+        revealFiredOnce = true;
+        if (window.fbq) { try { fbq('trackCustom', 'VSLReveal'); } catch(_) {} }
+        if (window.dataLayer) window.dataLayer.push({ event: 'vsl_reveal' });
       }
-      setTimeout(attachVimeoListener, 200);
-      return;
+    } else {
+      revealZone.classList.remove('unlocked');
+      revealZone.setAttribute('aria-hidden', 'true');
     }
+  }
 
-    const iframe = document.getElementById('vsl-player');
-    if (!iframe) {
-      console.error('vsl-player iframe não encontrado.');
-      return;
-    }
+  function play() {
+    if (playing) return;
+    playing = true;
+    player.classList.add('playing');
+    interval = setInterval(tick, 1000);
+    if (window.fbq) { try { fbq('trackCustom', 'VSLPlayed'); } catch(_) {} }
+    if (window.dataLayer) window.dataLayer.push({ event: 'vsl_played' });
+  }
+  function pause() {
+    playing = false;
+    player.classList.remove('playing');
+    clearInterval(interval);
+  }
 
-    const player = new Vimeo.Player(iframe);
-    console.info('[reveal] Vimeo Player criado, listeners ativos.');
-
-    // Captura duração assim que disponível pra ajustar threshold dinamicamente
-    player.getDuration().then(d => {
-      videoDuration = d;
-      console.info(`[reveal] Duração do vídeo: ${d.toFixed(1)}s. Threshold efetivo: ${effectiveThreshold().toFixed(1)}s.`);
-      if (d < THRESHOLD) {
-        console.warn(`[reveal] Vídeo (${d.toFixed(1)}s) é menor que threshold (${THRESHOLD}s) — auto-ajustando para 95% da duração.`);
-      }
-    }).catch(err => console.warn('[reveal] getDuration falhou:', err));
-
-    player.on('play', () => {
-      console.info('[reveal] vídeo: play');
-      if (window.fbq) {
-        try { fbq('trackCustom', 'VSLPlayed'); } catch (_) {}
-      }
-      if (window.dataLayer) window.dataLayer.push({ event: 'vsl_played' });
-    });
-
-    // Detector principal — usa threshold efetivo (auto-ajusta a vídeos curtos)
-    player.on('timeupdate', (data) => {
-      if (data.seconds >= effectiveThreshold()) {
-        reveal('timeupdate');
-      }
-    });
-
-    player.on('seeked', (data) => {
-      if (data.seconds >= effectiveThreshold()) {
-        reveal('seeked');
-      }
-    });
-
-    // Belt-and-suspenders: se 'ended' disparar antes de timeupdate, ainda revela
-    player.on('ended', () => {
-      console.info('[reveal] vídeo: ended');
-      reveal('video_ended');
-    });
-
-    // Quartis de retenção (analytics)
-    let quartilesFired = { 25: false, 50: false, 75: false, 95: false };
-    player.getDuration().then(duration => {
-      player.on('timeupdate', (data) => {
-        const pct = (data.seconds / duration) * 100;
-        [25, 50, 75, 95].forEach(q => {
-          if (pct >= q && !quartilesFired[q]) {
-            quartilesFired[q] = true;
-            if (window.fbq) {
-              try { fbq('trackCustom', `VSL${q}`); } catch (_) {}
-            }
-            if (window.dataLayer) window.dataLayer.push({ event: `vsl_${q}` });
-          }
-        });
-      });
+  if (playBtn) playBtn.addEventListener('click', play);
+  if (playerContent) {
+    playerContent.addEventListener('click', (e) => {
+      if (e.target.closest('.play-btn')) return;
+      if (playing) pause(); else play();
     });
   }
 
-  attachVimeoListener();
+  render();
+  if (currentTime > 0 && currentTime < TOTAL_SECONDS) {
+    player.classList.add('playing');
+    if (playerMeta) playerMeta.style.opacity = '1';
+  }
 
-  // Fallback de emergência: garante reveal em 6 min mesmo se Vimeo falhar completamente
-  setTimeout(() => {
-    if (!revealed) reveal('fallback_timeout');
-  }, 360_000);
+  // Dev controls — visíveis apenas com ?dev=true na URL
+  const devControls = document.getElementById('devControls');
+  if (new URLSearchParams(location.search).has('dev')) {
+    devControls?.classList.add('visible');
+  }
+  document.getElementById('skipBtn')?.addEventListener('click', () => {
+    currentTime = REVEAL_AT;
+    localStorage.setItem(STORAGE_KEY, currentTime);
+    play();
+    render();
+  });
+  document.getElementById('resetBtn')?.addEventListener('click', () => {
+    pause();
+    currentTime = 0;
+    localStorage.setItem(STORAGE_KEY, 0);
+    render();
+    if (playerMeta) {
+      playerMeta.textContent = 'Toque para iniciar a transmissão';
+      playerMeta.dataset.last = '';
+    }
+    player.classList.remove('playing');
+  });
 })();
