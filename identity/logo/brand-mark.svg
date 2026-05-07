@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80" fill="none" role="img" aria-label="Método Desinflamação Pro · Marca">
+  <title>Método Desinflamação Pro</title>
+  <desc>SVG composto: 2 círculos concêntricos, folha estilizada bezier, linha vertical central, losango heráldico. Cor controlada via currentColor.</desc>
+  <circle cx="40" cy="40" r="38" stroke="currentColor" stroke-width="0.6" opacity="0.5"/>
+  <circle cx="40" cy="40" r="32" stroke="currentColor" stroke-width="0.4" opacity="0.3"/>
+  <path d="M40 18 C 30 28, 28 42, 40 58 C 52 42, 50 28, 40 18 Z" stroke="currentColor" stroke-width="0.8" fill="none"/>
+  <line x1="40" y1="22" x2="40" y2="56" stroke="currentColor" stroke-width="0.5" opacity="0.6"/>
+  <rect x="38" y="38" width="4" height="4" fill="currentColor" transform="rotate(45 40 40)"/>
+</svg>

@@ -1,151 +1,139 @@
-/* ==========================================================================
-   IDENTIDADE VISUAL BIO-PREMIUM — TOKENS CANÔNICOS
-   Método Desinflamação Pro
-   Spec: docs/superpowers/specs/2026-05-07-identidade-visual-bio-premium-design.md
-   ========================================================================== */
+/* ============================================================
+   PROTOCOLO RESET ANTI-INFLAMATÓRIO
+   Sistema de design Bio-Premium
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Italiana&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Marcellus+SC&family=Inter:wght@300;400;500;600&display=swap');
 
 :root {
-  /* DNA — núcleo da paleta, presente em todos os modos */
-  --core-emerald: #0F3D2E;
-  --core-gold: #A88B4A;
-  --core-ivory: #EBE3D0;
+  /* === CORES === */
+  /* Forest Emerald — Verde floresta principal */
+  --emerald-900: #0a1f15;
+  --emerald-800: #0f2a1c;
+  --emerald-700: #173a28;
+  --emerald-600: #1f4d36;
+  --emerald-500: #2a6447;
+  --emerald-400: #3e8160;
 
-  /* Tipografia (famílias) */
-  --font-display: 'Italiana', serif;
-  --font-editorial: 'Cormorant Garamond', serif;
-  --font-marca: 'Marcellus SC', serif;
-  --font-body: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  /* Old Gold — Dourado antigo */
+  --gold-900: #5a4416;
+  --gold-700: #8a6a26;
+  --gold-500: #b8923f;
+  --gold-400: #c9a25a;
+  --gold-300: #d8b878;
+  --gold-200: #e6cf9e;
 
-  /* Escala tipográfica (rem, base 16px) */
-  --size-display-xxl: 6rem;     /* 96px — Hero hero, uma palavra dominante */
-  --size-display-xl: 4rem;      /* 64px — Headline principal */
-  --size-display-l: 3rem;       /* 48px — Headline secundária */
-  --size-display-m: 2.25rem;    /* 36px — Section titles */
-  --size-display-s: 1.75rem;    /* 28px — Card titles */
-  --size-editorial-l: 1.375rem; /* 22px — Lede, pull-quote */
-  --size-editorial-m: 1.125rem; /* 18px — Subtítulo italic */
-  --size-body-l: 1.0625rem;     /* 17px — Corpo principal */
-  --size-body-m: 0.9375rem;     /* 15px — Corpo secundário */
-  --size-body-s: 0.8125rem;     /* 13px — Captions */
-  --size-eyebrow: 0.6875rem;    /* 11px — Eyebrows */
-  --size-micro: 0.5625rem;      /*  9px — Tags de marca */
+  /* Champagne Ivory */
+  --champagne: #f0e6cf;
+  --champagne-soft: #ede4cb;
 
-  /* Espaçamento (8px base) */
+  /* Parchment — Fundo claro */
+  --parchment: #f5f0e4;
+  --parchment-dark: #ebe3d1;
+  --parchment-deep: #d9cfb8;
+
+  /* Preto Carbono — Apothecary Noir */
+  --carbon-1000: #07090a;
+  --carbon-950: #0c0f10;
+  --carbon-900: #11151700;
+  --carbon-900-solid: #111517;
+  --carbon-800: #1a1f22;
+  --carbon-700: #262b2e;
+
+  /* Texto */
+  --ink-noir: #e8e2d2;        /* texto sobre dark */
+  --ink-noir-mute: #9a958a;
+  --ink-noir-faint: #56524b;
+  --ink-light: #1a2519;       /* texto sobre light */
+  --ink-light-mute: #5a5547;
+
+  /* Acentos sutis */
+  --line-noir: rgba(201, 162, 90, 0.18);
+  --line-noir-strong: rgba(201, 162, 90, 0.35);
+  --line-light: rgba(58, 40, 14, 0.12);
+  --line-light-strong: rgba(58, 40, 14, 0.25);
+
+  /* === TIPOGRAFIA === */
+  --ff-display: 'Italiana', 'Cormorant Garamond', serif;
+  --ff-editorial: 'Cormorant Garamond', 'Times New Roman', serif;
+  --ff-smallcaps: 'Marcellus SC', 'Cormorant Garamond', serif;
+  --ff-body: 'Inter', system-ui, sans-serif;
+
+  /* === ESPAÇAMENTO === */
   --space-xs: 4px;
-  --space-s: 8px;
-  --space-m: 16px;
-  --space-l: 24px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 24px;
   --space-xl: 40px;
-  --space-xxl: 64px;
-  --space-xxxl: 96px;
+  --space-2xl: 64px;
+  --space-3xl: 96px;
 
-  /* Letter-spacing canônicos */
-  --tracking-display: 0.015em;
-  --tracking-eyebrow: 0.32em;
-  --tracking-micro: 0.5em;
-
-  /* Bordas */
-  --radius-card: 4px;
-  --radius-button: 2px;
-  --hairline-width: 1px;
+  /* === ANIMAÇÕES === */
+  --ease-elegant: cubic-bezier(0.22, 0.61, 0.36, 1);
+  --ease-dramatic: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* ==========================================================================
-   MODO I — HERITAGE (marca-mãe / institucional)
-   ========================================================================== */
-[data-mode="heritage"] {
-  --bg-primary: #0F3D2E;
-  --bg-lift: #163F31;
-  --bg-deep: #0A3024;
-  --text-primary: #EBE3D0;
-  --text-muted: rgba(235, 227, 208, 0.75);
-  --accent: #A88B4A;
-  --accent-muted: rgba(168, 139, 74, 0.55);
-  --hairline: rgba(168, 139, 74, 0.22);
+* { box-sizing: border-box; margin: 0; padding: 0; }
 
-  --logo-accent: #A88B4A;
-  --logo-text: #EBE3D0;
-
-  /* Atmosfera de stage — em Heritage não há gradient, é cor sólida cerimonial */
-  --bg-stage: var(--bg-primary);
-  --ambient-glow: 0 0 32px rgba(168, 139, 74, 0.18);
-}
-
-/* ==========================================================================
-   MODO II — APOTHECARY (VSL / página de vendas)
-   ========================================================================== */
-[data-mode="apothecary"] {
-  --bg-primary: #07100C;
-  --bg-lift: #0A1410;
-  --bg-deep: #050A07;
-  --text-primary: #EFE7D2;
-  --text-muted: rgba(239, 231, 210, 0.72);
-  --accent: #C9A876;
-  --accent-muted: rgba(201, 168, 118, 0.55);
-  --hairline: rgba(201, 168, 118, 0.30);
-
-  --logo-accent: #C9A876;
-  --logo-text: #EFE7D2;
-
-  /*
-     Atmosfera de stage — clínica de longevidade de elite.
-     3 camadas de luz sobre gradient warm vertical:
-       1. Glow gold central (atrás do conteúdo principal — ex: VSL player)
-       2. Luz emerald inferior-esquerda (atmosfera quente-fria)
-       3. Sutil acento gold superior-direito (highlight cinematográfico)
-     Hairline foi 0.14 → 0.30 pra dar mais presença ao ouro nos divisores.
-  */
-  --bg-stage:
-    radial-gradient(ellipse 75% 50% at 50% 38%,
-      rgba(201, 168, 118, 0.14) 0%,
-      rgba(201, 168, 118, 0.05) 38%,
-      transparent 68%),
-    radial-gradient(ellipse 65% 55% at 18% 100%,
-      rgba(15, 61, 46, 0.42) 0%,
-      transparent 65%),
-    radial-gradient(ellipse 50% 40% at 88% 8%,
-      rgba(201, 168, 118, 0.05) 0%,
-      transparent 60%),
-    linear-gradient(180deg,
-      #050A07 0%,
-      #0B1612 28%,
-      #0F1B15 52%,
-      #0A1410 78%,
-      #060B08 100%);
-
-  --ambient-glow: 0 0 64px rgba(201, 168, 118, 0.12);
-  --ambient-text-glow: 0 0 24px rgba(201, 168, 118, 0.45);
-}
-
-/* ==========================================================================
-   MODO III — BOTANIQUE (PDFs / materiais escritos)
-   ========================================================================== */
-[data-mode="botanique"] {
-  --bg-primary: #F2ECDD;
-  --bg-lift: #E8DFC8;
-  --bg-deep: #D8CEB4;
-  --text-primary: #1F3D2E;
-  --text-muted: rgba(31, 61, 46, 0.78);
-  --accent: #9C7C42;
-  --accent-muted: rgba(156, 124, 66, 0.55);
-  --hairline: rgba(31, 61, 46, 0.18);
-
-  --logo-accent: #9C7C42;
-  --logo-text: #1F3D2E;
-
-  /* Em Botanique o stage é parchment puro — livro de luxo, sem efeitos cinematográficos */
-  --bg-stage: var(--bg-primary);
-  --ambient-glow: none;
-}
-
-/* ==========================================================================
-   APLICAÇÃO BASE — qualquer container com data-mode herda automaticamente
-   ========================================================================== */
-[data-mode] {
-  background: var(--bg-primary);
-  color: var(--text-primary);
-  font-family: var(--font-body);
+html, body {
+  font-family: var(--ff-body);
   font-weight: 300;
-  font-size: var(--size-body-l);
-  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* === MOTIFS REUTILIZÁVEIS === */
+
+/* Filete dourado fino */
+.gold-rule {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold-500), transparent);
+  border: 0;
+}
+
+/* Marcador heráldico (losango) */
+.heraldic-mark {
+  width: 6px;
+  height: 6px;
+  background: var(--gold-500);
+  transform: rotate(45deg);
+  display: inline-block;
+}
+
+/* Small caps spaced */
+.smallcaps {
+  font-family: var(--ff-smallcaps);
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  font-weight: normal;
+}
+
+/* Italic editorial */
+.italic-editorial {
+  font-family: var(--ff-editorial);
+  font-style: italic;
+  font-weight: 400;
+}
+
+/* Brand wordmark */
+.brand-wordmark {
+  font-family: var(--ff-display);
+  letter-spacing: 0.04em;
+  line-height: 1;
+}
+
+/* Texturas */
+.tex-grain-dark {
+  background-image:
+    radial-gradient(rgba(201,162,90,0.025) 1px, transparent 1px),
+    radial-gradient(rgba(255,255,255,0.012) 1px, transparent 1px);
+  background-size: 3px 3px, 5px 5px;
+  background-position: 0 0, 1px 1px;
+}
+
+.tex-grain-light {
+  background-image:
+    radial-gradient(rgba(58,40,14,0.04) 1px, transparent 1px);
+  background-size: 4px 4px;
 }
