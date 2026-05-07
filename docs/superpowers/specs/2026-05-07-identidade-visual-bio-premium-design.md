@@ -225,7 +225,7 @@ Quatro famílias, todas via Google Fonts. **Não usar nenhuma outra família em 
 | `botanique.text.primary` | `#1F3D2E` | Texto principal (verde tinta — mais escuro que `core.emerald` para legibilidade) |
 | `botanique.text.muted` | `rgba(31,61,46,0.78)` | Texto secundário |
 | `botanique.accent` | `#9C7C42` | Aged Brass — gold mais escurecido para contraste em fundo creme |
-| `botanique.accent.muted` | `rgba(31,61,46,0.55)` | Acentos discretos em verde |
+| `botanique.accent.muted` | `rgba(156,124,66,0.55)` | Versão muted do brass — usado em borders de botões ghost, hairlines de ênfase |
 | `botanique.hairline` | `rgba(31,61,46,0.18)` | Filetes, bordas, divisórias |
 
 **Por que o text é `#1F3D2E` (mais escuro que `#0F3D2E`):** em fundo claro, o emerald do core fica com contraste insuficiente para corpo de texto longo (WCAG 4.5:1). `#1F3D2E` mantém a percepção "verde da marca" e atinge ~10:1 em parchment.
