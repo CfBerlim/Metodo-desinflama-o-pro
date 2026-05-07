@@ -1,0 +1,139 @@
+/* ============================================================
+   PROTOCOLO RESET ANTI-INFLAMATÓRIO
+   Sistema de design Bio-Premium
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Italiana&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Marcellus+SC&family=Inter:wght@300;400;500;600&display=swap');
+
+:root {
+  /* === CORES === */
+  /* Forest Emerald — Verde floresta principal */
+  --emerald-900: #0a1f15;
+  --emerald-800: #0f2a1c;
+  --emerald-700: #173a28;
+  --emerald-600: #1f4d36;
+  --emerald-500: #2a6447;
+  --emerald-400: #3e8160;
+
+  /* Old Gold — Dourado antigo */
+  --gold-900: #5a4416;
+  --gold-700: #8a6a26;
+  --gold-500: #b8923f;
+  --gold-400: #c9a25a;
+  --gold-300: #d8b878;
+  --gold-200: #e6cf9e;
+
+  /* Champagne Ivory */
+  --champagne: #f0e6cf;
+  --champagne-soft: #ede4cb;
+
+  /* Parchment — Fundo claro */
+  --parchment: #f5f0e4;
+  --parchment-dark: #ebe3d1;
+  --parchment-deep: #d9cfb8;
+
+  /* Preto Carbono — Apothecary Noir */
+  --carbon-1000: #07090a;
+  --carbon-950: #0c0f10;
+  --carbon-900: #11151700;
+  --carbon-900-solid: #111517;
+  --carbon-800: #1a1f22;
+  --carbon-700: #262b2e;
+
+  /* Texto */
+  --ink-noir: #e8e2d2;        /* texto sobre dark */
+  --ink-noir-mute: #9a958a;
+  --ink-noir-faint: #56524b;
+  --ink-light: #1a2519;       /* texto sobre light */
+  --ink-light-mute: #5a5547;
+
+  /* Acentos sutis */
+  --line-noir: rgba(201, 162, 90, 0.18);
+  --line-noir-strong: rgba(201, 162, 90, 0.35);
+  --line-light: rgba(58, 40, 14, 0.12);
+  --line-light-strong: rgba(58, 40, 14, 0.25);
+
+  /* === TIPOGRAFIA === */
+  --ff-display: 'Italiana', 'Cormorant Garamond', serif;
+  --ff-editorial: 'Cormorant Garamond', 'Times New Roman', serif;
+  --ff-smallcaps: 'Marcellus SC', 'Cormorant Garamond', serif;
+  --ff-body: 'Inter', system-ui, sans-serif;
+
+  /* === ESPAÇAMENTO === */
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 40px;
+  --space-2xl: 64px;
+  --space-3xl: 96px;
+
+  /* === ANIMAÇÕES === */
+  --ease-elegant: cubic-bezier(0.22, 0.61, 0.36, 1);
+  --ease-dramatic: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  font-family: var(--ff-body);
+  font-weight: 300;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* === MOTIFS REUTILIZÁVEIS === */
+
+/* Filete dourado fino */
+.gold-rule {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold-500), transparent);
+  border: 0;
+}
+
+/* Marcador heráldico (losango) */
+.heraldic-mark {
+  width: 6px;
+  height: 6px;
+  background: var(--gold-500);
+  transform: rotate(45deg);
+  display: inline-block;
+}
+
+/* Small caps spaced */
+.smallcaps {
+  font-family: var(--ff-smallcaps);
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  font-weight: normal;
+}
+
+/* Italic editorial */
+.italic-editorial {
+  font-family: var(--ff-editorial);
+  font-style: italic;
+  font-weight: 400;
+}
+
+/* Brand wordmark */
+.brand-wordmark {
+  font-family: var(--ff-display);
+  letter-spacing: 0.04em;
+  line-height: 1;
+}
+
+/* Texturas */
+.tex-grain-dark {
+  background-image:
+    radial-gradient(rgba(201,162,90,0.025) 1px, transparent 1px),
+    radial-gradient(rgba(255,255,255,0.012) 1px, transparent 1px);
+  background-size: 3px 3px, 5px 5px;
+  background-position: 0 0, 1px 1px;
+}
+
+.tex-grain-light {
+  background-image:
+    radial-gradient(rgba(58,40,14,0.04) 1px, transparent 1px);
+  background-size: 4px 4px;
+}

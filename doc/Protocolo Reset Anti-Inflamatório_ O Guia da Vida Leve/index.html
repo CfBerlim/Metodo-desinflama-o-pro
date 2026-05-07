@@ -1,0 +1,1168 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<title>Método Desinflamação Pro — Protocolo Reset Anti-Inflamatório</title>
+<link rel="stylesheet" href="shared/tokens.css" />
+<style>
+  /* ============================================================
+     LANDING PAGE — APOTHECARY NOIR
+     Mobile-first. Sem countdown. Sem texto persuasivo visível.
+     CTA aparece SOMENTE aos 4:00 do vídeo.
+     ============================================================ */
+
+  body {
+    /* Carbono mais quente, com nuance — não preto absoluto */
+    background:
+      radial-gradient(ellipse 70% 50% at 50% 0%, #1c1a14 0%, #14130f 35%, #0d0c0a 70%),
+      #0d0c0a;
+    color: var(--ink-noir);
+    overflow-x: hidden;
+    min-height: 100vh;
+  }
+
+  /* === ILUMINAÇÃO CINEMATOGRÁFICA === */
+  /* Camada 1 — luz de estúdio dourada de cima */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 90% 55% at 50% -10%, rgba(216,184,120,0.18), rgba(184,146,63,0.08) 30%, transparent 65%),
+      radial-gradient(ellipse 60% 45% at 50% 35%, rgba(216,184,120,0.10), transparent 60%),
+      radial-gradient(ellipse 70% 60% at 50% 100%, rgba(23,58,40,0.30), transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+  }
+  /* Camada 2 — grain + filete de luz lateral */
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      radial-gradient(rgba(216,184,120,0.025) 1px, transparent 1px),
+      linear-gradient(180deg, transparent 0%, rgba(216,184,120,0.04) 50%, transparent 100%);
+    background-size: 4px 4px, auto;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.7;
+  }
+
+  .page {
+    position: relative;
+    z-index: 1;
+    max-width: 480px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  /* === HEADER === */
+  .top-bar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 22px 0 18px;
+    border-bottom: 1px solid transparent;
+    border-image: linear-gradient(90deg, transparent, rgba(216,184,120,0.45), transparent) 1;
+  }
+  .crest {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+  }
+  .crest-rules {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .crest-rules .line {
+    width: 28px;
+    height: 1px;
+    background: var(--gold-500);
+    opacity: 0.55;
+  }
+  .crest-rules .diamond {
+    width: 4px;
+    height: 4px;
+    background: var(--gold-500);
+    transform: rotate(45deg);
+  }
+  .crest-name {
+    font-family: var(--ff-display);
+    font-size: 15px;
+    letter-spacing: 0.32em;
+    color: var(--gold-200);
+    text-transform: uppercase;
+    text-shadow: 0 0 24px rgba(216,184,120,0.35);
+  }
+  .crest-tag {
+    font-family: var(--ff-smallcaps);
+    font-size: 8.5px;
+    letter-spacing: 0.42em;
+    color: var(--ink-noir-faint);
+  }
+
+  /* === HERO MANCHETE === */
+  .hero {
+    padding: 44px 0 28px;
+    text-align: center;
+  }
+  .eyebrow {
+    font-family: var(--ff-smallcaps);
+    font-size: 10px;
+    letter-spacing: 0.5em;
+    color: var(--gold-300);
+    margin-bottom: 22px;
+    text-shadow: 0 0 18px rgba(216,184,120,0.35);
+  }
+  .headline {
+    font-family: var(--ff-display);
+    font-size: 38px;
+    line-height: 1.08;
+    letter-spacing: 0.005em;
+    color: var(--champagne);
+    text-wrap: balance;
+  }
+  .headline em {
+    font-family: var(--ff-editorial);
+    font-style: italic;
+    font-weight: 400;
+    background: linear-gradient(180deg, #f0d9a3 0%, #c9a25a 60%, #a07e3a 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 0 32px rgba(216,184,120,0.25);
+  }
+  .headline-divider {
+    margin: 26px auto 18px;
+    width: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+  }
+  .headline-divider .l {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold-300), transparent);
+    opacity: 0.9;
+  }
+  .headline-divider .d {
+    width: 5px;
+    height: 5px;
+    background: var(--gold-300);
+    transform: rotate(45deg);
+    box-shadow: 0 0 12px rgba(216,184,120,0.7);
+  }
+  .subhead {
+    font-family: var(--ff-editorial);
+    font-style: italic;
+    font-size: 17px;
+    line-height: 1.45;
+    color: var(--ink-noir-mute);
+    max-width: 360px;
+    margin: 0 auto;
+    text-wrap: pretty;
+  }
+
+  /* === PLAYER === */
+  .player-wrap {
+    margin: 32px 0 24px;
+    position: relative;
+  }
+  /* Halo dourado de luz de estúdio atrás do player */
+  .player-wrap::before {
+    content: '';
+    position: absolute;
+    inset: -40px -20px;
+    background:
+      radial-gradient(ellipse 80% 90% at 50% 50%, rgba(216,184,120,0.22), rgba(184,146,63,0.08) 40%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+  }
+  .player-frame {
+    position: relative;
+    aspect-ratio: 16 / 9;
+    background: #000;
+    border: 1px solid rgba(216,184,120,0.55);
+    overflow: hidden;
+    cursor: pointer;
+    z-index: 1;
+    box-shadow:
+      0 0 0 1px rgba(216,184,120,0.12),
+      0 0 60px -10px rgba(216,184,120,0.35),
+      0 30px 60px -20px rgba(0,0,0,0.6);
+  }
+  /* Cantos dourados */
+  .player-frame::before,
+  .player-frame::after,
+  .corner-tr, .corner-br {
+    content: '';
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    pointer-events: none;
+  }
+  .player-frame::before {
+    top: -1px; left: -1px;
+    border-top: 1px solid var(--gold-200);
+    border-left: 1px solid var(--gold-200);
+    box-shadow: -2px -2px 8px rgba(216,184,120,0.4);
+  }
+  .player-frame::after {
+    bottom: -1px; right: -1px;
+    border-bottom: 1px solid var(--gold-200);
+    border-right: 1px solid var(--gold-200);
+    box-shadow: 2px 2px 8px rgba(216,184,120,0.4);
+  }
+  .corner-tr {
+    top: -1px; right: -1px;
+    border-top: 1px solid var(--gold-200);
+    border-right: 1px solid var(--gold-200);
+  }
+  .corner-bl {
+    position: absolute;
+    bottom: -1px; left: -1px;
+    width: 14px; height: 14px;
+    border-bottom: 1px solid var(--gold-200);
+    border-left: 1px solid var(--gold-200);
+    pointer-events: none;
+  }
+
+  /* Conteúdo do player */
+  .player-content {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background:
+      radial-gradient(ellipse at center, rgba(40,72,52,0.5), rgba(15,18,20,0.92)),
+      linear-gradient(180deg, #161310, #0a0a08);
+  }
+  .player-thumb-grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(216,184,120,0.06) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(216,184,120,0.06) 1px, transparent 1px);
+    background-size: 24px 24px;
+    opacity: 0.6;
+  }
+  .player-vignette {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at center, transparent 30%, rgba(0,0,0,0.7));
+  }
+  .play-btn {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+    background: none;
+    border: none;
+    color: var(--gold-300);
+    cursor: pointer;
+    transition: transform 0.4s var(--ease-elegant);
+  }
+  .play-btn:hover { transform: scale(1.04); }
+  .play-circle {
+    width: 64px;
+    height: 64px;
+    border: 1px solid var(--gold-200);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(15,18,20,0.55);
+    backdrop-filter: blur(4px);
+    position: relative;
+    box-shadow:
+      0 0 0 1px rgba(216,184,120,0.15),
+      0 0 32px rgba(216,184,120,0.35),
+      inset 0 0 16px rgba(216,184,120,0.12);
+  }
+  .play-circle::before {
+    content: '';
+    position: absolute;
+    inset: -10px;
+    border: 1px solid var(--gold-300);
+    border-radius: 50%;
+    opacity: 0.4;
+    animation: ringPulse 3s var(--ease-elegant) infinite;
+  }
+  @keyframes ringPulse {
+    0%, 100% { opacity: 0.15; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(1.08); }
+  }
+  .play-triangle {
+    width: 0;
+    height: 0;
+    border-left: 14px solid var(--gold-200);
+    border-top: 9px solid transparent;
+    border-bottom: 9px solid transparent;
+    margin-left: 4px;
+    filter: drop-shadow(0 0 6px rgba(216,184,120,0.5));
+  }
+  .play-label {
+    font-family: var(--ff-smallcaps);
+    font-size: 9.5px;
+    letter-spacing: 0.4em;
+    color: var(--gold-200);
+    text-shadow: 0 0 12px rgba(216,184,120,0.4);
+  }
+
+  /* Estado: tocando */
+  .playing .player-content { background: var(--carbon-1000); }
+  .playing .play-btn { display: none; }
+
+  /* Linha de progresso */
+  .progress-frame {
+    margin-top: 12px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--ink-noir-faint);
+    font-family: var(--ff-smallcaps);
+    font-size: 9px;
+    letter-spacing: 0.3em;
+  }
+  .progress-track {
+    flex: 1;
+    height: 1px;
+    background: rgba(216,184,120,0.18);
+    position: relative;
+  }
+  .progress-fill {
+    position: absolute;
+    inset: 0 auto 0 0;
+    width: 0%;
+    background: linear-gradient(90deg, var(--gold-500), var(--gold-200));
+    transition: width 0.4s linear;
+    box-shadow: 0 0 8px rgba(216,184,120,0.6);
+  }
+
+  /* "Now playing" texto que muda — mantém atenção sem revelar oferta */
+  .player-meta {
+    text-align: center;
+    margin-top: 18px;
+    font-family: var(--ff-editorial);
+    font-style: italic;
+    font-size: 14px;
+    color: var(--ink-noir-mute);
+    min-height: 22px;
+    transition: opacity 0.4s ease;
+  }
+
+  /* === ZONA REVEAL — TUDO OCULTO ATÉ 4 MIN === */
+  .reveal-zone {
+    margin-top: 36px;
+    opacity: 0;
+    transform: translateY(20px);
+    pointer-events: none;
+    transition: opacity 1.6s var(--ease-dramatic), transform 1.6s var(--ease-dramatic);
+  }
+  .reveal-zone.unlocked {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+
+  /* Anel cerimonial antes do reveal */
+  .reveal-zone .ceremony {
+    text-align: center;
+    margin-bottom: 28px;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: all 1.2s var(--ease-dramatic) 0.3s;
+  }
+  .reveal-zone.unlocked .ceremony { opacity: 1; transform: translateY(0); }
+  .ceremony-rule {
+    width: 1px;
+    height: 36px;
+    background: linear-gradient(to bottom, transparent, var(--gold-300));
+    margin: 0 auto 16px;
+    box-shadow: 0 0 12px rgba(216,184,120,0.5);
+  }
+  .ceremony-label {
+    font-family: var(--ff-smallcaps);
+    font-size: 10px;
+    letter-spacing: 0.5em;
+    color: var(--gold-200);
+    text-shadow: 0 0 18px rgba(216,184,120,0.4);
+  }
+
+  /* Apresentação do produto */
+  .product-card {
+    border: 1px solid rgba(216,184,120,0.28);
+    background:
+      radial-gradient(ellipse 80% 60% at 50% 0%, rgba(216,184,120,0.10), transparent 70%),
+      linear-gradient(180deg, rgba(184,146,63,0.04), rgba(15,18,20,0.6) 40%);
+    padding: 32px 24px 28px;
+    text-align: center;
+    margin-bottom: 24px;
+    position: relative;
+    box-shadow:
+      inset 0 1px 0 rgba(216,184,120,0.15),
+      0 30px 60px -30px rgba(216,184,120,0.2);
+  }
+  .product-card .crest-mini {
+    width: 36px;
+    height: 36px;
+    margin: 0 auto 16px;
+    color: var(--gold-400);
+  }
+  .product-name {
+    font-family: var(--ff-display);
+    font-size: 28px;
+    color: var(--champagne);
+    line-height: 1.1;
+    margin-bottom: 8px;
+    text-shadow: 0 0 24px rgba(240,230,207,0.15);
+  }
+  .product-name em {
+    font-family: var(--ff-editorial);
+    font-style: italic;
+    background: linear-gradient(180deg, #f0d9a3, #c9a25a);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .product-tag {
+    font-family: var(--ff-smallcaps);
+    font-size: 9.5px;
+    letter-spacing: 0.42em;
+    color: var(--ink-noir-mute);
+  }
+
+  /* Módulos */
+  .modules {
+    border-top: 1px solid transparent;
+    border-image: linear-gradient(90deg, transparent, rgba(216,184,120,0.4), transparent) 1;
+    margin-top: 24px;
+    padding-top: 20px;
+    text-align: left;
+  }
+  .modules-title {
+    font-family: var(--ff-smallcaps);
+    font-size: 9.5px;
+    letter-spacing: 0.42em;
+    color: var(--gold-200);
+    text-align: center;
+    margin-bottom: 18px;
+    text-shadow: 0 0 14px rgba(216,184,120,0.3);
+  }
+  .module-row {
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    padding: 12px 0;
+    border-bottom: 1px solid rgba(201,162,90,0.08);
+  }
+  .module-row:last-child { border-bottom: none; }
+  .module-num {
+    font-family: var(--ff-display);
+    font-size: 18px;
+    color: var(--gold-300);
+    min-width: 28px;
+    text-shadow: 0 0 12px rgba(216,184,120,0.3);
+  }
+  .module-text {
+    flex: 1;
+  }
+  .module-name {
+    font-family: var(--ff-editorial);
+    font-size: 17px;
+    color: var(--champagne);
+    font-style: italic;
+    line-height: 1.25;
+  }
+  .module-meta {
+    font-family: var(--ff-smallcaps);
+    font-size: 8.5px;
+    letter-spacing: 0.3em;
+    color: var(--ink-noir-faint);
+    margin-top: 3px;
+  }
+
+  /* Bônus / materiais */
+  .bonuses {
+    margin-top: 0;
+    margin-bottom: 28px;
+  }
+  .bonus-header {
+    text-align: center;
+    margin-bottom: 22px;
+  }
+  .bonus-header .label {
+    font-family: var(--ff-smallcaps);
+    font-size: 10px;
+    letter-spacing: 0.5em;
+    color: var(--gold-200);
+    margin-bottom: 8px;
+    display: block;
+    text-shadow: 0 0 14px rgba(216,184,120,0.3);
+  }
+  .bonus-header .title {
+    font-family: var(--ff-display);
+    font-size: 24px;
+    color: var(--champagne);
+  }
+  .bonus-grid {
+    display: grid;
+    gap: 14px;
+  }
+  .bonus-item {
+    border: 1px solid rgba(216,184,120,0.25);
+    padding: 18px 18px 16px;
+    display: grid;
+    grid-template-columns: 64px 1fr;
+    gap: 16px;
+    align-items: center;
+    background:
+      linear-gradient(180deg, rgba(216,184,120,0.04), transparent),
+      rgba(15,18,20,0.5);
+    box-shadow: inset 0 1px 0 rgba(216,184,120,0.08);
+  }
+  .bonus-thumb {
+    aspect-ratio: 3/4;
+    background:
+      repeating-linear-gradient(
+        135deg,
+        rgba(184,146,63,0.08) 0 4px,
+        transparent 4px 8px
+      ),
+      var(--carbon-800);
+    border: 1px solid var(--line-noir-strong);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--gold-500);
+    font-family: var(--ff-smallcaps);
+    font-size: 7px;
+    letter-spacing: 0.3em;
+    text-align: center;
+    padding: 4px;
+  }
+  .bonus-name {
+    font-family: var(--ff-editorial);
+    font-style: italic;
+    font-size: 16px;
+    color: var(--champagne);
+    line-height: 1.3;
+    margin-bottom: 4px;
+  }
+  .bonus-meta {
+    font-family: var(--ff-smallcaps);
+    font-size: 8px;
+    letter-spacing: 0.32em;
+    color: var(--ink-noir-mute);
+  }
+
+  /* Stack de oferta */
+  .offer-stack {
+    margin-top: 12px;
+    margin-bottom: 28px;
+    border: 1px solid rgba(216,184,120,0.55);
+    background:
+      radial-gradient(ellipse 90% 70% at 50% 0%, rgba(216,184,120,0.18), rgba(184,146,63,0.06) 40%, transparent 70%),
+      linear-gradient(180deg, rgba(184,146,63,0.10), rgba(15,18,20,0.85)),
+      #14130f;
+    padding: 36px 24px 32px;
+    text-align: center;
+    position: relative;
+    box-shadow:
+      0 0 0 1px rgba(216,184,120,0.15),
+      0 0 80px -20px rgba(216,184,120,0.4),
+      inset 0 1px 0 rgba(216,184,120,0.2);
+  }
+  .offer-stack::before,
+  .offer-stack::after {
+    content: '';
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    border: 1px solid var(--gold-200);
+  }
+  .offer-stack::before {
+    top: 8px; left: 8px;
+    border-right: none; border-bottom: none;
+  }
+  .offer-stack::after {
+    bottom: 8px; right: 8px;
+    border-left: none; border-top: none;
+  }
+  .offer-eyebrow {
+    font-family: var(--ff-smallcaps);
+    font-size: 9.5px;
+    letter-spacing: 0.5em;
+    color: var(--gold-400);
+    margin-bottom: 12px;
+  }
+  .offer-title {
+    font-family: var(--ff-display);
+    font-size: 26px;
+    color: var(--champagne);
+    line-height: 1.1;
+    margin-bottom: 24px;
+  }
+  .price-was {
+    font-family: var(--ff-editorial);
+    font-style: italic;
+    font-size: 18px;
+    color: var(--ink-noir-mute);
+    text-decoration: line-through;
+    text-decoration-color: rgba(201, 162, 90, 0.6);
+    text-decoration-thickness: 1px;
+    margin-bottom: 6px;
+  }
+  .price-cta-line {
+    font-family: var(--ff-smallcaps);
+    font-size: 9.5px;
+    letter-spacing: 0.42em;
+    color: var(--gold-400);
+    margin-bottom: 10px;
+  }
+  .price-installment {
+    font-family: var(--ff-display);
+    font-size: 56px;
+    line-height: 1;
+    background: linear-gradient(180deg, #f5e3b8 0%, #d8b878 50%, #a07e3a 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    letter-spacing: 0.01em;
+    margin-bottom: 4px;
+    text-shadow: 0 0 40px rgba(216,184,120,0.3);
+  }
+  .price-installment .small {
+    font-size: 26px;
+    color: var(--gold-400);
+    margin-right: 4px;
+  }
+  .price-installment .cents {
+    font-size: 32px;
+    color: var(--gold-400);
+  }
+  .price-cash {
+    font-family: var(--ff-editorial);
+    font-style: italic;
+    font-size: 14px;
+    color: var(--ink-noir-mute);
+    margin-bottom: 28px;
+  }
+
+  .cta-button {
+    display: block;
+    width: 100%;
+    padding: 22px 24px;
+    background: linear-gradient(180deg, #3e8160 0%, #2a6447 50%, #173a28 100%);
+    color: var(--champagne);
+    border: 1px solid var(--gold-200);
+    text-decoration: none;
+    font-family: var(--ff-smallcaps);
+    font-size: 13px;
+    letter-spacing: 0.32em;
+    text-align: center;
+    cursor: pointer;
+    position: relative;
+    transition: all 0.4s var(--ease-elegant);
+    text-shadow: 0 0 18px rgba(216,184,120,0.3);
+    box-shadow:
+      0 0 0 1px rgba(216,184,120,0.25),
+      inset 0 1px 0 rgba(240,217,163,0.3),
+      inset 0 -2px 0 rgba(0,0,0,0.3),
+      0 30px 60px -20px rgba(216,184,120,0.5),
+      0 0 60px -10px rgba(216,184,120,0.4);
+  }
+  .cta-button:hover {
+    background: linear-gradient(180deg, var(--emerald-400), var(--emerald-600));
+    transform: translateY(-1px);
+    box-shadow:
+      0 0 0 1px rgba(201,162,90,0.3),
+      inset 0 1px 0 rgba(201,162,90,0.3),
+      0 26px 48px -20px rgba(184,146,63,0.55);
+  }
+  .cta-button .arrow {
+    display: inline-block;
+    margin-left: 14px;
+    transition: transform 0.4s var(--ease-elegant);
+  }
+  .cta-button:hover .arrow { transform: translateX(4px); }
+  .cta-helper {
+    font-family: var(--ff-editorial);
+    font-style: italic;
+    font-size: 12.5px;
+    color: var(--ink-noir-mute);
+    margin-top: 14px;
+  }
+
+  /* === GARANTIA === */
+  .guarantee {
+    text-align: center;
+    padding: 28px 0;
+    margin-bottom: 16px;
+  }
+  .seal {
+    width: 110px;
+    height: 110px;
+    margin: 0 auto 16px;
+    position: relative;
+    color: var(--gold-200);
+    filter: drop-shadow(0 0 16px rgba(216,184,120,0.4));
+  }
+  .seal-text {
+    font-family: var(--ff-smallcaps);
+    font-size: 9.5px;
+    letter-spacing: 0.42em;
+    color: var(--gold-200);
+    margin-bottom: 6px;
+    text-shadow: 0 0 14px rgba(216,184,120,0.35);
+  }
+  .guarantee-title {
+    font-family: var(--ff-display);
+    font-size: 22px;
+    color: var(--champagne);
+    margin-bottom: 8px;
+  }
+  .guarantee-body {
+    font-family: var(--ff-editorial);
+    font-style: italic;
+    font-size: 14px;
+    color: var(--ink-noir-mute);
+    max-width: 340px;
+    margin: 0 auto;
+    line-height: 1.5;
+  }
+
+  /* === FOOTER COMPLIANCE === */
+  .compliance {
+    margin-top: 40px;
+    padding: 32px 0 60px;
+    border-top: 1px solid var(--line-noir);
+    text-align: center;
+    color: var(--ink-noir-faint);
+  }
+  .compliance .crest-rules { justify-content: center; margin-bottom: 14px; }
+  .compliance-brand {
+    font-family: var(--ff-display);
+    font-size: 13px;
+    letter-spacing: 0.32em;
+    color: var(--ink-noir-mute);
+    text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+  .disclaimer {
+    font-size: 10px;
+    line-height: 1.7;
+    color: var(--ink-noir-faint);
+    max-width: 420px;
+    margin: 0 auto 14px;
+    letter-spacing: 0.02em;
+  }
+  .legal-row {
+    font-family: var(--ff-smallcaps);
+    font-size: 8px;
+    letter-spacing: 0.32em;
+    color: var(--ink-noir-faint);
+  }
+  .legal-row a {
+    color: var(--ink-noir-mute);
+    text-decoration: none;
+    margin: 0 6px;
+  }
+  .legal-row a:hover { color: var(--gold-400); }
+
+  /* === DESKTOP === */
+  @media (min-width: 768px) {
+    .page { max-width: 720px; padding: 0 40px; }
+    .headline { font-size: 56px; }
+    .subhead { font-size: 19px; max-width: 520px; }
+    .product-name { font-size: 38px; }
+    .offer-title { font-size: 34px; }
+    .price-installment { font-size: 72px; }
+    .bonus-grid { grid-template-columns: 1fr 1fr; }
+  }
+  @media (min-width: 1100px) {
+    .page { max-width: 880px; }
+    .headline { font-size: 68px; }
+  }
+
+  /* === DEV / TWEAKS === */
+  .dev-controls {
+    position: fixed;
+    bottom: 16px;
+    right: 16px;
+    z-index: 100;
+    display: none;
+  }
+  .dev-controls.visible { display: flex; gap: 8px; }
+  .dev-controls button {
+    background: var(--carbon-800);
+    color: var(--gold-300);
+    border: 1px solid var(--gold-700);
+    padding: 8px 14px;
+    font-family: var(--ff-smallcaps);
+    font-size: 9px;
+    letter-spacing: 0.3em;
+    cursor: pointer;
+  }
+  .dev-controls button:hover { background: var(--carbon-700); }
+</style>
+</head>
+<body>
+  <main class="page" data-screen-label="01 Landing Page (VSL Apothecary Noir)">
+
+    <!-- Top crest -->
+    <header class="top-bar">
+      <div class="crest">
+        <div class="crest-rules">
+          <span class="line"></span>
+          <span class="diamond"></span>
+          <span class="line"></span>
+        </div>
+        <div class="crest-name">Método Desinflamação Pro</div>
+        <div class="crest-tag">Protocolo Reset · est. mmxxv</div>
+      </div>
+    </header>
+
+    <!-- Hero / Headline -->
+    <section class="hero">
+      <div class="eyebrow">Uma transmissão privada</div>
+      <h1 class="headline">
+        Como <em>desligar</em> o interruptor da inflamação celular que está travando o seu emagrecimento, sugando a sua energia e <em>envelhecendo</em> o seu corpo mais rápido.
+      </h1>
+      <div class="headline-divider">
+        <span class="l"></span>
+        <span class="d"></span>
+        <span class="l"></span>
+      </div>
+      <p class="subhead">
+        Assista à transmissão completa abaixo. <br/>
+        O acesso é liberado ao final.
+      </p>
+    </section>
+
+    <!-- Player -->
+    <section class="player-wrap">
+      <div class="player-frame" id="player">
+        <span class="corner-tr"></span>
+        <span class="corner-bl"></span>
+        <div class="player-content" id="playerContent">
+          <div class="player-thumb-grid"></div>
+          <div class="player-vignette"></div>
+          <button class="play-btn" id="playBtn" aria-label="Iniciar transmissão">
+            <span class="play-circle">
+              <span class="play-triangle"></span>
+            </span>
+            <span class="play-label">Iniciar transmissão</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="progress-frame">
+        <span id="timeDisplay">00:00</span>
+        <div class="progress-track">
+          <div class="progress-fill" id="progressFill"></div>
+        </div>
+        <span>08:00</span>
+      </div>
+
+      <div class="player-meta" id="playerMeta">
+        Toque para iniciar a transmissão
+      </div>
+    </section>
+
+    <!-- ============================================================
+         REVEAL ZONE — só aparece aos 4:00
+         ============================================================ -->
+    <section class="reveal-zone" id="revealZone" aria-hidden="true">
+
+      <div class="ceremony">
+        <div class="ceremony-rule"></div>
+        <div class="ceremony-label">— Acesso liberado —</div>
+      </div>
+
+      <!-- Apresentação do Produto -->
+      <article class="product-card">
+        <svg class="crest-mini" viewBox="0 0 80 80" fill="none" aria-hidden="true">
+          <circle cx="40" cy="40" r="38" stroke="currentColor" stroke-width="0.6" opacity="0.5"/>
+          <circle cx="40" cy="40" r="32" stroke="currentColor" stroke-width="0.4" opacity="0.3"/>
+          <path d="M40 18 C 30 28, 28 42, 40 58 C 52 42, 50 28, 40 18 Z" stroke="currentColor" stroke-width="0.8" fill="none"/>
+          <line x1="40" y1="22" x2="40" y2="56" stroke="currentColor" stroke-width="0.5" opacity="0.6"/>
+          <rect x="38" y="38" width="4" height="4" fill="currentColor" transform="rotate(45 40 40)"/>
+        </svg>
+        <div class="product-tag">O entregável</div>
+        <div style="height: 14px;"></div>
+        <h2 class="product-name">Protocolo <em>Reset</em><br/>Anti-Inflamatório</h2>
+        <div style="height: 16px;"></div>
+        <div class="product-tag">26 vídeo-aulas · 5 módulos · acesso vitalício</div>
+
+        <div class="modules">
+          <div class="modules-title">— A jornada em cinco atos —</div>
+          <div class="module-row">
+            <div class="module-num">I.</div>
+            <div class="module-text">
+              <div class="module-name">O Desafio de 6 Dias — O Reset</div>
+              <div class="module-meta">06 aulas · vitória rápida</div>
+            </div>
+          </div>
+          <div class="module-row">
+            <div class="module-num">II.</div>
+            <div class="module-text">
+              <div class="module-name">Os Compostos Bioativos</div>
+              <div class="module-meta">05 aulas · ingredientes da feira</div>
+            </div>
+          </div>
+          <div class="module-row">
+            <div class="module-num">III.</div>
+            <div class="module-text">
+              <div class="module-name">Reconstrução Intestinal</div>
+              <div class="module-meta">05 aulas · saciedade hormonal</div>
+            </div>
+          </div>
+          <div class="module-row">
+            <div class="module-num">IV.</div>
+            <div class="module-text">
+              <div class="module-name">Vida Leve Permanente</div>
+              <div class="module-meta">05 aulas · manutenção sem peso</div>
+            </div>
+          </div>
+          <div class="module-row">
+            <div class="module-num">V.</div>
+            <div class="module-text">
+              <div class="module-name">Cozinha de Alta Performance</div>
+              <div class="module-meta">05 aulas · 15 minutos de poder</div>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Bônus -->
+      <section class="bonuses">
+        <header class="bonus-header">
+          <span class="label">— Materiais de apoio —</span>
+          <div class="title">Os <em style="font-family: var(--ff-editorial); font-style: italic;">três</em> dossiês de campo</div>
+        </header>
+        <div class="bonus-grid">
+          <div class="bonus-item">
+            <div class="bonus-thumb">PDF<br/>guia</div>
+            <div>
+              <div class="bonus-name">Guia de Compras<br/>Sem Erro</div>
+              <div class="bonus-meta">Dossiê I · pdf</div>
+            </div>
+          </div>
+          <div class="bonus-item">
+            <div class="bonus-thumb">PDF<br/>planner</div>
+            <div>
+              <div class="bonus-name">Planner do Desafio<br/>de 6 Dias</div>
+              <div class="bonus-meta">Dossiê II · pdf</div>
+            </div>
+          </div>
+          <div class="bonus-item">
+            <div class="bonus-thumb">PDF<br/>recipe</div>
+            <div>
+              <div class="bonus-name">15 Minutos<br/>de Poder</div>
+              <div class="bonus-meta">Dossiê III · pdf</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Stack de oferta -->
+      <section class="offer-stack">
+        <div class="offer-eyebrow">— A oferta oficial —</div>
+        <h3 class="offer-title">Protocolo Reset<br/><em style="font-family: var(--ff-editorial); font-style: italic; color: var(--gold-300);">acesso completo</em></h3>
+
+        <div class="price-was">de R$ 497,00</div>
+        <div class="price-cta-line">— por apenas —</div>
+        <div class="price-installment">
+          <span class="small">12×</span>R$&nbsp;29<span class="cents">,70</span>
+        </div>
+        <div class="price-cash">ou R$ 297,00 à vista</div>
+
+        <a href="checkout.html" class="cta-button">
+          Quero acessar o Protocolo
+          <span class="arrow">→</span>
+        </a>
+        <div class="cta-helper">Acesso imediato · pagamento seguro</div>
+      </section>
+
+      <!-- Garantia -->
+      <section class="guarantee">
+        <svg class="seal" viewBox="0 0 110 110" fill="none" aria-hidden="true">
+          <circle cx="55" cy="55" r="52" stroke="currentColor" stroke-width="0.6"/>
+          <circle cx="55" cy="55" r="46" stroke="currentColor" stroke-width="0.4" opacity="0.6"/>
+          <circle cx="55" cy="55" r="40" stroke="currentColor" stroke-width="0.3" opacity="0.4" stroke-dasharray="2 3"/>
+          <text x="55" y="48" text-anchor="middle" font-family="Italiana, serif" font-size="28" fill="currentColor">7</text>
+          <text x="55" y="68" text-anchor="middle" font-family="Marcellus SC, serif" font-size="6" letter-spacing="2" fill="currentColor">DIAS</text>
+          <rect x="53" y="78" width="4" height="4" fill="currentColor" transform="rotate(45 55 80)"/>
+        </svg>
+        <div class="seal-text">— Garantia de risco zero —</div>
+        <div class="guarantee-title">Sete dias incondicionais</div>
+        <p class="guarantee-body">
+          Se em sete dias o protocolo não cumprir o que promete, basta um e-mail e devolvemos cada centavo. O risco é nosso.
+        </p>
+      </section>
+    </section>
+    <!-- /reveal -->
+
+    <!-- Compliance -->
+    <footer class="compliance">
+      <div class="crest-rules">
+        <span class="line"></span>
+        <span class="diamond"></span>
+        <span class="line"></span>
+      </div>
+      <div class="compliance-brand">Método Desinflamação Pro</div>
+      <p class="disclaimer">
+        Os resultados apresentados são individuais e podem variar de pessoa para pessoa. Este conteúdo tem caráter educativo e não substitui acompanhamento médico, nutricional ou tratamento profissional. Sempre consulte um profissional de saúde antes de iniciar qualquer mudança alimentar.
+      </p>
+      <p class="disclaimer">
+        Vida Leve Editorial Ltda. · CNPJ 00.000.000/0001-00 · contato@desinflamacaopro.com.br
+      </p>
+      <div class="legal-row">
+        <a href="#">Termos</a> · <a href="#">Privacidade</a> · <a href="#">Suporte</a>
+      </div>
+    </footer>
+  </main>
+
+  <!-- Tweaks dev: simular reveal -->
+  <div class="dev-controls" id="devControls">
+    <button id="skipBtn">Saltar para 4:00</button>
+    <button id="resetBtn">Reiniciar</button>
+  </div>
+
+  <script>
+    /* ============================================================
+       LÓGICA DO PLAYER
+       Simula um VSL de 8 minutos. CTA aparece exatamente em 4:00.
+       Tempo persistido em localStorage para sobreviver a reload.
+       ============================================================ */
+
+    const STORAGE_KEY = 'mdp:vsl:time';
+    const TOTAL_SECONDS = 480; // 8 min
+    const REVEAL_AT = 240;     // 4 min
+
+    const player = document.getElementById('player');
+    const playerContent = document.getElementById('playerContent');
+    const playBtn = document.getElementById('playBtn');
+    const progressFill = document.getElementById('progressFill');
+    const timeDisplay = document.getElementById('timeDisplay');
+    const playerMeta = document.getElementById('playerMeta');
+    const revealZone = document.getElementById('revealZone');
+
+    let currentTime = parseInt(localStorage.getItem(STORAGE_KEY) || '0', 10);
+    let playing = false;
+    let interval = null;
+
+    const metaScript = [
+      { at: 0,   text: 'Capítulo I · O incêndio invisível' },
+      { at: 45,  text: 'Capítulo II · Por que sua dieta falhou' },
+      { at: 95,  text: 'Capítulo III · A descoberta dos compostos bioativos' },
+      { at: 160, text: 'Capítulo IV · O método em 5 atos' },
+      { at: 210, text: 'Capítulo V · A revelação' },
+      { at: 240, text: 'Acesso liberado — leia abaixo' },
+      { at: 360, text: 'Considerações finais' },
+    ];
+
+    function fmt(s) {
+      const m = Math.floor(s / 60).toString().padStart(2, '0');
+      const r = Math.floor(s % 60).toString().padStart(2, '0');
+      return `${m}:${r}`;
+    }
+
+    function updateMeta() {
+      let active = metaScript[0];
+      for (const m of metaScript) if (currentTime >= m.at) active = m;
+      if (playerMeta.dataset.last !== active.text) {
+        playerMeta.style.opacity = '0';
+        setTimeout(() => {
+          playerMeta.textContent = active.text;
+          playerMeta.dataset.last = active.text;
+          playerMeta.style.opacity = '1';
+        }, 220);
+      }
+    }
+
+    function tick() {
+      currentTime = Math.min(currentTime + 1, TOTAL_SECONDS);
+      localStorage.setItem(STORAGE_KEY, currentTime);
+      render();
+      if (currentTime >= TOTAL_SECONDS) pause();
+    }
+
+    function render() {
+      progressFill.style.width = (currentTime / TOTAL_SECONDS * 100) + '%';
+      timeDisplay.textContent = fmt(currentTime);
+      updateMeta();
+      if (currentTime >= REVEAL_AT) {
+        revealZone.classList.add('unlocked');
+        revealZone.setAttribute('aria-hidden', 'false');
+      } else {
+        revealZone.classList.remove('unlocked');
+        revealZone.setAttribute('aria-hidden', 'true');
+      }
+    }
+
+    function play() {
+      if (playing) return;
+      playing = true;
+      player.classList.add('playing');
+      interval = setInterval(tick, 1000);
+    }
+    function pause() {
+      playing = false;
+      player.classList.remove('playing');
+      clearInterval(interval);
+    }
+
+    playBtn.addEventListener('click', play);
+    playerContent.addEventListener('click', (e) => {
+      if (e.target.closest('.play-btn')) return;
+      if (playing) pause(); else play();
+    });
+
+    // restore
+    render();
+    if (currentTime > 0 && currentTime < TOTAL_SECONDS) {
+      // já assistia — mostra player como se tivesse pausado
+      player.classList.add('playing');
+      playerMeta.style.opacity = '1';
+    }
+
+    /* ============================================================
+       TWEAKS — toggle do botão na toolbar
+       ============================================================ */
+    const devControls = document.getElementById('devControls');
+    const skipBtn = document.getElementById('skipBtn');
+    const resetBtn = document.getElementById('resetBtn');
+
+    skipBtn.addEventListener('click', () => {
+      currentTime = REVEAL_AT;
+      localStorage.setItem(STORAGE_KEY, currentTime);
+      play();
+      render();
+    });
+    resetBtn.addEventListener('click', () => {
+      pause();
+      currentTime = 0;
+      localStorage.setItem(STORAGE_KEY, 0);
+      render();
+      playerMeta.textContent = 'Toque para iniciar a transmissão';
+      player.classList.remove('playing');
+    });
+
+    window.addEventListener('message', (e) => {
+      if (!e.data || !e.data.type) return;
+      if (e.data.type === '__activate_edit_mode') devControls.classList.add('visible');
+      if (e.data.type === '__deactivate_edit_mode') devControls.classList.remove('visible');
+    });
+    window.parent.postMessage({ type: '__edit_mode_available' }, '*');
+  </script>
+</body>
+</html>

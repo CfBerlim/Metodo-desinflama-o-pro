@@ -1,0 +1,924 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Validação do Funil — Método Desinflamação Pro</title>
+<link rel="stylesheet" href="shared/tokens.css" />
+<style>
+  body {
+    background: var(--carbon-1000);
+    color: var(--ink-noir);
+    min-height: 100vh;
+    overflow-x: auto;
+  }
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      radial-gradient(ellipse 80% 50% at 50% 0%, rgba(184,146,63,0.05), transparent 60%),
+      radial-gradient(rgba(201,162,90,0.018) 1px, transparent 1px);
+    background-size: auto, 4px 4px;
+    pointer-events: none;
+    z-index: 0;
+  }
+  .shell {
+    position: relative; z-index: 1;
+    max-width: 1700px;
+    margin: 0 auto;
+    padding: 40px 32px 80px;
+  }
+
+  /* Header */
+  .head {
+    text-align: center;
+    margin-bottom: 36px;
+  }
+  .crest-rules {
+    display: flex; align-items: center; justify-content: center; gap: 8px; margin-bottom: 8px;
+  }
+  .crest-rules .line { width: 28px; height: 1px; background: var(--gold-500); opacity: 0.55; }
+  .crest-rules .diamond { width: 4px; height: 4px; background: var(--gold-500); transform: rotate(45deg); }
+  .brand-tag {
+    font-family: var(--ff-display);
+    font-size: 12px;
+    letter-spacing: 0.32em;
+    color: var(--gold-300);
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .small-tag {
+    font-family: var(--ff-smallcaps);
+    font-size: 8.5px;
+    letter-spacing: 0.42em;
+    color: var(--ink-noir-faint);
+    margin-bottom: 24px;
+  }
+  .h1 {
+    font-family: var(--ff-display);
+    font-size: 48px;
+    line-height: 1.05;
+    color: var(--champagne);
+    margin-bottom: 12px;
+  }
+  .h1 em {
+    font-family: var(--ff-editorial);
+    font-style: italic;
+    color: var(--gold-300);
+  }
+  .h-sub {
+    font-family: var(--ff-editorial);
+    font-style: italic;
+    font-size: 16px;
+    color: var(--ink-noir-mute);
+    max-width: 580px;
+    margin: 0 auto;
+  }
+
+  /* Step rail */
+  .rail {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    max-width: 1100px;
+    margin: 30px auto 50px;
+    border-top: 1px solid var(--line-noir);
+    border-bottom: 1px solid var(--line-noir);
+    padding: 18px 0;
+  }
+  .rail-step {
+    display: flex; align-items: center; gap: 10px;
+    font-family: var(--ff-smallcaps);
+    font-size: 9px;
+    letter-spacing: 0.32em;
+    color: var(--ink-noir-mute);
+  }
+  .rail-step .num {
+    font-family: var(--ff-display);
+    font-size: 14px;
+    color: var(--gold-400);
+    letter-spacing: 0.04em;
+  }
+  .rail-arrow {
+    font-family: var(--ff-display);
+    color: var(--gold-700);
+  }
+
+  /* Each act */
+  .act {
+    margin-bottom: 60px;
+    border-top: 1px solid var(--line-noir);
+    padding-top: 32px;
+  }
+  .act-head {
+    display: flex; align-items: baseline; gap: 16px;
+    margin-bottom: 8px;
+    flex-wrap: wrap;
+  }
+  .act-num {
+    font-family: var(--ff-display);
+    font-size: 64px;
+    color: var(--gold-400);
+    letter-spacing: 0.02em;
+    line-height: 0.9;
+  }
+  .act-title {
+    font-family: var(--ff-display);
+    font-size: 32px;
+    color: var(--champagne);
+  }
+  .act-title em {
+    font-family: var(--ff-editorial);
+    font-style: italic;
+    color: var(--gold-300);
+  }
+  .act-tag {
+    font-family: var(--ff-smallcaps);
+    font-size: 9px;
+    letter-spacing: 0.42em;
+    color: var(--gold-700);
+    border: 1px solid var(--gold-700);
+    padding: 4px 10px;
+  }
+  .act-desc {
+    font-family: var(--ff-editorial);
+    font-style: italic;
+    font-size: 15px;
+    color: var(--ink-noir-mute);
+    line-height: 1.5;
+    margin-bottom: 28px;
+    max-width: 720px;
+  }
+  .act-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--ff-smallcaps);
+    font-size: 9px;
+    letter-spacing: 0.32em;
+    color: var(--gold-300);
+    text-decoration: none;
+    border: 1px solid var(--line-noir-strong);
+    padding: 10px 16px;
+    margin-bottom: 28px;
+    transition: all 0.3s;
+  }
+  .act-link:hover {
+    border-color: var(--gold-500);
+    color: var(--gold-200);
+  }
+
+  /* Frame grid */
+  .frames {
+    display: grid;
+    gap: 24px;
+    grid-template-columns: 1fr;
+  }
+  .frames.two { grid-template-columns: 1fr 1fr; }
+  .frames.three { grid-template-columns: repeat(3, 1fr); }
+  @media (max-width: 1100px) {
+    .frames.two, .frames.three { grid-template-columns: 1fr; }
+  }
+
+  .state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .state-label {
+    text-align: center;
+    margin-bottom: 14px;
+  }
+  .state-label .step {
+    font-family: var(--ff-smallcaps);
+    font-size: 8px;
+    letter-spacing: 0.42em;
+    color: var(--gold-700);
+    margin-bottom: 4px;
+  }
+  .state-label .name {
+    font-family: var(--ff-editorial);
+    font-style: italic;
+    font-size: 17px;
+    color: var(--champagne);
+    line-height: 1.3;
+  }
+  .state-label .tip {
+    font-family: var(--ff-editorial);
+    font-style: italic;
+    font-size: 12.5px;
+    color: var(--ink-noir-mute);
+    margin-top: 4px;
+  }
+
+  /* Phone frame — bezel iPhone-like com screen mascarada e notch dinâmica */
+  .phone {
+    --phone-w: 320px;
+    --phone-h: 660px;
+    --bezel: 12px;
+    --radius-outer: 48px;
+    --radius-inner: 36px;
+    width: var(--phone-w);
+    height: var(--phone-h);
+    background:
+      linear-gradient(145deg, #2a2620 0%, #14110d 45%, #0a0908 100%);
+    border-radius: var(--radius-outer);
+    padding: var(--bezel);
+    box-shadow:
+      inset 0 0 0 1px rgba(216,184,120,0.22),
+      inset 0 1px 1px rgba(216,184,120,0.15),
+      0 0 0 1px rgba(216,184,120,0.55),
+      0 40px 80px -40px rgba(216,184,120,0.3),
+      0 30px 60px -30px rgba(0,0,0,0.85);
+    position: relative;
+    isolation: isolate;
+    flex-shrink: 0;
+  }
+  .phone .screen {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background: #000;
+    border-radius: var(--radius-inner);
+    overflow: hidden;
+    /* clip iframe rounded corners on Safari/Chrome reliably */
+    -webkit-mask-image: -webkit-radial-gradient(white, black);
+  }
+  .phone .notch {
+    position: absolute;
+    top: calc(var(--bezel) + 8px);
+    left: 50%;
+    transform: translateX(-50%);
+    width: 88px;
+    height: 22px;
+    background: #000;
+    border-radius: 12px;
+    z-index: 5;
+    pointer-events: none;
+    box-shadow: inset 0 0 0 1px rgba(20,20,18,1);
+  }
+  .phone iframe {
+    width: 100%;
+    height: 100%;
+    border: 0;
+    background: #000;
+    display: block;
+  }
+  /* compact phones (jornada strip) */
+  .phone.compact {
+    --phone-w: 230px;
+    --phone-h: 480px;
+    --bezel: 8px;
+    --radius-outer: 36px;
+    --radius-inner: 28px;
+  }
+  .phone.compact .notch {
+    width: 70px;
+    height: 16px;
+    top: calc(var(--bezel) + 5px);
+  }
+  /* tall single phone (upsell) */
+  .phone.tall {
+    --phone-w: 340px;
+    --phone-h: 720px;
+  }
+
+  /* Desktop frame */
+  .desktop {
+    width: 100%;
+    max-width: 980px;
+    margin: 0 auto;
+    aspect-ratio: 16 / 10;
+    background: #000;
+    border-radius: 12px;
+    padding: 0;
+    box-shadow:
+      0 0 0 1px var(--gold-700),
+      0 50px 80px -40px rgba(184,146,63,0.3);
+    overflow: hidden;
+    position: relative;
+  }
+  .desktop .titlebar {
+    height: 28px;
+    background: linear-gradient(180deg, var(--carbon-800), var(--carbon-900-solid));
+    display: flex;
+    align-items: center;
+    padding: 0 12px;
+    gap: 6px;
+    border-bottom: 1px solid var(--line-noir);
+  }
+  .desktop .titlebar .dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--carbon-700);
+  }
+  .desktop .titlebar .url {
+    flex: 1;
+    text-align: center;
+    font-family: var(--ff-smallcaps);
+    font-size: 8px;
+    letter-spacing: 0.32em;
+    color: var(--ink-noir-faint);
+  }
+  .desktop iframe {
+    width: 100%;
+    height: calc(100% - 28px);
+    border: 0;
+    background: #fff;
+  }
+
+  /* Annotation badges — agora vivem FORA do telefone, ancorados ao .state */
+  .state { position: relative; }
+  .badge-floating {
+    position: absolute;
+    z-index: 10;
+    background: rgba(7,9,10,0.95);
+    border: 1px solid var(--gold-500);
+    padding: 7px 14px;
+    font-family: var(--ff-smallcaps);
+    font-size: 8px;
+    letter-spacing: 0.32em;
+    color: var(--gold-300);
+    box-shadow: 0 8px 24px -10px rgba(184,146,63,0.5);
+    white-space: nowrap;
+  }
+  .badge-pulse {
+    position: relative;
+  }
+  .badge-pulse::before {
+    content: '';
+    position: absolute;
+    inset: -4px;
+    border: 1px solid var(--gold-500);
+    opacity: 0;
+    animation: pulse 2.4s var(--ease-elegant) infinite;
+  }
+  @keyframes pulse {
+    0% { opacity: 0.6; transform: scale(1); }
+    100% { opacity: 0; transform: scale(1.15); }
+  }
+
+  /* Validation table */
+  .check-list {
+    margin-top: 22px;
+    border: 1px solid var(--line-noir);
+    background: rgba(12,15,16,0.5);
+    padding: 22px 26px;
+    max-width: 720px;
+  }
+  .check-row {
+    display: grid;
+    grid-template-columns: 22px 1fr;
+    gap: 14px;
+    padding: 8px 0;
+    align-items: baseline;
+  }
+  .check-row + .check-row { border-top: 1px solid rgba(201,162,90,0.08); }
+  .check-mark {
+    width: 16px; height: 16px;
+    border-radius: 50%;
+    border: 1px solid var(--emerald-400);
+    display: grid;
+    place-items: center;
+    color: var(--emerald-400);
+    font-size: 10px;
+  }
+  .check-text {
+    font-family: var(--ff-editorial);
+    font-style: italic;
+    font-size: 14px;
+    color: var(--ink-noir);
+    line-height: 1.5;
+  }
+  .check-text b {
+    font-family: var(--ff-smallcaps);
+    font-style: normal;
+    font-size: 9px;
+    letter-spacing: 0.32em;
+    color: var(--gold-400);
+    margin-right: 6px;
+  }
+
+  /* Floating panel — modo de teste */
+  .test-panel {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    z-index: 50;
+    background: var(--carbon-900-solid);
+    border: 1px solid var(--gold-500);
+    padding: 18px 18px 16px;
+    width: 240px;
+    box-shadow: 0 30px 60px -30px rgba(184,146,63,0.4);
+  }
+  .test-panel .label {
+    font-family: var(--ff-smallcaps);
+    font-size: 8px;
+    letter-spacing: 0.42em;
+    color: var(--gold-400);
+    margin-bottom: 12px;
+  }
+  .test-panel button {
+    display: block;
+    width: 100%;
+    padding: 10px 12px;
+    background: transparent;
+    color: var(--ink-noir);
+    border: 1px solid var(--line-noir-strong);
+    font-family: var(--ff-smallcaps);
+    font-size: 8.5px;
+    letter-spacing: 0.32em;
+    cursor: pointer;
+    margin-bottom: 6px;
+    transition: all 0.3s;
+    text-align: left;
+  }
+  .test-panel button:hover {
+    border-color: var(--gold-500);
+    color: var(--gold-300);
+  }
+  .test-panel button.primary {
+    background: linear-gradient(180deg, var(--emerald-500), var(--emerald-700));
+    color: var(--champagne);
+    border-color: var(--gold-500);
+  }
+
+  /* Cinema mode */
+  .cinema-mode {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    background: rgba(0,0,0,0.95);
+    padding: 40px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .cinema-mode.active { display: flex; }
+  .cinema-mode iframe {
+    width: 380px;
+    height: 780px;
+    border: 1px solid var(--gold-500);
+    border-radius: 32px;
+    background: #000;
+  }
+  .cinema-close {
+    position: absolute;
+    top: 20px; right: 20px;
+    background: transparent;
+    border: 1px solid var(--gold-500);
+    color: var(--gold-300);
+    width: 40px; height: 40px;
+    font-family: var(--ff-display);
+    font-size: 18px;
+    cursor: pointer;
+  }
+  .cinema-controls {
+    margin-top: 20px;
+    display: flex;
+    gap: 8px;
+  }
+  .cinema-controls button {
+    background: var(--carbon-800);
+    color: var(--gold-300);
+    border: 1px solid var(--gold-700);
+    padding: 10px 18px;
+    font-family: var(--ff-smallcaps);
+    font-size: 9px;
+    letter-spacing: 0.32em;
+    cursor: pointer;
+  }
+
+  @media (max-width: 1400px) {
+    .frames.three { grid-template-columns: 1fr 1fr; }
+    .phone { width: 280px; height: 580px; }
+  }
+  @media (max-width: 800px) {
+    .frames.two, .frames.three { grid-template-columns: 1fr; }
+    .h1 { font-size: 32px; }
+    .act-num { font-size: 48px; }
+    .act-title { font-size: 22px; }
+    .phone { width: 100%; max-width: 320px; height: 660px; }
+  }
+</style>
+</head>
+<body>
+  <main class="shell" data-screen-label="00 Validação do Funil">
+
+    <!-- Header -->
+    <header class="head">
+      <div class="crest-rules">
+        <span class="line"></span><span class="diamond"></span><span class="line"></span>
+      </div>
+      <div class="brand-tag">Método Desinflamação Pro</div>
+      <div class="small-tag">— Validação da engenharia de vendas —</div>
+      <h1 class="h1">A esteira <em>Bio-Premium,</em><br/>conferida em quatro atos.</h1>
+      <p class="h-sub">
+        Cada estado crítico do funil isolado em uma vitrine. Use o painel à direita para simular o lock dos quatro minutos sem precisar assistir à VSL inteira.
+      </p>
+    </header>
+
+    <!-- Rail -->
+    <nav class="rail">
+      <div class="rail-step"><span class="num">I.</span> Vendas</div>
+      <div class="rail-step"><span class="rail-arrow">⟶</span><span class="num">II.</span> Checkout</div>
+      <div class="rail-step"><span class="rail-arrow">⟶</span><span class="num">III.</span> Upsell</div>
+      <div class="rail-step"><span class="rail-arrow">⟶</span><span class="num">IV.</span> Membros</div>
+    </nav>
+
+    <!-- ============ ATO I — LANDING PAGE ============ -->
+    <section class="act">
+      <div class="act-head">
+        <div class="act-num">I.</div>
+        <h2 class="act-title">Página de <em>Vendas</em> · estado limpo vs. estado liberado</h2>
+        <span class="act-tag">Apothecary Noir</span>
+      </div>
+      <p class="act-desc">
+        À esquerda, a página carrega <em>sem CTA, sem preço, sem garantia, sem bônus</em> — apenas a manchete e o player. À direita, os mesmos pixels, após o player atingir 4:00 — a zona oculta surge com fade-in dramático e tudo é revelado em sequência.
+      </p>
+      <a class="act-link" href="index.html" target="_blank">Abrir landing page em nova aba →</a>
+
+      <div class="frames two">
+        <div class="state">
+          <div class="state-label">
+            <div class="step">— Estado A · 0:00 a 3:59 —</div>
+            <div class="name">Carrega <em>limpa</em></div>
+            <div class="tip">Cliente não vê oferta · não desconfia da venda</div>
+          </div>
+          <div class="badge-floating badge-pulse" style="top: -14px; left: 50%; transform: translateX(-50%);">CTA oculto</div>
+          <div class="phone" style="position: relative;">
+            <div class="notch"></div>
+            <div class="screen"><iframe id="frameLanding-locked" src="index.html?reset=1" loading="lazy" title="Landing locked"></iframe></div>
+          </div>
+        </div>
+
+        <div class="state">
+          <div class="state-label">
+            <div class="step">— Estado B · 4:00 em diante —</div>
+            <div class="name">Acesso <em>liberado</em></div>
+            <div class="tip">Reveal cerimonial · botão verde + dourado surge</div>
+          </div>
+          <div class="badge-floating badge-pulse" style="top: -14px; left: 50%; transform: translateX(-50%); border-color: var(--emerald-400); color: var(--emerald-400);">CTA revelado</div>
+          <div class="phone" style="position: relative;">
+            <div class="notch"></div>
+            <div class="screen"><iframe id="frameLanding-unlocked" src="index.html" loading="lazy" title="Landing unlocked"></iframe></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="check-list">
+        <div class="check-row">
+          <div class="check-mark">✓</div>
+          <div class="check-text"><b>Lock</b>Botão de oferta, preço, bônus, selo de garantia — todos ocultos no carregamento.</div>
+        </div>
+        <div class="check-row">
+          <div class="check-mark">✓</div>
+          <div class="check-text"><b>Trigger</b>Reveal disparado em <i>currentTime ≥ 240s</i> · animação fade-in + slide-up de 1,6s.</div>
+        </div>
+        <div class="check-row">
+          <div class="check-mark">✓</div>
+          <div class="check-text"><b>Sem countdown</b>Não há cronômetro visível. Cliente vê apenas a barra de progresso do "vídeo" — não da venda.</div>
+        </div>
+        <div class="check-row">
+          <div class="check-mark">✓</div>
+          <div class="check-text"><b>Persistência</b>Tempo salvo em <i>localStorage</i> · cliente que recarrega não perde progresso.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ ATO II — CHECKOUT ============ -->
+    <section class="act">
+      <div class="act-head">
+        <div class="act-num">II.</div>
+        <h2 class="act-title">Checkout · order bump <em>Xícara de Ouro</em></h2>
+        <span class="act-tag">Apothecary Noir</span>
+      </div>
+      <p class="act-desc">
+        O bump tem moldura tracejada dourada e selo "<em>⚜ Adicione à sua ordem</em>" sobre o topo. Ao marcar o checkbox, o item entra no resumo e o total recalcula em tempo real (R$ 297 → R$ 324,90).
+      </p>
+      <a class="act-link" href="checkout.html" target="_blank">Abrir checkout em nova aba →</a>
+
+      <div class="frames two">
+        <div class="state">
+          <div class="state-label">
+            <div class="step">— Estado A · sem bump —</div>
+            <div class="name">Total: <em>R$ 297,00</em></div>
+            <div class="tip">Apenas o protocolo · 12× R$ 29,70</div>
+          </div>
+          <div class="phone" style="position: relative;">
+            <div class="notch"></div>
+            <div class="screen"><iframe id="frameCheckout-clean" src="checkout.html#nobump" loading="lazy" title="Checkout sem bump"></iframe></div>
+          </div>
+        </div>
+
+        <div class="state">
+          <div class="state-label">
+            <div class="step">— Estado B · com bump aceito —</div>
+            <div class="name">Total: <em>R$ 324,90</em></div>
+            <div class="tip">Xícara de Ouro adicionada · resumo recalculado</div>
+          </div>
+          <div class="badge-floating badge-pulse" style="top: -14px; left: 50%; transform: translateX(-50%);">+ R$ 27,90</div>
+          <div class="phone" style="position: relative;">
+            <div class="notch"></div>
+            <div class="screen"><iframe id="frameCheckout-bump" src="checkout.html#bump" loading="lazy" title="Checkout com bump"></iframe></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="check-list">
+        <div class="check-row">
+          <div class="check-mark">✓</div>
+          <div class="check-text"><b>Visibilidade</b>Box do bump em destaque — moldura tracejada dourada + selo "<i>⚜ Adicione à sua ordem</i>" centralizado no topo.</div>
+        </div>
+        <div class="check-row">
+          <div class="check-mark">✓</div>
+          <div class="check-text"><b>Reativo</b>Checkbox aciona reordenação do resumo + recálculo do subtotal e total à vista em tempo real.</div>
+        </div>
+        <div class="check-row">
+          <div class="check-mark">✓</div>
+          <div class="check-text"><b>Ancoragem</b>Preço riscado <i>R$ 67,00 → R$ 27,90</i> reforça desconto exclusivo do bump.</div>
+        </div>
+        <div class="check-row">
+          <div class="check-mark">✓</div>
+          <div class="check-text"><b>Saída</b>Botão "Confirmar e acessar →" leva ao Upsell sem fricção.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ ATO III — UPSELL ============ -->
+    <section class="act">
+      <div class="act-head">
+        <div class="act-num">III.</div>
+        <h2 class="act-title">Upsell · <em>Clube Vida Leve</em> com 1 clique</h2>
+        <span class="act-tag">Apothecary Noir</span>
+      </div>
+      <p class="act-desc">
+        Após o pagamento, o Upsell carrega imediatamente. Página minimalista: confirmação discreta no topo, vídeo curto, oferta única, e dois botões — verde (aceitar com 1 clique) e cinza (recusar). Ambos seguem para a Área de Membros.
+      </p>
+      <a class="act-link" href="upsell.html" target="_blank">Abrir upsell em nova aba →</a>
+
+      <div class="frames" style="grid-template-columns: 1fr;">
+        <div class="state">
+          <div class="state-label">
+            <div class="step">— Página de upsell · 1 clique —</div>
+            <div class="name">Sim ou não · <em>nada além disso</em></div>
+            <div class="tip">Botão verde aceita · botão cinza recusa · ambos vão para /membros</div>
+          </div>
+          <div class="phone tall" style="position: relative;">
+            <div class="notch"></div>
+            <div class="screen"><iframe id="frameUpsell" src="upsell.html" loading="lazy" title="Upsell"></iframe></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="check-list">
+        <div class="check-row">
+          <div class="check-mark">✓</div>
+          <div class="check-text"><b>Confirmação</b>Pílula verde no topo: "<i>Sua compra foi aprovada</i>" — tranquiliza sem competir com a oferta.</div>
+        </div>
+        <div class="check-row">
+          <div class="check-mark">✓</div>
+          <div class="check-text"><b>Hierarquia</b>CTA principal (verde + dourado) ocupa toda a largura · CTA secundário (cinza) é claramente subordinado.</div>
+        </div>
+        <div class="check-row">
+          <div class="check-mark">✓</div>
+          <div class="check-text"><b>Direcionamento</b>Tanto "<i>Sim, adicionar com 1 clique</i>" quanto "<i>Não, prefiro seguir sem</i>" levam à Área de Membros — cliente nunca fica preso.</div>
+        </div>
+        <div class="check-row">
+          <div class="check-mark">✓</div>
+          <div class="check-text"><b>Sem ruído</b>Zero tabela de comparação, zero garantia repetida, zero bullets. Apenas: vídeo · oferta · sim · não.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ ATO IV — MEMBROS ============ -->
+    <section class="act">
+      <div class="act-head">
+        <div class="act-num">IV.</div>
+        <h2 class="act-title">Área de membros · <em>Editorial Botanique</em></h2>
+        <span class="act-tag" style="color: var(--emerald-400); border-color: var(--emerald-400);">Light mode</span>
+      </div>
+      <p class="act-desc">
+        Aqui a marca troca de pele. Sai o carbono, entra o parchment. Os atos I e II ficam liberados de imediato; III, IV e V mostram a trava de oito dias com countdown vivo. A garantia de sete dias passa antes da liberação — protegendo de reembolsos oportunistas.
+      </p>
+      <a class="act-link" href="members.html" target="_blank">Abrir área de membros em nova aba →</a>
+
+      <div class="frames" style="grid-template-columns: 1fr;">
+        <div class="desktop">
+          <div class="titlebar">
+            <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+            <span class="url">desinflamacaopro.com.br · área de alunos</span>
+          </div>
+          <iframe id="frameMembers" src="members.html" loading="lazy" title="Members"></iframe>
+        </div>
+      </div>
+
+      <div class="check-list">
+        <div class="check-row">
+          <div class="check-mark">✓</div>
+          <div class="check-text"><b>Troca de pele</b>Light mode parchment + dourado · mantém Italiana / Cormorant / Marcellus SC / Inter — unidade de marca preservada.</div>
+        </div>
+        <div class="check-row">
+          <div class="check-mark">✓</div>
+          <div class="check-text"><b>Trava 8 dias</b>Atos III, IV e V exibem cadeado dourado e tag "<i>Em 5 dias</i>" · countdown vivo abaixo da grade.</div>
+        </div>
+        <div class="check-row">
+          <div class="check-mark">✓</div>
+          <div class="check-text"><b>Vitória rápida</b>Ato I ("Desafio de 6 Dias") em destaque "<i>Em curso</i>" — cliente entra direto na vitória rápida.</div>
+        </div>
+        <div class="check-row">
+          <div class="check-mark">✓</div>
+          <div class="check-text"><b>Dossiês</b>PDFs (Guia · Planner · 15 Minutos) acessíveis imediatamente · sem trava.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ JORNADA UNIFICADA ============ -->
+    <section class="act">
+      <div class="act-head">
+        <div class="act-num">⚜</div>
+        <h2 class="act-title">A jornada <em>em um respiro</em></h2>
+      </div>
+      <p class="act-desc">
+        Todas as quatro peças, lado a lado, na ordem que o cliente atravessa. Use o "Modo Cinema" do painel para abrir uma simulação telefônica em tela cheia.
+      </p>
+
+      <div class="frames" style="grid-template-columns: repeat(4, 1fr); gap: 16px;">
+        <div class="state">
+          <div class="state-label">
+            <div class="step">— I —</div>
+            <div class="name">Vendas</div>
+          </div>
+          <div class="phone compact">
+            <div class="notch"></div>
+            <div class="screen"><iframe src="index.html" loading="lazy" title="Vendas"></iframe></div>
+          </div>
+        </div>
+        <div class="state">
+          <div class="state-label">
+            <div class="step">— II —</div>
+            <div class="name">Checkout</div>
+          </div>
+          <div class="phone compact">
+            <div class="notch"></div>
+            <div class="screen"><iframe src="checkout.html" loading="lazy" title="Checkout"></iframe></div>
+          </div>
+        </div>
+        <div class="state">
+          <div class="state-label">
+            <div class="step">— III —</div>
+            <div class="name">Upsell</div>
+          </div>
+          <div class="phone compact">
+            <div class="notch"></div>
+            <div class="screen"><iframe src="upsell.html" loading="lazy" title="Upsell"></iframe></div>
+          </div>
+        </div>
+        <div class="state">
+          <div class="state-label">
+            <div class="step">— IV —</div>
+            <div class="name">Membros</div>
+          </div>
+          <div class="phone compact">
+            <div class="notch"></div>
+            <div class="screen"><iframe src="members.html" loading="lazy" title="Membros"></iframe></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Painel de teste -->
+  <aside class="test-panel">
+    <div class="label">— Modo de teste —</div>
+    <button class="primary" id="btnLock">Liberar landing (skip 4:00)</button>
+    <button id="btnRelock">Re-bloquear landing</button>
+    <button id="btnBumpOn">Marcar order bump</button>
+    <button id="btnBumpOff">Desmarcar order bump</button>
+    <button id="btnCinema">Modo cinema (full)</button>
+  </aside>
+
+  <!-- Cinema mode -->
+  <div class="cinema-mode" id="cinema">
+    <button class="cinema-close" id="cinemaClose">×</button>
+    <iframe id="cinemaFrame" src="index.html" title="Cinema"></iframe>
+    <div class="cinema-controls">
+      <button data-cinema="index.html">I · Vendas</button>
+      <button data-cinema="checkout.html">II · Checkout</button>
+      <button data-cinema="upsell.html">III · Upsell</button>
+      <button data-cinema="members.html">IV · Membros</button>
+    </div>
+  </div>
+
+  <script>
+    /* === ATO I — controle do lock === */
+    const STORAGE_KEY = 'mdp:vsl:time';
+    const REVEAL_AT = 240;
+
+    function reloadFrame(id) {
+      const f = document.getElementById(id);
+      if (!f) return;
+      // Recarrega preservando src sem passar por about:blank (que zera o documento)
+      try { f.contentWindow.location.reload(); } catch (e) { f.src = f.src; }
+    }
+
+    document.getElementById('btnLock').addEventListener('click', () => {
+      // Aplica em todas as frames de landing
+      try {
+        const f = document.getElementById('frameLanding-unlocked');
+        if (f && f.contentWindow) {
+          f.contentWindow.localStorage.setItem(STORAGE_KEY, REVEAL_AT);
+        }
+      } catch (e) {}
+      reloadFrame('frameLanding-unlocked');
+    });
+
+    document.getElementById('btnRelock').addEventListener('click', () => {
+      try {
+        const f = document.getElementById('frameLanding-unlocked');
+        if (f && f.contentWindow) {
+          f.contentWindow.localStorage.removeItem(STORAGE_KEY);
+        }
+        const f2 = document.getElementById('frameLanding-locked');
+        if (f2 && f2.contentWindow) {
+          f2.contentWindow.localStorage.removeItem(STORAGE_KEY);
+        }
+      } catch (e) {}
+      reloadFrame('frameLanding-locked');
+      reloadFrame('frameLanding-unlocked');
+    });
+
+    /* === ATO II — order bump === */
+    function setBumpWhenReady(frameId, on) {
+      const f = document.getElementById(frameId);
+      if (!f) return;
+      const apply = () => {
+        try {
+          const doc = f.contentDocument;
+          if (!doc || !doc.body || doc.body.children.length === 0) return false;
+          const cb = doc.getElementById('bumpCheck');
+          if (!cb) return false;
+          cb.checked = on;
+          cb.dispatchEvent(new Event('change'));
+          return true;
+        } catch (e) { return false; }
+      };
+      // tenta várias vezes até o iframe ter carregado o body
+      let tries = 0;
+      const iv = setInterval(() => {
+        if (apply() || ++tries > 40) clearInterval(iv);
+      }, 200);
+    }
+
+    document.getElementById('btnBumpOn').addEventListener('click', () => {
+      setBumpWhenReady('frameCheckout-bump', true);
+      setBumpWhenReady('frameCheckout-clean', true);
+    });
+    document.getElementById('btnBumpOff').addEventListener('click', () => {
+      setBumpWhenReady('frameCheckout-bump', false);
+      setBumpWhenReady('frameCheckout-clean', false);
+    });
+
+    // Inicializa estados das frames de checkout
+    setBumpWhenReady('frameCheckout-clean', false);
+    setBumpWhenReady('frameCheckout-bump', true);
+
+    // Inicializa landing-unlocked com lock saltado, locked sem
+    function initLandingStates() {
+      try {
+        const f = document.getElementById('frameLanding-unlocked');
+        if (f && f.contentWindow && f.contentWindow.localStorage) {
+          f.contentWindow.localStorage.setItem(STORAGE_KEY, REVEAL_AT);
+          // Dispara o reveal sem precisar reload
+          const reveal = f.contentDocument && f.contentDocument.getElementById('revealZone');
+          if (reveal) reveal.classList.add('unlocked');
+          const skipBtn = f.contentDocument && f.contentDocument.getElementById('skipBtn');
+          if (skipBtn) skipBtn.click();
+        }
+        const f2 = document.getElementById('frameLanding-locked');
+        if (f2 && f2.contentWindow && f2.contentWindow.localStorage) {
+          f2.contentWindow.localStorage.removeItem(STORAGE_KEY);
+        }
+      } catch (e) {}
+    }
+    [1200, 2400, 3800].forEach(d => setTimeout(initLandingStates, d));
+
+    /* === Cinema mode === */
+    const cinema = document.getElementById('cinema');
+    const cinemaFrame = document.getElementById('cinemaFrame');
+    document.getElementById('btnCinema').addEventListener('click', () => {
+      cinema.classList.add('active');
+    });
+    document.getElementById('cinemaClose').addEventListener('click', () => {
+      cinema.classList.remove('active');
+    });
+    document.querySelectorAll('[data-cinema]').forEach(b => {
+      b.addEventListener('click', () => {
+        cinemaFrame.src = b.dataset.cinema;
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,839 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<title>Sua jornada — Método Desinflamação Pro</title>
+<link rel="stylesheet" href="shared/tokens.css" />
+<style>
+  /* ============================================================
+     ÁREA DE MEMBROS — EDITORIAL BOTANIQUE (LIGHT)
+     Parchment + verde floresta + dourado antigo
+     ============================================================ */
+  body {
+    background: var(--parchment);
+    color: var(--ink-light);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      radial-gradient(ellipse 80% 40% at 50% 0%, rgba(184,146,63,0.06), transparent 60%),
+      radial-gradient(rgba(58,40,14,0.04) 1px, transparent 1px);
+    background-size: auto, 4px 4px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* === HEADER === */
+  .nav {
+    position: relative;
+    z-index: 2;
+    background: var(--parchment-dark);
+    border-bottom: 1px solid var(--line-light);
+  }
+  .nav-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 18px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .nav-brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .nav-brand .crest-rules {
+    display: flex; align-items: center; gap: 6px;
+  }
+  .nav-brand .line {
+    width: 18px; height: 1px; background: var(--gold-700); opacity: 0.7;
+  }
+  .nav-brand .diamond {
+    width: 4px; height: 4px; background: var(--gold-700); transform: rotate(45deg);
+  }
+  .nav-brand .name {
+    font-family: var(--ff-display);
+    font-size: 14px;
+    letter-spacing: 0.32em;
+    color: var(--emerald-700);
+    text-transform: uppercase;
+  }
+  .nav-user {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .nav-user .greet {
+    font-family: var(--ff-editorial);
+    font-style: italic;
+    font-size: 14px;
+    color: var(--ink-light-mute);
+  }
+  .nav-user .greet b {
+    color: var(--emerald-700);
+    font-style: normal;
+    font-family: var(--ff-display);
+    letter-spacing: 0.04em;
+    margin-left: 4px;
+  }
+  .avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: var(--emerald-700);
+    color: var(--champagne);
+    display: grid;
+    place-items: center;
+    font-family: var(--ff-display);
+    font-size: 13px;
+    letter-spacing: 0.04em;
+  }
+
+  /* === LAYOUT === */
+  .shell {
+    position: relative;
+    z-index: 1;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 40px 24px 80px;
+  }
+
+  /* === HERO === */
+  .hero {
+    text-align: center;
+    margin-bottom: 60px;
+  }
+  .hero-eyebrow {
+    font-family: var(--ff-smallcaps);
+    font-size: 10px;
+    letter-spacing: 0.5em;
+    color: var(--gold-700);
+    margin-bottom: 18px;
+  }
+  .hero-title {
+    font-family: var(--ff-display);
+    font-size: 64px;
+    line-height: 1;
+    color: var(--emerald-900);
+    margin-bottom: 14px;
+    text-wrap: balance;
+  }
+  .hero-title em {
+    font-family: var(--ff-editorial);
+    font-style: italic;
+    color: var(--gold-700);
+  }
+  .hero-rule {
+    width: 80px;
+    margin: 22px auto 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+  }
+  .hero-rule .l { flex: 1; height: 1px; background: var(--gold-700); opacity: 0.5; }
+  .hero-rule .d { width: 5px; height: 5px; background: var(--gold-700); transform: rotate(45deg); }
+  .hero-sub {
+    font-family: var(--ff-editorial);
+    font-style: italic;
+    font-size: 18px;
+    color: var(--ink-light-mute);
+    max-width: 540px;
+    margin: 0 auto;
+    line-height: 1.5;
+  }
+
+  /* === PROGRESS RIBBON === */
+  .ribbon {
+    margin: 0 auto 60px;
+    max-width: 720px;
+    border-top: 1px solid var(--line-light);
+    border-bottom: 1px solid var(--line-light);
+    padding: 28px 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 20px;
+    text-align: center;
+  }
+  .ribbon-item .label {
+    font-family: var(--ff-smallcaps);
+    font-size: 9px;
+    letter-spacing: 0.42em;
+    color: var(--gold-700);
+    margin-bottom: 8px;
+  }
+  .ribbon-item .value {
+    font-family: var(--ff-display);
+    font-size: 32px;
+    color: var(--emerald-800);
+    line-height: 1;
+  }
+  .ribbon-item .value em {
+    font-family: var(--ff-editorial);
+    font-style: italic;
+    color: var(--gold-700);
+  }
+  .ribbon-item .meta {
+    font-family: var(--ff-editorial);
+    font-style: italic;
+    font-size: 13px;
+    color: var(--ink-light-mute);
+    margin-top: 4px;
+  }
+
+  /* === MODULES === */
+  .modules-section {
+    margin-bottom: 60px;
+  }
+  .sec-header {
+    text-align: center;
+    margin-bottom: 36px;
+  }
+  .sec-eyebrow {
+    font-family: var(--ff-smallcaps);
+    font-size: 10px;
+    letter-spacing: 0.5em;
+    color: var(--gold-700);
+    margin-bottom: 8px;
+  }
+  .sec-title {
+    font-family: var(--ff-display);
+    font-size: 36px;
+    color: var(--emerald-900);
+  }
+  .sec-title em {
+    font-family: var(--ff-editorial);
+    font-style: italic;
+    color: var(--gold-700);
+  }
+
+  .module-grid {
+    display: grid;
+    gap: 20px;
+    grid-template-columns: 1fr;
+  }
+  @media (min-width: 700px) {
+    .module-grid { grid-template-columns: 1fr 1fr; }
+  }
+  @media (min-width: 1000px) {
+    .module-grid { grid-template-columns: repeat(3, 1fr); }
+  }
+
+  .module {
+    background: var(--parchment-dark);
+    border: 1px solid var(--line-light);
+    padding: 0;
+    overflow: hidden;
+    transition: all 0.4s var(--ease-elegant);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+  }
+  .module:hover:not(.locked) {
+    border-color: var(--gold-700);
+    transform: translateY(-2px);
+    box-shadow: 0 24px 48px -32px rgba(58, 40, 14, 0.2);
+  }
+  .module-cover {
+    aspect-ratio: 16 / 10;
+    background: var(--emerald-800);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .module-cover .pattern {
+    position: absolute;
+    inset: 0;
+    background-image:
+      repeating-linear-gradient(45deg, rgba(201,162,90,0.08) 0 4px, transparent 4px 12px);
+  }
+  .module-cover .num {
+    position: relative;
+    z-index: 2;
+    font-family: var(--ff-display);
+    font-size: 96px;
+    color: var(--gold-300);
+    line-height: 0.85;
+    letter-spacing: 0.02em;
+    opacity: 0.95;
+  }
+  .module-cover .num em {
+    font-family: var(--ff-editorial);
+    font-style: italic;
+  }
+  .module-cover .ribbon-tag {
+    position: absolute;
+    top: 14px;
+    left: 14px;
+    z-index: 3;
+    font-family: var(--ff-smallcaps);
+    font-size: 7.5px;
+    letter-spacing: 0.32em;
+    color: var(--gold-300);
+    padding: 4px 10px;
+    border: 1px solid var(--gold-500);
+    background: rgba(7, 9, 10, 0.5);
+  }
+  .module-body {
+    padding: 22px 22px 24px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+  .module-meta {
+    font-family: var(--ff-smallcaps);
+    font-size: 8.5px;
+    letter-spacing: 0.32em;
+    color: var(--gold-700);
+    margin-bottom: 8px;
+  }
+  .module-name {
+    font-family: var(--ff-display);
+    font-size: 22px;
+    line-height: 1.15;
+    color: var(--emerald-900);
+    margin-bottom: 8px;
+  }
+  .module-name em {
+    font-family: var(--ff-editorial);
+    font-style: italic;
+    color: var(--gold-700);
+  }
+  .module-desc {
+    font-family: var(--ff-editorial);
+    font-style: italic;
+    font-size: 14px;
+    color: var(--ink-light-mute);
+    line-height: 1.5;
+    margin-bottom: 18px;
+    flex: 1;
+  }
+  .module-foot {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid var(--line-light);
+    padding-top: 14px;
+  }
+  .module-progress {
+    font-family: var(--ff-smallcaps);
+    font-size: 8px;
+    letter-spacing: 0.3em;
+    color: var(--ink-light-mute);
+  }
+  .module-progress b {
+    color: var(--emerald-700);
+    font-family: var(--ff-display);
+    font-size: 13px;
+    letter-spacing: 0.04em;
+    margin-right: 3px;
+  }
+  .module-cta {
+    font-family: var(--ff-smallcaps);
+    font-size: 9px;
+    letter-spacing: 0.32em;
+    color: var(--emerald-700);
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+  .module-cta:hover { color: var(--gold-700); }
+  .module-cta .arrow {
+    display: inline-block;
+    margin-left: 6px;
+    transition: transform 0.3s;
+  }
+  .module-cta:hover .arrow { transform: translateX(3px); }
+
+  /* Estado: locked */
+  .module.locked {
+    opacity: 0.7;
+  }
+  .module.locked .module-cover {
+    background: var(--ink-light);
+  }
+  .module.locked .module-cover .num {
+    color: var(--gold-700);
+    opacity: 0.4;
+  }
+  .module.locked .module-cover::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at center, transparent 30%, rgba(7,9,10,0.5));
+    z-index: 1;
+  }
+  .lock-icon {
+    position: absolute;
+    z-index: 4;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 48px;
+    height: 48px;
+    color: var(--gold-300);
+  }
+  .module.locked .module-cta {
+    color: var(--ink-light-mute);
+    pointer-events: none;
+  }
+  .module.locked .module-foot { border-color: rgba(58,40,14,0.08); }
+
+  /* === LOCK BANNER === */
+  .lock-banner {
+    margin: 60px 0 40px;
+    border: 1px solid var(--gold-700);
+    background:
+      linear-gradient(180deg, rgba(184,146,63,0.06), transparent),
+      var(--parchment-dark);
+    padding: 32px 28px;
+    text-align: center;
+    position: relative;
+  }
+  .lock-banner::before, .lock-banner::after {
+    content: '';
+    position: absolute;
+    width: 18px; height: 18px;
+    border: 1px solid var(--gold-700);
+  }
+  .lock-banner::before {
+    top: 8px; left: 8px;
+    border-right: none; border-bottom: none;
+  }
+  .lock-banner::after {
+    bottom: 8px; right: 8px;
+    border-left: none; border-top: none;
+  }
+  .countdown {
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+    gap: 14px;
+    margin: 14px 0 12px;
+  }
+  .countdown-unit {
+    font-family: var(--ff-display);
+    font-size: 56px;
+    line-height: 1;
+    color: var(--emerald-800);
+  }
+  .countdown-unit .lbl {
+    display: block;
+    font-family: var(--ff-smallcaps);
+    font-size: 8.5px;
+    letter-spacing: 0.32em;
+    color: var(--gold-700);
+    margin-top: 6px;
+  }
+  .countdown-sep {
+    font-family: var(--ff-display);
+    font-size: 36px;
+    color: var(--gold-700);
+    align-self: center;
+    margin-top: -10px;
+  }
+  .lock-banner .body {
+    font-family: var(--ff-editorial);
+    font-style: italic;
+    font-size: 15px;
+    color: var(--ink-light-mute);
+    max-width: 460px;
+    margin: 12px auto 0;
+    line-height: 1.5;
+  }
+
+  /* === DOSSIÊS / PDFs === */
+  .dossier-section {
+    margin: 60px 0;
+  }
+  .dossier-grid {
+    display: grid;
+    gap: 18px;
+    grid-template-columns: 1fr;
+  }
+  @media (min-width: 700px) {
+    .dossier-grid { grid-template-columns: repeat(3, 1fr); }
+  }
+  .dossier {
+    border: 1px solid var(--line-light);
+    background: var(--parchment-dark);
+    padding: 24px 22px;
+    text-align: left;
+    text-decoration: none;
+    color: inherit;
+    transition: all 0.4s var(--ease-elegant);
+    display: flex;
+    gap: 18px;
+    align-items: flex-start;
+  }
+  .dossier:hover {
+    border-color: var(--gold-700);
+    transform: translateY(-2px);
+  }
+  .dossier-thumb {
+    width: 64px;
+    aspect-ratio: 3/4;
+    background:
+      linear-gradient(180deg, var(--champagne), var(--parchment));
+    border: 1px solid var(--line-light-strong);
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--ff-smallcaps);
+    font-size: 7px;
+    letter-spacing: 0.3em;
+    color: var(--gold-700);
+    text-align: center;
+    padding: 4px;
+    position: relative;
+  }
+  .dossier-thumb::before {
+    content: '';
+    position: absolute;
+    inset: 6px;
+    border: 1px solid var(--gold-500);
+    opacity: 0.4;
+  }
+  .dossier-meta {
+    font-family: var(--ff-smallcaps);
+    font-size: 8.5px;
+    letter-spacing: 0.32em;
+    color: var(--gold-700);
+    margin-bottom: 6px;
+  }
+  .dossier-name {
+    font-family: var(--ff-display);
+    font-size: 20px;
+    line-height: 1.15;
+    color: var(--emerald-900);
+    margin-bottom: 4px;
+  }
+  .dossier-name em {
+    font-family: var(--ff-editorial);
+    font-style: italic;
+    color: var(--gold-700);
+  }
+  .dossier-link {
+    font-family: var(--ff-smallcaps);
+    font-size: 8.5px;
+    letter-spacing: 0.32em;
+    color: var(--emerald-700);
+    margin-top: 10px;
+  }
+
+  /* === SUPORTE / FOOTER === */
+  .support {
+    margin-top: 48px;
+    padding: 32px 28px;
+    text-align: center;
+    border-top: 1px solid var(--line-light);
+  }
+  .support-title {
+    font-family: var(--ff-display);
+    font-size: 24px;
+    color: var(--emerald-800);
+    margin-bottom: 8px;
+  }
+  .support-body {
+    font-family: var(--ff-editorial);
+    font-style: italic;
+    font-size: 14px;
+    color: var(--ink-light-mute);
+    margin-bottom: 18px;
+  }
+  .support-link {
+    font-family: var(--ff-smallcaps);
+    font-size: 9.5px;
+    letter-spacing: 0.32em;
+    color: var(--emerald-700);
+    text-decoration: none;
+    border-bottom: 1px solid var(--gold-700);
+    padding-bottom: 2px;
+  }
+
+  @media (max-width: 600px) {
+    .hero-title { font-size: 42px; }
+    .sec-title { font-size: 28px; }
+    .countdown-unit { font-size: 40px; }
+    .countdown-sep { font-size: 28px; }
+    .nav-user .greet { display: none; }
+    .ribbon { grid-template-columns: 1fr; gap: 16px; }
+  }
+</style>
+</head>
+<body>
+  <main data-screen-label="04 Área de Membros (Editorial Botanique)">
+
+    <!-- Nav -->
+    <nav class="nav">
+      <div class="nav-inner">
+        <div class="nav-brand">
+          <div class="crest-rules">
+            <span class="line"></span>
+            <span class="diamond"></span>
+            <span class="line"></span>
+          </div>
+          <span class="name">Método Desinflamação Pro</span>
+        </div>
+        <div class="nav-user">
+          <div class="greet">Bem-vindo, <b>Carolina</b></div>
+          <div class="avatar">C</div>
+        </div>
+      </div>
+    </nav>
+
+    <div class="shell">
+
+      <!-- Hero -->
+      <header class="hero">
+        <div class="hero-eyebrow">— A sua jornada começa aqui —</div>
+        <h1 class="hero-title">A vida leve, <em>em cinco atos.</em></h1>
+        <div class="hero-rule"><span class="l"></span><span class="d"></span><span class="l"></span></div>
+        <p class="hero-sub">
+          Comece pelo Desafio de Seis Dias. Os módulos avançados serão liberados após o primeiro ciclo de adaptação.
+        </p>
+      </header>
+
+      <!-- Progress ribbon -->
+      <section class="ribbon">
+        <div class="ribbon-item">
+          <div class="label">— Dia atual —</div>
+          <div class="value">III<em>/VI</em></div>
+          <div class="meta">desafio do reset</div>
+        </div>
+        <div class="ribbon-item">
+          <div class="label">— Aulas concluídas —</div>
+          <div class="value">04<em>/26</em></div>
+          <div class="meta">15% da jornada</div>
+        </div>
+        <div class="ribbon-item">
+          <div class="label">— Avanço —</div>
+          <div class="value"><em>em rota</em></div>
+          <div class="meta">próxima parada: ato II</div>
+        </div>
+      </section>
+
+      <!-- MÓDULOS -->
+      <section class="modules-section">
+        <header class="sec-header">
+          <div class="sec-eyebrow">— Os cinco atos —</div>
+          <h2 class="sec-title">Vinte e seis aulas, <em>uma travessia</em></h2>
+        </header>
+
+        <div class="module-grid">
+
+          <!-- I. unlocked -->
+          <article class="module">
+            <div class="module-cover">
+              <div class="pattern"></div>
+              <span class="ribbon-tag">Em curso</span>
+              <span class="num">I</span>
+            </div>
+            <div class="module-body">
+              <div class="module-meta">Ato I · 06 aulas</div>
+              <h3 class="module-name">O Desafio <em>de Seis Dias</em></h3>
+              <p class="module-desc">A vitória rápida. Reset celular, intestino desinflamado e energia restituída em menos de uma semana.</p>
+              <div class="module-foot">
+                <div class="module-progress"><b>4</b>/6 aulas</div>
+                <a href="#" class="module-cta">Continuar<span class="arrow">→</span></a>
+              </div>
+            </div>
+          </article>
+
+          <!-- II. unlocked -->
+          <article class="module">
+            <div class="module-cover">
+              <div class="pattern"></div>
+              <span class="ribbon-tag">Liberado</span>
+              <span class="num">II</span>
+            </div>
+            <div class="module-body">
+              <div class="module-meta">Ato II · 05 aulas</div>
+              <h3 class="module-name">Os Compostos <em>Bioativos</em></h3>
+              <p class="module-desc">A farmácia da feira. Por que ingredientes simples e baratos apagam o incêndio que medicações caras não tocam.</p>
+              <div class="module-foot">
+                <div class="module-progress"><b>0</b>/5 aulas</div>
+                <a href="#" class="module-cta">Iniciar<span class="arrow">→</span></a>
+              </div>
+            </div>
+          </article>
+
+          <!-- III. locked -->
+          <article class="module locked">
+            <div class="module-cover">
+              <div class="pattern"></div>
+              <span class="ribbon-tag" style="border-color: var(--gold-700); color: var(--gold-300);">Em 5 dias</span>
+              <span class="num">III</span>
+              <svg class="lock-icon" viewBox="0 0 48 48" fill="none">
+                <rect x="12" y="22" width="24" height="18" stroke="currentColor" stroke-width="1"/>
+                <path d="M16 22 V16 a8 8 0 0 1 16 0 V22" stroke="currentColor" stroke-width="1" fill="none"/>
+                <circle cx="24" cy="30" r="2" fill="currentColor"/>
+                <line x1="24" y1="32" x2="24" y2="36" stroke="currentColor" stroke-width="1"/>
+              </svg>
+            </div>
+            <div class="module-body">
+              <div class="module-meta">Ato III · 05 aulas</div>
+              <h3 class="module-name">Reconstrução <em>Intestinal</em></h3>
+              <p class="module-desc">Como religar leptina e queima de gordura no organismo já adaptado ao protocolo. Liberação após 8 dias do início.</p>
+              <div class="module-foot">
+                <div class="module-progress" style="color: var(--gold-700);">Trava ativa · 8 dias</div>
+                <span class="module-cta">Bloqueado</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- IV. locked -->
+          <article class="module locked">
+            <div class="module-cover">
+              <div class="pattern"></div>
+              <span class="ribbon-tag" style="border-color: var(--gold-700); color: var(--gold-300);">Em 5 dias</span>
+              <span class="num">IV</span>
+              <svg class="lock-icon" viewBox="0 0 48 48" fill="none">
+                <rect x="12" y="22" width="24" height="18" stroke="currentColor" stroke-width="1"/>
+                <path d="M16 22 V16 a8 8 0 0 1 16 0 V22" stroke="currentColor" stroke-width="1" fill="none"/>
+                <circle cx="24" cy="30" r="2" fill="currentColor"/>
+                <line x1="24" y1="32" x2="24" y2="36" stroke="currentColor" stroke-width="1"/>
+              </svg>
+            </div>
+            <div class="module-body">
+              <div class="module-meta">Ato IV · 05 aulas</div>
+              <h3 class="module-name">Vida Leve <em>Permanente</em></h3>
+              <p class="module-desc">Manutenção a longo prazo. O método incorporado à rotina, sem fricção e sem o efeito sanfona retornar.</p>
+              <div class="module-foot">
+                <div class="module-progress" style="color: var(--gold-700);">Trava ativa · 8 dias</div>
+                <span class="module-cta">Bloqueado</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- V. locked -->
+          <article class="module locked">
+            <div class="module-cover">
+              <div class="pattern"></div>
+              <span class="ribbon-tag" style="border-color: var(--gold-700); color: var(--gold-300);">Em 5 dias</span>
+              <span class="num">V</span>
+              <svg class="lock-icon" viewBox="0 0 48 48" fill="none">
+                <rect x="12" y="22" width="24" height="18" stroke="currentColor" stroke-width="1"/>
+                <path d="M16 22 V16 a8 8 0 0 1 16 0 V22" stroke="currentColor" stroke-width="1" fill="none"/>
+                <circle cx="24" cy="30" r="2" fill="currentColor"/>
+                <line x1="24" y1="32" x2="24" y2="36" stroke="currentColor" stroke-width="1"/>
+              </svg>
+            </div>
+            <div class="module-body">
+              <div class="module-meta">Ato V · 05 aulas</div>
+              <h3 class="module-name">Cozinha de <em>Alta Performance</em></h3>
+              <p class="module-desc">Receitas-chave em quinze minutos. Mais rápido do que pedir delivery, mais saboroso do que qualquer dieta.</p>
+              <div class="module-foot">
+                <div class="module-progress" style="color: var(--gold-700);">Trava ativa · 8 dias</div>
+                <span class="module-cta">Bloqueado</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- Bônus card -->
+          <article class="module" style="background: linear-gradient(180deg, rgba(184,146,63,0.08), var(--parchment-dark));">
+            <div class="module-cover" style="background: var(--gold-900);">
+              <div class="pattern"></div>
+              <span class="ribbon-tag" style="border-color: var(--champagne); color: var(--champagne);">Bônus</span>
+              <span class="num" style="color: var(--champagne);">⚜</span>
+            </div>
+            <div class="module-body">
+              <div class="module-meta">Adição · Xícara de Ouro</div>
+              <h3 class="module-name">15 Blends <em>Termogênicos</em></h3>
+              <p class="module-desc">Receituário completo dos chás de potencialização. Ingredientes da feira, prontos em 3 minutos.</p>
+              <div class="module-foot">
+                <div class="module-progress"><b>0</b>/15 receitas</div>
+                <a href="#" class="module-cta">Acessar<span class="arrow">→</span></a>
+              </div>
+            </div>
+          </article>
+
+        </div>
+      </section>
+
+      <!-- Lock banner / Countdown -->
+      <section class="lock-banner">
+        <div class="sec-eyebrow">— Próxima liberação —</div>
+        <p class="body" style="margin-top: 0;">Os módulos avançados são liberados ao final do oitavo dia, garantindo que você complete o ciclo de adaptação antes de avançar.</p>
+        <div class="countdown" id="countdown">
+          <div class="countdown-unit">04<span class="lbl">dias</span></div>
+          <span class="countdown-sep">·</span>
+          <div class="countdown-unit">17<span class="lbl">horas</span></div>
+          <span class="countdown-sep">·</span>
+          <div class="countdown-unit">42<span class="lbl">minutos</span></div>
+        </div>
+        <p class="body">Atos III, IV e V serão liberados automaticamente. Não é necessária nenhuma ação.</p>
+      </section>
+
+      <!-- DOSSIÊS -->
+      <section class="dossier-section">
+        <header class="sec-header">
+          <div class="sec-eyebrow">— Materiais de apoio —</div>
+          <h2 class="sec-title">Os <em>três</em> dossiês de campo</h2>
+        </header>
+
+        <div class="dossier-grid">
+          <a href="#" class="dossier">
+            <div class="dossier-thumb">guia<br/>de campo</div>
+            <div>
+              <div class="dossier-meta">Dossiê I · pdf</div>
+              <div class="dossier-name">Guia de Compras<br/><em>Sem Erro</em></div>
+              <div class="dossier-link">Baixar →</div>
+            </div>
+          </a>
+          <a href="#" class="dossier">
+            <div class="dossier-thumb">planner<br/>de seis dias</div>
+            <div>
+              <div class="dossier-meta">Dossiê II · pdf</div>
+              <div class="dossier-name">Planner do<br/><em>Desafio Reset</em></div>
+              <div class="dossier-link">Baixar →</div>
+            </div>
+          </a>
+          <a href="#" class="dossier">
+            <div class="dossier-thumb">livro<br/>de receitas</div>
+            <div>
+              <div class="dossier-meta">Dossiê III · pdf</div>
+              <div class="dossier-name">15 Minutos<br/><em>de Poder</em></div>
+              <div class="dossier-link">Baixar →</div>
+            </div>
+          </a>
+        </div>
+      </section>
+
+      <!-- Suporte -->
+      <section class="support">
+        <div class="sec-eyebrow" style="margin-bottom: 6px;">— Concierge —</div>
+        <div class="support-title">Precisa de assistência?</div>
+        <p class="support-body">Nosso atendimento responde em até quatro horas, em dias úteis.</p>
+        <a href="mailto:contato@desinflamacaopro.com.br" class="support-link">contato@desinflamacaopro.com.br</a>
+      </section>
+
+    </div>
+
+  </main>
+
+  <script>
+    // Countdown decorativo até liberação dos módulos avançados
+    let totalSeconds = 4 * 86400 + 17 * 3600 + 42 * 60;
+    const cd = document.getElementById('countdown');
+    function tick() {
+      totalSeconds--;
+      const d = Math.floor(totalSeconds / 86400);
+      const h = Math.floor((totalSeconds % 86400) / 3600);
+      const m = Math.floor((totalSeconds % 3600) / 60);
+      const units = cd.querySelectorAll('.countdown-unit');
+      units[0].childNodes[0].textContent = String(d).padStart(2, '0');
+      units[1].childNodes[0].textContent = String(h).padStart(2, '0');
+      units[2].childNodes[0].textContent = String(m).padStart(2, '0');
+    }
+    setInterval(tick, 60000); // tick a cada minuto pra não distrair
+  </script>
+</body>
+</html>

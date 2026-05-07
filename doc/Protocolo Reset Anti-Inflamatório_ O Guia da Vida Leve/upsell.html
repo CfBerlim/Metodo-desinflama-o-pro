@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<title>Uma oferta especial — Método Desinflamação Pro</title>
+<link rel="stylesheet" href="shared/tokens.css" />
+<style>
+  body {
+    background:
+      radial-gradient(ellipse 70% 50% at 50% 0%, #1c1a14 0%, #14130f 35%, #0d0c0a 70%),
+      #0d0c0a;
+    color: var(--ink-noir);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 90% 55% at 50% -10%, rgba(216,184,120,0.20), rgba(184,146,63,0.09) 30%, transparent 65%),
+      radial-gradient(ellipse 60% 45% at 50% 35%, rgba(216,184,120,0.12), transparent 60%),
+      radial-gradient(ellipse 70% 60% at 50% 100%, rgba(23,58,40,0.32), transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+  }
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      radial-gradient(rgba(216,184,120,0.025) 1px, transparent 1px),
+      linear-gradient(180deg, transparent 0%, rgba(216,184,120,0.04) 50%, transparent 100%);
+    background-size: 4px 4px, auto;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.7;
+  }
+  .crest-name,
+  .upsell-eyebrow,
+  .upsell-headline em,
+  .offer-product em,
+  .price-installment-up,
+  .offer-tagline {
+    text-shadow: 0 0 24px rgba(216,184,120,0.28);
+  }
+  .upsell-player {
+    box-shadow: 0 0 80px -10px rgba(216,184,120,0.32), 0 40px 80px -30px rgba(0,0,0,0.7);
+  }
+  .price-card {
+    box-shadow: 0 0 60px -10px rgba(216,184,120,0.22), 0 30px 60px -30px rgba(0,0,0,0.6);
+  }
+  .btn-accept {
+    box-shadow:
+      inset 0 1px 0 rgba(216,184,120,0.3),
+      0 0 60px -10px rgba(216,184,120,0.4),
+      0 30px 60px -20px rgba(23,58,40,0.5) !important;
+  }
+
+  .page {
+    position: relative;
+    z-index: 1;
+    max-width: 480px;
+    margin: 0 auto;
+    padding: 0 20px 60px;
+    text-align: center;
+  }
+
+  /* Confirmação sutil */
+  .confirm {
+    margin-top: 28px;
+    padding: 14px 18px;
+    border: 1px solid rgba(62, 129, 96, 0.4);
+    background: rgba(23, 58, 40, 0.25);
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--ff-smallcaps);
+    font-size: 9px;
+    letter-spacing: 0.32em;
+    color: var(--emerald-400);
+  }
+  .confirm svg { width: 14px; height: 14px; }
+  .confirm-wrap {
+    text-align: center;
+    margin-bottom: 12px;
+  }
+
+  /* Crest */
+  .crest-block {
+    margin-top: 10px;
+    margin-bottom: 24px;
+  }
+  .crest-rules {
+    display: flex; align-items: center; justify-content: center; gap: 8px;
+    margin-bottom: 6px;
+  }
+  .crest-rules .line { width: 28px; height: 1px; background: var(--gold-500); opacity: 0.55; }
+  .crest-rules .diamond { width: 4px; height: 4px; background: var(--gold-500); transform: rotate(45deg); }
+  .crest-name {
+    font-family: var(--ff-display);
+    font-size: 12px;
+    letter-spacing: 0.32em;
+    color: var(--gold-300);
+    text-transform: uppercase;
+  }
+
+  /* Headline */
+  .upsell-eyebrow {
+    font-family: var(--ff-smallcaps);
+    font-size: 9.5px;
+    letter-spacing: 0.5em;
+    color: var(--gold-400);
+    margin-bottom: 18px;
+  }
+  .upsell-headline {
+    font-family: var(--ff-display);
+    font-size: 36px;
+    line-height: 1.1;
+    color: var(--champagne);
+    margin-bottom: 12px;
+    text-wrap: balance;
+  }
+  .upsell-headline em {
+    font-family: var(--ff-editorial);
+    font-style: italic;
+    color: var(--gold-300);
+  }
+  .upsell-sub {
+    font-family: var(--ff-editorial);
+    font-style: italic;
+    font-size: 16px;
+    color: var(--ink-noir-mute);
+    max-width: 380px;
+    margin: 0 auto 28px;
+    line-height: 1.5;
+  }
+
+  /* Player simples */
+  .upsell-player {
+    aspect-ratio: 16 / 9;
+    background: #000;
+    border: 1px solid var(--line-noir-strong);
+    position: relative;
+    margin-bottom: 28px;
+    overflow: hidden;
+  }
+  .upsell-player::before,
+  .upsell-player::after {
+    content: '';
+    position: absolute;
+    width: 14px;
+    height: 14px;
+  }
+  .upsell-player::before {
+    top: -1px; left: -1px;
+    border-top: 1px solid var(--gold-500);
+    border-left: 1px solid var(--gold-500);
+  }
+  .upsell-player::after {
+    bottom: -1px; right: -1px;
+    border-bottom: 1px solid var(--gold-500);
+    border-right: 1px solid var(--gold-500);
+  }
+  .upsell-corner-tr, .upsell-corner-bl {
+    position: absolute;
+    width: 14px;
+    height: 14px;
+  }
+  .upsell-corner-tr {
+    top: -1px; right: -1px;
+    border-top: 1px solid var(--gold-500);
+    border-right: 1px solid var(--gold-500);
+  }
+  .upsell-corner-bl {
+    bottom: -1px; left: -1px;
+    border-bottom: 1px solid var(--gold-500);
+    border-left: 1px solid var(--gold-500);
+  }
+  .upsell-player .content {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background:
+      radial-gradient(ellipse at center, rgba(23,58,40,0.35), rgba(7,9,10,0.95));
+  }
+  .upsell-player .grid-bg {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(201,162,90,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(201,162,90,0.04) 1px, transparent 1px);
+    background-size: 24px 24px;
+    opacity: 0.5;
+  }
+  .upsell-play-btn {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    background: none;
+    border: none;
+    color: var(--gold-300);
+    cursor: pointer;
+    transition: transform 0.4s var(--ease-elegant);
+  }
+  .upsell-play-btn:hover { transform: scale(1.04); }
+  .upsell-play-circle {
+    width: 60px; height: 60px;
+    border: 1px solid var(--gold-500);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(7,9,10,0.6);
+  }
+  .upsell-play-tri {
+    width: 0; height: 0;
+    border-left: 12px solid var(--gold-300);
+    border-top: 8px solid transparent;
+    border-bottom: 8px solid transparent;
+    margin-left: 4px;
+  }
+  .upsell-play-label {
+    font-family: var(--ff-smallcaps);
+    font-size: 9px;
+    letter-spacing: 0.4em;
+    color: var(--gold-300);
+  }
+
+  /* Card da oferta — minimalista */
+  .upsell-offer {
+    margin-bottom: 24px;
+  }
+  .offer-product {
+    font-family: var(--ff-display);
+    font-size: 26px;
+    color: var(--champagne);
+    line-height: 1.15;
+    margin-bottom: 6px;
+  }
+  .offer-product em {
+    font-family: var(--ff-editorial);
+    font-style: italic;
+    color: var(--gold-300);
+  }
+  .offer-tagline {
+    font-family: var(--ff-smallcaps);
+    font-size: 9.5px;
+    letter-spacing: 0.42em;
+    color: var(--gold-400);
+    margin-bottom: 22px;
+  }
+
+  .price-card {
+    border: 1px solid var(--gold-700);
+    background: linear-gradient(180deg, rgba(184,146,63,0.06), rgba(12,15,16,0.7));
+    padding: 28px 22px 26px;
+    margin-bottom: 22px;
+    position: relative;
+  }
+  .price-card::before, .price-card::after {
+    content: '';
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    border: 1px solid var(--gold-500);
+  }
+  .price-card::before {
+    top: 6px; left: 6px;
+    border-right: none; border-bottom: none;
+  }
+  .price-card::after {
+    bottom: 6px; right: 6px;
+    border-left: none; border-top: none;
+  }
+  .price-was {
+    font-family: var(--ff-editorial);
+    font-style: italic;
+    font-size: 16px;
+    color: var(--ink-noir-mute);
+    text-decoration: line-through;
+    text-decoration-color: rgba(201, 162, 90, 0.6);
+    margin-bottom: 4px;
+  }
+  .price-line-sm {
+    font-family: var(--ff-smallcaps);
+    font-size: 9px;
+    letter-spacing: 0.42em;
+    color: var(--gold-400);
+    margin-bottom: 8px;
+  }
+  .price-installment-up {
+    font-family: var(--ff-display);
+    font-size: 48px;
+    line-height: 1;
+    color: var(--gold-300);
+    margin-bottom: 4px;
+  }
+  .price-installment-up .small { font-size: 22px; color: var(--gold-400); margin-right: 4px; }
+  .price-installment-up .cents { font-size: 26px; color: var(--gold-400); }
+  .price-cash-up {
+    font-family: var(--ff-editorial);
+    font-style: italic;
+    font-size: 13px;
+    color: var(--ink-noir-mute);
+  }
+
+  /* Ações — apenas DOIS botões, regra do briefing */
+  .upsell-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .btn-accept {
+    display: block;
+    width: 100%;
+    padding: 22px 24px;
+    background: linear-gradient(180deg, var(--emerald-500), var(--emerald-700));
+    color: var(--champagne);
+    border: 1px solid var(--gold-500);
+    text-decoration: none;
+    font-family: var(--ff-smallcaps);
+    font-size: 12px;
+    letter-spacing: 0.3em;
+    cursor: pointer;
+    transition: all 0.4s var(--ease-elegant);
+    box-shadow:
+      inset 0 1px 0 rgba(201,162,90,0.2),
+      0 20px 40px -20px rgba(184,146,63,0.4);
+  }
+  .btn-accept:hover {
+    background: linear-gradient(180deg, var(--emerald-400), var(--emerald-600));
+    transform: translateY(-1px);
+  }
+  .btn-accept .arrow {
+    display: inline-block;
+    margin-left: 10px;
+    transition: transform 0.4s var(--ease-elegant);
+  }
+  .btn-accept:hover .arrow { transform: translateX(4px); }
+
+  .btn-decline {
+    display: block;
+    width: 100%;
+    padding: 16px 20px;
+    background: transparent;
+    color: var(--ink-noir-mute);
+    border: 1px solid var(--line-noir);
+    text-decoration: none;
+    font-family: var(--ff-smallcaps);
+    font-size: 9.5px;
+    letter-spacing: 0.32em;
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+  .btn-decline:hover {
+    color: var(--ink-noir);
+    border-color: var(--line-noir-strong);
+  }
+
+  .one-click-note {
+    margin-top: 18px;
+    font-family: var(--ff-editorial);
+    font-style: italic;
+    font-size: 12.5px;
+    color: var(--ink-noir-faint);
+  }
+
+  /* Selo discreto no canto */
+  .corner-seal {
+    position: absolute;
+    top: 18px;
+    right: 18px;
+    font-family: var(--ff-smallcaps);
+    font-size: 7.5px;
+    letter-spacing: 0.32em;
+    color: var(--ink-noir-faint);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  @media (min-width: 768px) {
+    .page { max-width: 640px; padding: 0 40px 80px; }
+    .upsell-headline { font-size: 48px; }
+    .offer-product { font-size: 36px; }
+    .price-installment-up { font-size: 64px; }
+  }
+</style>
+</head>
+<body>
+  <main class="page" data-screen-label="03 Upsell — Clube Vida Leve">
+
+    <!-- Confirmação minúscula da compra anterior -->
+    <div class="confirm-wrap">
+      <div class="confirm">
+        <svg viewBox="0 0 14 14" fill="none">
+          <circle cx="7" cy="7" r="6" stroke="currentColor" stroke-width="0.8"/>
+          <path d="M4.5 7 L6.2 8.7 L9.5 5.3" stroke="currentColor" stroke-width="1" fill="none"/>
+        </svg>
+        Sua compra foi aprovada
+      </div>
+    </div>
+
+    <div class="crest-block">
+      <div class="crest-rules">
+        <span class="line"></span>
+        <span class="diamond"></span>
+        <span class="line"></span>
+      </div>
+      <div class="crest-name">Espera, antes de prosseguir</div>
+    </div>
+
+    <div class="upsell-eyebrow">— Uma adição feita para você —</div>
+
+    <h1 class="upsell-headline">
+      Você quer <em>nunca mais</em> precisar pensar no que vai comer?
+    </h1>
+    <p class="upsell-sub">
+      Assista a este breve vídeo de 2 minutos. <br/>
+      A decisão é exclusiva e não voltará.
+    </p>
+
+    <!-- Player do upsell -->
+    <div class="upsell-player">
+      <span class="upsell-corner-tr"></span>
+      <span class="upsell-corner-bl"></span>
+      <div class="content">
+        <div class="grid-bg"></div>
+        <button class="upsell-play-btn" id="upPlayBtn">
+          <span class="upsell-play-circle"><span class="upsell-play-tri"></span></span>
+          <span class="upsell-play-label">Iniciar transmissão · 2:14</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Apresentação curta do produto -->
+    <section class="upsell-offer">
+      <div class="offer-tagline">— Adição exclusiva, somente nesta página —</div>
+      <h2 class="offer-product">Clube <em>Vida Leve</em><br/>365 dias de refeições</h2>
+    </section>
+
+    <!-- Preço -->
+    <section class="price-card">
+      <div class="price-was">de R$ 397,00</div>
+      <div class="price-line-sm">— por apenas, hoje —</div>
+      <div class="price-installment-up">
+        <span class="small">12×</span>R$&nbsp;14<span class="cents">,70</span>
+      </div>
+      <div class="price-cash-up">ou R$ 147,00 à vista</div>
+    </section>
+
+    <!-- Botões: aceitar (verde) e recusar (cinza) -->
+    <section class="upsell-actions">
+      <a href="members.html" class="btn-accept">
+        Sim, adicionar à minha ordem com 1 clique
+        <span class="arrow">→</span>
+      </a>
+      <a href="members.html" class="btn-decline">
+        Não, obrigado — prefiro seguir sem o Clube
+      </a>
+    </section>
+
+    <p class="one-click-note">
+      Adição com 1 clique. Cobrança no mesmo cartão da ordem anterior.
+    </p>
+  </main>
+
+  <script>
+    const btn = document.getElementById('upPlayBtn');
+    btn.addEventListener('click', () => {
+      btn.style.opacity = '0.4';
+      btn.querySelector('.upsell-play-label').textContent = 'Reproduzindo…';
+    });
+  </script>
+</body>
+</html>

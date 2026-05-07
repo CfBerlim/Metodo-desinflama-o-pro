@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Mapa do Funil — Método Desinflamação Pro</title>
+<link rel="stylesheet" href="shared/tokens.css" />
+<style>
+  body {
+    background: var(--carbon-1000);
+    color: var(--ink-noir);
+    min-height: 100vh;
+  }
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      radial-gradient(ellipse 80% 50% at 50% 0%, rgba(184,146,63,0.05), transparent 60%),
+      radial-gradient(rgba(201,162,90,0.018) 1px, transparent 1px);
+    background-size: auto, 4px 4px;
+    pointer-events: none;
+    z-index: 0;
+  }
+  .shell {
+    position: relative; z-index: 1;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 60px 32px 80px;
+  }
+  .crest-rules {
+    display: flex; align-items: center; justify-content: center; gap: 8px;
+    margin-bottom: 8px;
+  }
+  .crest-rules .line { width: 28px; height: 1px; background: var(--gold-500); opacity: 0.55; }
+  .crest-rules .diamond { width: 4px; height: 4px; background: var(--gold-500); transform: rotate(45deg); }
+  .brand {
+    text-align: center;
+    font-family: var(--ff-display);
+    font-size: 13px;
+    letter-spacing: 0.32em;
+    color: var(--gold-300);
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .ftag {
+    text-align: center;
+    font-family: var(--ff-smallcaps);
+    font-size: 8.5px;
+    letter-spacing: 0.42em;
+    color: var(--ink-noir-faint);
+    margin-bottom: 32px;
+  }
+  .title {
+    text-align: center;
+    font-family: var(--ff-display);
+    font-size: 56px;
+    line-height: 1.05;
+    color: var(--champagne);
+    margin-bottom: 14px;
+  }
+  .title em {
+    font-family: var(--ff-editorial);
+    font-style: italic;
+    color: var(--gold-300);
+  }
+  .sub {
+    text-align: center;
+    font-family: var(--ff-editorial);
+    font-style: italic;
+    font-size: 17px;
+    color: var(--ink-noir-mute);
+    max-width: 560px;
+    margin: 0 auto 60px;
+    line-height: 1.5;
+  }
+
+  .funnel {
+    display: grid;
+    gap: 18px;
+    grid-template-columns: 1fr;
+  }
+  @media (min-width: 720px) {
+    .funnel { grid-template-columns: repeat(4, 1fr); }
+  }
+
+  .step {
+    border: 1px solid var(--line-noir);
+    background: rgba(12,15,16,0.55);
+    padding: 26px 22px 24px;
+    text-decoration: none;
+    color: inherit;
+    transition: all 0.4s var(--ease-elegant);
+    display: flex;
+    flex-direction: column;
+    min-height: 280px;
+    position: relative;
+  }
+  .step:hover {
+    border-color: var(--gold-500);
+    transform: translateY(-2px);
+    box-shadow: 0 24px 56px -32px rgba(184,146,63,0.4);
+  }
+  .step .num {
+    font-family: var(--ff-display);
+    font-size: 14px;
+    letter-spacing: 0.32em;
+    color: var(--gold-400);
+    margin-bottom: 14px;
+  }
+  .step .name {
+    font-family: var(--ff-display);
+    font-size: 26px;
+    color: var(--champagne);
+    line-height: 1.1;
+    margin-bottom: 8px;
+  }
+  .step .name em {
+    font-family: var(--ff-editorial);
+    font-style: italic;
+    color: var(--gold-300);
+  }
+  .step .meta {
+    font-family: var(--ff-smallcaps);
+    font-size: 8px;
+    letter-spacing: 0.32em;
+    color: var(--ink-noir-faint);
+    margin-bottom: 16px;
+  }
+  .step .desc {
+    font-family: var(--ff-editorial);
+    font-style: italic;
+    font-size: 14px;
+    color: var(--ink-noir-mute);
+    line-height: 1.5;
+    flex: 1;
+    margin-bottom: 18px;
+  }
+  .step .open {
+    font-family: var(--ff-smallcaps);
+    font-size: 9px;
+    letter-spacing: 0.32em;
+    color: var(--gold-300);
+    border-top: 1px solid var(--line-noir);
+    padding-top: 14px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .step .open .arrow { transition: transform 0.3s; }
+  .step:hover .open .arrow { transform: translateX(4px); }
+
+  .step .badge {
+    position: absolute;
+    top: 22px;
+    right: 22px;
+    font-family: var(--ff-smallcaps);
+    font-size: 7px;
+    letter-spacing: 0.3em;
+    color: var(--gold-400);
+    padding: 3px 8px;
+    border: 1px solid var(--line-noir-strong);
+  }
+  .step.light {
+    background: linear-gradient(180deg, rgba(245,240,228,0.04), rgba(245,240,228,0.02));
+  }
+
+  .legend {
+    margin-top: 56px;
+    text-align: center;
+    font-family: var(--ff-editorial);
+    font-style: italic;
+    font-size: 14px;
+    color: var(--ink-noir-faint);
+    line-height: 1.6;
+    max-width: 640px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .legend b {
+    font-family: var(--ff-smallcaps);
+    font-style: normal;
+    font-size: 9px;
+    letter-spacing: 0.32em;
+    color: var(--gold-400);
+    margin-right: 6px;
+  }
+</style>
+</head>
+<body>
+  <main class="shell" data-screen-label="00 Mapa do Funil (índice)">
+    <div class="crest-rules">
+      <span class="line"></span><span class="diamond"></span><span class="line"></span>
+    </div>
+    <div class="brand">Método Desinflamação Pro</div>
+    <div class="ftag">— Mapa da experiência —</div>
+
+    <h1 class="title">A esteira <em>Bio-Premium</em>,<br/>em quatro atos.</h1>
+    <p class="sub">
+      Cada peça do funil foi desenhada na sua linguagem visual própria — mas com a mesma identidade de marca. Clique em qualquer peça para abrir.
+    </p>
+
+    <nav class="funnel">
+      <a href="index.html" class="step">
+        <span class="badge">Apothecary Noir</span>
+        <div class="num">— I —</div>
+        <h2 class="name">Página de <em>Vendas</em></h2>
+        <div class="meta">VSL · lock 4 minutos</div>
+        <p class="desc">Transmissão imersiva em fundo carbono. Botão de compra surge somente aos quatro minutos do vídeo, com animação dramática.</p>
+        <div class="open"><span>Abrir</span><span class="arrow">→</span></div>
+      </a>
+
+      <a href="checkout.html" class="step">
+        <span class="badge">Apothecary Noir</span>
+        <div class="num">— II —</div>
+        <h2 class="name">Checkout <em>com bump</em></h2>
+        <div class="meta">order bump · Xícara de Ouro</div>
+        <p class="desc">Pagamento com cartão ou Pix. Adição da Xícara de Ouro com 1 clique, em destaque pontilhado dourado.</p>
+        <div class="open"><span>Abrir</span><span class="arrow">→</span></div>
+      </a>
+
+      <a href="upsell.html" class="step">
+        <span class="badge">Apothecary Noir</span>
+        <div class="num">— III —</div>
+        <h2 class="name">Upsell <em>de 1 clique</em></h2>
+        <div class="meta">vídeo curto · 2 botões</div>
+        <p class="desc">Clube Vida Leve — 365 dias de cardápios. Página minimalista: vídeo, oferta, sim ou não. Sem distrações.</p>
+        <div class="open"><span>Abrir</span><span class="arrow">→</span></div>
+      </a>
+
+      <a href="members.html" class="step light">
+        <span class="badge" style="color: var(--champagne); border-color: var(--champagne);">Editorial Botanique</span>
+        <div class="num">— IV —</div>
+        <h2 class="name">Área de <em>membros</em></h2>
+        <div class="meta">light mode · trava 8 dias</div>
+        <p class="desc">Onde a promessa é entregue. Parchment, tipografia editorial e os módulos avançados liberados após o oitavo dia.</p>
+        <div class="open"><span>Abrir</span><span class="arrow">→</span></div>
+      </a>
+    </nav>
+
+    <p class="legend">
+      <b>Paleta</b> Forest Emerald · Old Gold · Champagne Ivory · Carbon · Parchment <br/>
+      <b>Tipografia</b> Italiana · Cormorant Garamond · Marcellus SC · Inter
+    </p>
+  </main>
+</body>
+</html>

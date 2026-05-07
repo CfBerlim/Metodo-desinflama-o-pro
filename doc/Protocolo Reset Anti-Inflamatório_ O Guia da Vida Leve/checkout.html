@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<title>Checkout — Método Desinflamação Pro</title>
+<link rel="stylesheet" href="shared/tokens.css" />
+<style>
+  body {
+    background:
+      radial-gradient(ellipse 70% 50% at 50% 0%, #1c1a14 0%, #14130f 35%, #0d0c0a 70%),
+      #0d0c0a;
+    color: var(--ink-noir);
+    min-height: 100vh;
+  }
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 90% 55% at 50% -10%, rgba(216,184,120,0.18), rgba(184,146,63,0.08) 30%, transparent 65%),
+      radial-gradient(ellipse 60% 45% at 50% 35%, rgba(216,184,120,0.10), transparent 60%),
+      radial-gradient(ellipse 70% 60% at 50% 100%, rgba(23,58,40,0.30), transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+  }
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      radial-gradient(rgba(216,184,120,0.025) 1px, transparent 1px),
+      linear-gradient(180deg, transparent 0%, rgba(216,184,120,0.04) 50%, transparent 100%);
+    background-size: 4px 4px, auto;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.7;
+  }
+  .check-top .brand,
+  .sec-title,
+  .item-name,
+  .bump-name,
+  .total-row.grand .value,
+  .item-price {
+    text-shadow: 0 0 22px rgba(216,184,120,0.22);
+  }
+  .bump-card {
+    box-shadow: 0 0 60px -10px rgba(216,184,120,0.28), 0 30px 60px -30px rgba(0,0,0,0.6);
+  }
+  .summary, .form-card {
+    box-shadow: 0 0 80px -20px rgba(216,184,120,0.15), 0 30px 60px -30px rgba(0,0,0,0.5);
+  }
+  .pay-cta {
+    box-shadow:
+      0 0 0 1px rgba(216,184,120,0.25),
+      inset 0 1px 0 rgba(216,184,120,0.3),
+      0 0 60px -10px rgba(216,184,120,0.4),
+      0 30px 60px -20px rgba(23,58,40,0.5) !important;
+  }
+  .page {
+    position: relative;
+    z-index: 1;
+    max-width: 480px;
+    margin: 0 auto;
+    padding: 0 20px 60px;
+  }
+
+  /* Header */
+  .check-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 0 14px;
+    border-bottom: 1px solid var(--line-noir);
+  }
+  .check-top .crest-rules {
+    display: flex; align-items: center; gap: 6px;
+  }
+  .check-top .line { width: 18px; height: 1px; background: var(--gold-500); opacity: 0.6; }
+  .check-top .diamond { width: 4px; height: 4px; background: var(--gold-500); transform: rotate(45deg); }
+  .check-top .brand {
+    font-family: var(--ff-display);
+    font-size: 12px;
+    letter-spacing: 0.32em;
+    color: var(--gold-300);
+    text-transform: uppercase;
+  }
+  .secure-badge {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--ff-smallcaps);
+    font-size: 8px;
+    letter-spacing: 0.32em;
+    color: var(--ink-noir-mute);
+  }
+  .secure-badge svg { width: 12px; height: 12px; }
+
+  /* Stepper */
+  .steps {
+    display: flex;
+    justify-content: center;
+    gap: 22px;
+    padding: 22px 0 28px;
+  }
+  .step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    opacity: 0.4;
+    font-family: var(--ff-smallcaps);
+    font-size: 8px;
+    letter-spacing: 0.32em;
+    color: var(--ink-noir-mute);
+  }
+  .step.active { opacity: 1; color: var(--gold-300); }
+  .step.done { opacity: 0.7; color: var(--gold-400); }
+  .step .dot {
+    width: 8px; height: 8px;
+    background: currentColor;
+    transform: rotate(45deg);
+  }
+
+  /* Section title */
+  .sec-title {
+    font-family: var(--ff-smallcaps);
+    font-size: 9.5px;
+    letter-spacing: 0.42em;
+    color: var(--gold-400);
+    text-align: center;
+    margin: 28px 0 14px;
+  }
+
+  /* Item card resumo */
+  .summary {
+    border: 1px solid var(--line-noir);
+    background: rgba(12,15,16,0.5);
+    padding: 22px 22px 20px;
+  }
+  .item-row {
+    display: grid;
+    grid-template-columns: 64px 1fr auto;
+    gap: 16px;
+    align-items: center;
+    padding: 12px 0;
+  }
+  .item-row + .item-row { border-top: 1px solid rgba(201,162,90,0.08); }
+  .item-thumb {
+    aspect-ratio: 3/4;
+    background:
+      repeating-linear-gradient(135deg, rgba(184,146,63,0.08) 0 4px, transparent 4px 8px),
+      var(--carbon-800);
+    border: 1px solid var(--line-noir-strong);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--gold-500);
+    font-family: var(--ff-smallcaps);
+    font-size: 7px;
+    letter-spacing: 0.28em;
+    text-align: center;
+  }
+  .item-thumb.bump {
+    background:
+      repeating-linear-gradient(45deg, rgba(184,146,63,0.12) 0 3px, transparent 3px 7px),
+      linear-gradient(180deg, var(--emerald-700), var(--carbon-900-solid));
+  }
+  .item-name {
+    font-family: var(--ff-editorial);
+    font-style: italic;
+    font-size: 16px;
+    color: var(--champagne);
+    line-height: 1.25;
+  }
+  .item-meta {
+    font-family: var(--ff-smallcaps);
+    font-size: 8px;
+    letter-spacing: 0.32em;
+    color: var(--ink-noir-faint);
+    margin-top: 4px;
+  }
+  .item-price {
+    font-family: var(--ff-display);
+    font-size: 18px;
+    color: var(--gold-300);
+    text-align: right;
+    white-space: nowrap;
+  }
+  .item-price .small {
+    font-family: var(--ff-smallcaps);
+    display: block;
+    font-size: 8px;
+    color: var(--ink-noir-faint);
+    letter-spacing: 0.3em;
+    margin-top: 2px;
+  }
+
+  .totals {
+    margin-top: 6px;
+    padding-top: 14px;
+    border-top: 1px solid var(--line-noir);
+    display: grid;
+    gap: 6px;
+  }
+  .total-row {
+    display: flex;
+    justify-content: space-between;
+    font-family: var(--ff-smallcaps);
+    font-size: 9px;
+    letter-spacing: 0.32em;
+    color: var(--ink-noir-mute);
+  }
+  .total-row.grand {
+    margin-top: 8px;
+    padding-top: 12px;
+    border-top: 1px dashed var(--line-noir);
+    color: var(--champagne);
+    align-items: baseline;
+  }
+  .total-row.grand .label { font-size: 10px; }
+  .total-row.grand .value {
+    font-family: var(--ff-display);
+    font-size: 24px;
+    letter-spacing: 0.01em;
+    color: var(--gold-300);
+  }
+
+  /* === ORDER BUMP === */
+  .bump-card {
+    margin-top: 22px;
+    border: 1px dashed var(--gold-500);
+    background:
+      linear-gradient(180deg, rgba(184,146,63,0.06), rgba(12,15,16,0.6));
+    padding: 18px 18px 16px;
+    position: relative;
+  }
+  .bump-card::before {
+    content: '⚜ Adicione à sua ordem';
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--carbon-1000);
+    padding: 0 14px;
+    font-family: var(--ff-smallcaps);
+    font-size: 8.5px;
+    letter-spacing: 0.42em;
+    color: var(--gold-400);
+    white-space: nowrap;
+  }
+  .bump-row {
+    display: grid;
+    grid-template-columns: 24px 64px 1fr;
+    gap: 14px;
+    align-items: center;
+  }
+  .bump-check {
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    border: 1px solid var(--gold-500);
+    background: var(--carbon-900-solid);
+    cursor: pointer;
+    position: relative;
+    margin: 0;
+  }
+  .bump-check:checked {
+    background: var(--gold-500);
+  }
+  .bump-check:checked::after {
+    content: '';
+    position: absolute;
+    top: 2px; left: 5px;
+    width: 5px; height: 10px;
+    border-right: 2px solid var(--carbon-1000);
+    border-bottom: 2px solid var(--carbon-1000);
+    transform: rotate(45deg);
+  }
+  .bump-name {
+    font-family: var(--ff-editorial);
+    font-style: italic;
+    font-size: 16px;
+    color: var(--champagne);
+    line-height: 1.25;
+  }
+  .bump-desc {
+    font-family: var(--ff-body);
+    font-size: 12px;
+    color: var(--ink-noir-mute);
+    line-height: 1.5;
+    margin-top: 4px;
+  }
+  .bump-price {
+    font-family: var(--ff-display);
+    font-size: 18px;
+    color: var(--gold-300);
+    margin-top: 6px;
+  }
+  .bump-price .was {
+    font-family: var(--ff-editorial);
+    font-style: italic;
+    font-size: 13px;
+    color: var(--ink-noir-mute);
+    text-decoration: line-through;
+    margin-right: 8px;
+  }
+
+  /* === FORM === */
+  .form-card {
+    margin-top: 28px;
+    border: 1px solid var(--line-noir);
+    background: rgba(12,15,16,0.5);
+    padding: 24px 22px 22px;
+  }
+  .form-grid {
+    display: grid;
+    gap: 16px;
+  }
+  .form-grid.two { grid-template-columns: 1fr 1fr; gap: 12px; }
+  label {
+    display: block;
+    font-family: var(--ff-smallcaps);
+    font-size: 8.5px;
+    letter-spacing: 0.32em;
+    color: var(--gold-400);
+    margin-bottom: 8px;
+  }
+  input[type="text"], input[type="email"], input[type="tel"] {
+    width: 100%;
+    background: var(--carbon-1000);
+    border: 1px solid var(--line-noir-strong);
+    padding: 14px 14px;
+    color: var(--champagne);
+    font-family: var(--ff-body);
+    font-size: 14px;
+    letter-spacing: 0.01em;
+    transition: border-color 0.3s;
+  }
+  input:focus {
+    outline: none;
+    border-color: var(--gold-500);
+    box-shadow: 0 0 0 1px rgba(201,162,90,0.2);
+  }
+  input::placeholder { color: var(--ink-noir-faint); }
+
+  /* Tabs forma de pagamento */
+  .pay-tabs {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    border: 1px solid var(--line-noir-strong);
+  }
+  .pay-tab {
+    padding: 16px 12px;
+    background: transparent;
+    border: none;
+    color: var(--ink-noir-mute);
+    font-family: var(--ff-smallcaps);
+    font-size: 9px;
+    letter-spacing: 0.32em;
+    cursor: pointer;
+    text-align: center;
+    transition: all 0.3s;
+    border-right: 1px solid var(--line-noir-strong);
+  }
+  .pay-tab:last-child { border-right: none; }
+  .pay-tab.active {
+    background: rgba(184,146,63,0.08);
+    color: var(--gold-300);
+  }
+
+  /* Parcelas select-like */
+  .installments-select {
+    width: 100%;
+    background: var(--carbon-1000);
+    border: 1px solid var(--line-noir-strong);
+    padding: 14px;
+    color: var(--champagne);
+    font-family: var(--ff-body);
+    font-size: 14px;
+    cursor: pointer;
+    appearance: none;
+    background-image: linear-gradient(45deg, transparent 50%, var(--gold-400) 50%),
+                      linear-gradient(135deg, var(--gold-400) 50%, transparent 50%);
+    background-position: calc(100% - 18px) center, calc(100% - 12px) center;
+    background-size: 6px 6px;
+    background-repeat: no-repeat;
+  }
+
+  /* === CTA === */
+  .pay-cta {
+    margin-top: 24px;
+    width: 100%;
+    padding: 22px 24px;
+    background: linear-gradient(180deg, var(--emerald-500), var(--emerald-700));
+    color: var(--champagne);
+    border: 1px solid var(--gold-500);
+    text-decoration: none;
+    font-family: var(--ff-smallcaps);
+    font-size: 13px;
+    letter-spacing: 0.32em;
+    text-align: center;
+    cursor: pointer;
+    display: block;
+    transition: all 0.4s var(--ease-elegant);
+    box-shadow:
+      0 0 0 1px rgba(201,162,90,0.15),
+      inset 0 1px 0 rgba(201,162,90,0.2),
+      0 20px 40px -20px rgba(184,146,63,0.4);
+  }
+  .pay-cta:hover {
+    background: linear-gradient(180deg, var(--emerald-400), var(--emerald-600));
+    transform: translateY(-1px);
+  }
+
+  /* Trust strip */
+  .trust {
+    margin-top: 22px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    text-align: center;
+  }
+  .trust-item {
+    padding: 14px 8px;
+    border: 1px solid var(--line-noir);
+  }
+  .trust-item svg { width: 16px; height: 16px; color: var(--gold-400); margin-bottom: 6px; }
+  .trust-label {
+    font-family: var(--ff-smallcaps);
+    font-size: 7.5px;
+    letter-spacing: 0.32em;
+    color: var(--ink-noir-mute);
+    line-height: 1.3;
+  }
+
+  /* Garantia compact */
+  .guarantee-strip {
+    margin-top: 24px;
+    padding: 20px;
+    border: 1px solid var(--line-noir);
+    display: grid;
+    grid-template-columns: 56px 1fr;
+    gap: 16px;
+    align-items: center;
+  }
+  .guarantee-strip svg { width: 56px; height: 56px; color: var(--gold-400); }
+  .guarantee-strip .gtitle {
+    font-family: var(--ff-display);
+    font-size: 18px;
+    color: var(--champagne);
+    margin-bottom: 4px;
+  }
+  .guarantee-strip .gbody {
+    font-family: var(--ff-editorial);
+    font-style: italic;
+    font-size: 13px;
+    color: var(--ink-noir-mute);
+    line-height: 1.4;
+  }
+
+  /* Footer mini */
+  .mini-foot {
+    margin-top: 32px;
+    text-align: center;
+    font-family: var(--ff-smallcaps);
+    font-size: 8px;
+    letter-spacing: 0.32em;
+    color: var(--ink-noir-faint);
+  }
+
+  @media (min-width: 768px) {
+    .page { max-width: 720px; padding: 0 40px 80px; }
+  }
+</style>
+</head>
+<body>
+  <main class="page" data-screen-label="02 Checkout com Order Bump">
+
+    <header class="check-top">
+      <div class="crest-rules" style="display:flex;align-items:center;gap:8px;">
+        <span class="line"></span>
+        <span class="diamond"></span>
+        <span class="brand">Método Desinflamação Pro</span>
+      </div>
+      <div class="secure-badge">
+        <svg viewBox="0 0 16 16" fill="none">
+          <path d="M8 1 L13 3 V8 C13 11.5 10.5 14 8 15 C5.5 14 3 11.5 3 8 V3 Z" stroke="currentColor" stroke-width="0.8"/>
+          <path d="M5.5 8 L7.2 9.7 L10.5 6.3" stroke="currentColor" stroke-width="0.8" fill="none"/>
+        </svg>
+        Pagamento seguro
+      </div>
+    </header>
+
+    <!-- Stepper -->
+    <div class="steps">
+      <div class="step done"><span class="dot"></span><span>Oferta</span></div>
+      <div class="step active"><span class="dot"></span><span>Pagamento</span></div>
+      <div class="step"><span class="dot"></span><span>Acesso</span></div>
+    </div>
+
+    <!-- Resumo -->
+    <div class="sec-title">— A sua ordem —</div>
+    <section class="summary">
+      <div class="item-row">
+        <div class="item-thumb">RESET<br/>protocolo</div>
+        <div>
+          <div class="item-name">Protocolo Reset<br/>Anti-Inflamatório</div>
+          <div class="item-meta">26 aulas · 5 módulos · vitalício</div>
+        </div>
+        <div class="item-price">
+          R$&nbsp;297,00
+          <span class="small">ou 12× 29,70</span>
+        </div>
+      </div>
+      <div class="item-row" id="bumpRow" style="display: none;">
+        <div class="item-thumb bump">CHÁS<br/>blends</div>
+        <div>
+          <div class="item-name">A Xícara de Ouro<br/>15 Blends Termogênicos</div>
+          <div class="item-meta">Order bump · pdf + receitas</div>
+        </div>
+        <div class="item-price">R$&nbsp;27,90</div>
+      </div>
+
+      <div class="totals">
+        <div class="total-row"><span>Subtotal</span><span id="subtotal">R$ 297,00</span></div>
+        <div class="total-row"><span>Frete</span><span>Digital</span></div>
+        <div class="total-row grand"><span class="label">Total à vista</span><span class="value" id="grandTotal">R$ 297,00</span></div>
+      </div>
+    </section>
+
+    <!-- ORDER BUMP -->
+    <div class="bump-card">
+      <div class="bump-row">
+        <input type="checkbox" id="bumpCheck" class="bump-check" />
+        <div class="item-thumb bump" style="aspect-ratio: 3/4;">CHÁS<br/>blends</div>
+        <div>
+          <div class="bump-name">+ A Xícara de Ouro</div>
+          <div class="bump-desc">15 blends termogênicos para potencializar a desinflamação. Ingredientes da feira, prontos em 3 minutos.</div>
+          <div class="bump-price"><span class="was">R$ 67,00</span>R$ 27,90</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DADOS PESSOAIS -->
+    <div class="sec-title">— Seus dados —</div>
+    <section class="form-card">
+      <div class="form-grid">
+        <div>
+          <label for="fullname">Nome completo</label>
+          <input type="text" id="fullname" placeholder="Como deve aparecer no seu acesso" />
+        </div>
+        <div>
+          <label for="email">E-mail de acesso</label>
+          <input type="email" id="email" placeholder="seu@email.com" />
+        </div>
+        <div class="form-grid two">
+          <div>
+            <label for="cpf">CPF</label>
+            <input type="text" id="cpf" placeholder="000.000.000-00" />
+          </div>
+          <div>
+            <label for="phone">Celular</label>
+            <input type="tel" id="phone" placeholder="(00) 00000-0000" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PAGAMENTO -->
+    <div class="sec-title">— Forma de pagamento —</div>
+    <section class="form-card">
+      <div class="pay-tabs">
+        <button class="pay-tab active" data-method="card">Cartão de crédito</button>
+        <button class="pay-tab" data-method="pix">Pix</button>
+      </div>
+
+      <div id="cardFields" class="form-grid" style="margin-top: 18px;">
+        <div>
+          <label for="cardnum">Número do cartão</label>
+          <input type="text" id="cardnum" placeholder="0000 0000 0000 0000" />
+        </div>
+        <div>
+          <label for="cardname">Nome impresso no cartão</label>
+          <input type="text" id="cardname" placeholder="Como está no cartão" />
+        </div>
+        <div class="form-grid two">
+          <div>
+            <label for="exp">Validade</label>
+            <input type="text" id="exp" placeholder="MM/AA" />
+          </div>
+          <div>
+            <label for="cvv">CVV</label>
+            <input type="text" id="cvv" placeholder="000" />
+          </div>
+        </div>
+        <div>
+          <label for="parc">Parcelas</label>
+          <select class="installments-select" id="parc">
+            <option>12× de R$ 29,70 sem juros</option>
+            <option>10× de R$ 35,64 sem juros</option>
+            <option>6× de R$ 59,40 sem juros</option>
+            <option>3× de R$ 118,80 sem juros</option>
+            <option>1× de R$ 297,00 à vista</option>
+          </select>
+        </div>
+      </div>
+
+      <div id="pixFields" style="display:none; margin-top:18px; text-align:center; padding:24px 0;">
+        <div style="width: 140px; height: 140px; margin: 0 auto 16px; border: 1px solid var(--line-noir-strong); display:grid; place-items:center; color: var(--gold-400); font-family: var(--ff-smallcaps); font-size: 8px; letter-spacing: 0.3em; background: repeating-linear-gradient(0deg, var(--carbon-800) 0 6px, var(--carbon-1000) 6px 12px), repeating-linear-gradient(90deg, var(--carbon-800) 0 6px, var(--carbon-1000) 6px 12px); background-blend-mode: difference;">
+          QR · CODE
+        </div>
+        <div class="item-meta">— Aponte a câmera do seu app bancário —</div>
+      </div>
+
+      <button class="pay-cta" id="payBtn">
+        Confirmar e acessar →
+      </button>
+    </section>
+
+    <!-- TRUST -->
+    <div class="trust">
+      <div class="trust-item">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M12 2 L20 6 V12 C20 17 16 21 12 22 C8 21 4 17 4 12 V6 Z" stroke="currentColor" stroke-width="1"/><path d="M8 12 L11 15 L16 9" stroke="currentColor" stroke-width="1.2" fill="none"/></svg>
+        <div class="trust-label">Compra<br/>protegida</div>
+      </div>
+      <div class="trust-item">
+        <svg viewBox="0 0 24 24" fill="none"><rect x="3" y="6" width="18" height="14" stroke="currentColor" stroke-width="1"/><path d="M3 10 H21" stroke="currentColor" stroke-width="1"/></svg>
+        <div class="trust-label">Cartão<br/>criptografado</div>
+      </div>
+      <div class="trust-item">
+        <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1"/><path d="M12 7 V12 L15 14" stroke="currentColor" stroke-width="1"/></svg>
+        <div class="trust-label">Acesso<br/>imediato</div>
+      </div>
+    </div>
+
+    <!-- Garantia -->
+    <div class="guarantee-strip">
+      <svg viewBox="0 0 56 56" fill="none">
+        <circle cx="28" cy="28" r="26" stroke="currentColor" stroke-width="0.6"/>
+        <circle cx="28" cy="28" r="22" stroke="currentColor" stroke-width="0.4" opacity="0.6"/>
+        <text x="28" y="26" text-anchor="middle" font-family="Italiana, serif" font-size="18" fill="currentColor">7</text>
+        <text x="28" y="36" text-anchor="middle" font-family="Marcellus SC, serif" font-size="4" letter-spacing="1.5" fill="currentColor">DIAS</text>
+      </svg>
+      <div>
+        <div class="gtitle">Garantia incondicional</div>
+        <div class="gbody">Sete dias para experimentar. Não cumpriu? Devolvemos cada centavo.</div>
+      </div>
+    </div>
+
+    <div class="mini-foot">
+      Vida Leve Editorial Ltda · CNPJ 00.000.000/0001-00
+    </div>
+  </main>
+
+  <script>
+    const bumpCheck = document.getElementById('bumpCheck');
+    const bumpRow = document.getElementById('bumpRow');
+    const subtotalEl = document.getElementById('subtotal');
+    const grandEl = document.getElementById('grandTotal');
+
+    function brl(n) {
+      return 'R$ ' + n.toFixed(2).replace('.', ',');
+    }
+
+    function updateTotal() {
+      const base = 297.00;
+      const bump = bumpCheck.checked ? 27.90 : 0;
+      const total = base + bump;
+      bumpRow.style.display = bumpCheck.checked ? 'grid' : 'none';
+      subtotalEl.textContent = brl(total);
+      grandEl.textContent = brl(total);
+    }
+    bumpCheck.addEventListener('change', updateTotal);
+
+    // tabs
+    const tabs = document.querySelectorAll('.pay-tab');
+    const cardFields = document.getElementById('cardFields');
+    const pixFields = document.getElementById('pixFields');
+    tabs.forEach(t => t.addEventListener('click', () => {
+      tabs.forEach(x => x.classList.remove('active'));
+      t.classList.add('active');
+      const m = t.dataset.method;
+      cardFields.style.display = m === 'card' ? 'grid' : 'none';
+      pixFields.style.display = m === 'pix' ? 'block' : 'none';
+    }));
+
+    document.getElementById('payBtn').addEventListener('click', () => {
+      window.location.href = 'upsell.html';
+    });
+  </script>
+</body>
+</html>
