@@ -1,0 +1,114 @@
+/* ==========================================================================
+   IDENTIDADE VISUAL BIO-PREMIUM — TOKENS CANÔNICOS
+   Método Desinflamação Pro
+   Spec: docs/superpowers/specs/2026-05-07-identidade-visual-bio-premium-design.md
+   ========================================================================== */
+
+:root {
+  /* DNA — núcleo da paleta, presente em todos os modos */
+  --core-emerald: #0F3D2E;
+  --core-gold: #A88B4A;
+  --core-ivory: #EBE3D0;
+
+  /* Tipografia (famílias) */
+  --font-display: 'Italiana', serif;
+  --font-editorial: 'Cormorant Garamond', serif;
+  --font-marca: 'Marcellus SC', serif;
+  --font-body: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+
+  /* Escala tipográfica (rem, base 16px) */
+  --size-display-xxl: 6rem;     /* 96px — Hero hero, uma palavra dominante */
+  --size-display-xl: 4rem;      /* 64px — Headline principal */
+  --size-display-l: 3rem;       /* 48px — Headline secundária */
+  --size-display-m: 2.25rem;    /* 36px — Section titles */
+  --size-display-s: 1.75rem;    /* 28px — Card titles */
+  --size-editorial-l: 1.375rem; /* 22px — Lede, pull-quote */
+  --size-editorial-m: 1.125rem; /* 18px — Subtítulo italic */
+  --size-body-l: 1.0625rem;     /* 17px — Corpo principal */
+  --size-body-m: 0.9375rem;     /* 15px — Corpo secundário */
+  --size-body-s: 0.8125rem;     /* 13px — Captions */
+  --size-eyebrow: 0.6875rem;    /* 11px — Eyebrows */
+  --size-micro: 0.5625rem;      /*  9px — Tags de marca */
+
+  /* Espaçamento (8px base) */
+  --space-xs: 4px;
+  --space-s: 8px;
+  --space-m: 16px;
+  --space-l: 24px;
+  --space-xl: 40px;
+  --space-xxl: 64px;
+  --space-xxxl: 96px;
+
+  /* Letter-spacing canônicos */
+  --tracking-display: 0.015em;
+  --tracking-eyebrow: 0.32em;
+  --tracking-micro: 0.5em;
+
+  /* Bordas */
+  --radius-card: 4px;
+  --radius-button: 2px;
+  --hairline-width: 1px;
+}
+
+/* ==========================================================================
+   MODO I — HERITAGE (marca-mãe / institucional)
+   ========================================================================== */
+[data-mode="heritage"] {
+  --bg-primary: #0F3D2E;
+  --bg-lift: #163F31;
+  --bg-deep: #0A3024;
+  --text-primary: #EBE3D0;
+  --text-muted: rgba(235, 227, 208, 0.75);
+  --accent: #A88B4A;
+  --accent-muted: rgba(168, 139, 74, 0.55);
+  --hairline: rgba(168, 139, 74, 0.22);
+
+  --logo-accent: #A88B4A;
+  --logo-text: #EBE3D0;
+}
+
+/* ==========================================================================
+   MODO II — APOTHECARY (VSL / página de vendas)
+   ========================================================================== */
+[data-mode="apothecary"] {
+  --bg-primary: #07100C;
+  --bg-lift: #0A1410;
+  --bg-deep: #050A07;
+  --text-primary: #EFE7D2;
+  --text-muted: rgba(239, 231, 210, 0.72);
+  --accent: #C9A876;
+  --accent-muted: rgba(201, 168, 118, 0.55);
+  --hairline: rgba(201, 168, 118, 0.14);
+
+  --logo-accent: #C9A876;
+  --logo-text: #EFE7D2;
+}
+
+/* ==========================================================================
+   MODO III — BOTANIQUE (PDFs / materiais escritos)
+   ========================================================================== */
+[data-mode="botanique"] {
+  --bg-primary: #F2ECDD;
+  --bg-lift: #E8DFC8;
+  --bg-deep: #D8CEB4;
+  --text-primary: #1F3D2E;
+  --text-muted: rgba(31, 61, 46, 0.78);
+  --accent: #9C7C42;
+  --accent-muted: rgba(31, 61, 46, 0.55);
+  --hairline: rgba(31, 61, 46, 0.18);
+
+  --logo-accent: #9C7C42;
+  --logo-text: #1F3D2E;
+}
+
+/* ==========================================================================
+   APLICAÇÃO BASE — qualquer container com data-mode herda automaticamente
+   ========================================================================== */
+[data-mode] {
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: var(--size-body-l);
+  line-height: 1.65;
+}
