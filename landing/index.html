@@ -33,11 +33,62 @@
 </head>
 <body data-mode="apothecary">
   <main>
-    <!-- Hero (Task 3) -->
-    <!-- Below-fold (Tasks 5-9) -->
+    <!-- ============================================================
+         HERO — fase imersão (sempre visível)
+         ============================================================ -->
+    <section class="hero">
+      <div class="hero-topbar">
+        <div class="mini-lockup">
+          <span class="mini-monogram">M</span>
+          <span class="mini-wordmark">Desinflamação</span>
+        </div>
+      </div>
+
+      <div class="hero-content">
+        <div class="hero-eyebrow" id="hero-eyebrow"></div>
+        <h1 class="hero-manchete" id="hero-manchete"></h1>
+        <p class="hero-subtitulo" id="hero-subtitulo"></p>
+
+        <div class="hero-video-wrapper">
+          <div class="hero-video-frame">
+            <iframe
+              id="vsl-player"
+              src=""
+              allow="autoplay; fullscreen; picture-in-picture"
+              allowfullscreen
+              title="VSL — Método Desinflamação Pro"></iframe>
+          </div>
+          <div class="hero-lock-note" id="hero-lock-note" aria-live="polite"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         BELOW-FOLD — fase pitch (revelado aos 4:00)
+         ============================================================ -->
+    <div id="below-fold" tabindex="-1">
+      <!-- Seções I-V serão adicionadas em Tasks 5-9 -->
+    </div>
   </main>
 
-  <!-- Scripts (Vimeo SDK + reveal + tracking) — adicionados em tasks subsequentes -->
   <script src="content.js"></script>
+
+  <!-- Bind hero copy + iframe src via content.js -->
+  <script>
+    (function() {
+      const c = window.LANDING_COPY.hero;
+      document.getElementById('hero-eyebrow').textContent = c.eyebrow;
+      document.getElementById('hero-manchete').textContent = c.manchete;
+      document.getElementById('hero-subtitulo').textContent = c.subtitulo;
+      document.getElementById('hero-lock-note').textContent = c.lockNote;
+
+      const cfg = window.LANDING_CONFIG;
+      const player = document.getElementById('vsl-player');
+      player.src = `https://player.vimeo.com/video/${cfg.VIDEO_ID}?title=0&byline=0&portrait=0&badge=0&color=C9A876&autopause=0&dnt=1`;
+    })();
+  </script>
+
+  <!-- Vimeo Player SDK (preparação para reveal.js — Task 4) -->
+  <script src="https://player.vimeo.com/api/player.js" defer></script>
 </body>
 </html>
