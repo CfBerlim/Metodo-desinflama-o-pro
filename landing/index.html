@@ -15,8 +15,8 @@
 
 <link rel="icon" type="image/svg+xml" href="../identity/logo/favicon.svg">
 
-<link rel="stylesheet" href="../identity/tokens.css?v=20260507g" />
-<link rel="stylesheet" href="style.css?v=20260507g" />
+<link rel="stylesheet" href="../identity/tokens.css?v=20260507i" />
+<link rel="stylesheet" href="style.css?v=20260507i" />
 </head>
 <body>
   <main class="page" data-screen-label="01 Landing Page (VSL Apothecary Noir)">
@@ -51,21 +51,18 @@
       </p>
     </section>
 
-    <!-- Player -->
+    <!-- Player com Vimeo iframe (vídeo real) dentro da moldura cinematográfica -->
     <section class="player-wrap">
       <div class="player-frame" id="player">
         <span class="corner-tr"></span>
         <span class="corner-bl"></span>
-        <div class="player-content" id="playerContent">
-          <div class="player-thumb-grid"></div>
-          <div class="player-vignette"></div>
-          <button class="play-btn" id="playBtn" aria-label="Iniciar transmissão">
-            <span class="play-circle">
-              <span class="play-triangle"></span>
-            </span>
-            <span class="play-label">Iniciar transmissão</span>
-          </button>
-        </div>
+        <iframe
+          id="vimeoPlayer"
+          src=""
+          allow="autoplay; fullscreen; picture-in-picture"
+          allowfullscreen
+          style="position:absolute;inset:0;width:100%;height:100%;border:0;background:#000;"
+          title="VSL — Método Desinflamação Pro"></iframe>
       </div>
 
       <div class="progress-frame">
@@ -77,7 +74,7 @@
       </div>
 
       <div class="player-meta" id="playerMeta">
-        Toque para iniciar a transmissão
+        Capítulo I · O incêndio invisível
       </div>
     </section>
 
@@ -233,13 +230,15 @@
     <button id="resetBtn">Reiniciar</button>
   </div>
 
-  <script src="content.js?v=20260507h"></script>
+  <script src="content.js?v=20260507i"></script>
+  <script src="https://player.vimeo.com/api/player.js"></script>
 
-  <!-- Reveal logic INLINE (resiliente a cache de arquivos externos) -->
+  <!-- Reveal logic INLINE com Vimeo Player SDK (vídeo real + reveal aos 4:00) -->
   <script>
   (function() {
-    // Bind do CTA
     const cfg = window.LANDING_CONFIG || {};
+
+    // Bind do CTA
     const cta = document.getElementById('ctaButton');
     if (cta && cfg.KIWIFY_CHECKOUT_URL) {
       cta.href = cfg.KIWIFY_CHECKOUT_URL;
@@ -249,28 +248,22 @@
       });
     }
 
-    // === Player simulado de VSL ===
-    const STORAGE_KEY = 'mdp:vsl:time';
-    const TOTAL_SECONDS = 480;
-    const REVEAL_AT = 240;
+    // === Configurar Vimeo iframe + listener ===
+    const REVEAL_AT = cfg.REVEAL_THRESHOLD_SECONDS || 240;
+    const VIDEO_ID = cfg.VIDEO_ID || '76979871';
 
-    const player = document.getElementById('player');
-    const playerContent = document.getElementById('playerContent');
-    const playBtn = document.getElementById('playBtn');
+    const iframe = document.getElementById('vimeoPlayer');
     const progressFill = document.getElementById('progressFill');
     const timeDisplay = document.getElementById('timeDisplay');
     const playerMeta = document.getElementById('playerMeta');
     const revealZone = document.getElementById('revealZone');
 
-    if (!player) {
-      console.warn('[reveal] #player não encontrado. Abortado.');
-      return;
+    if (iframe) {
+      iframe.src = 'https://player.vimeo.com/video/' + VIDEO_ID + '?title=0&byline=0&portrait=0&badge=0&color=C9A876&autopause=0&dnt=1';
     }
 
-    let currentTime = parseInt(localStorage.getItem(STORAGE_KEY) || '0', 10);
-    let playing = false;
-    let interval = null;
     let revealFiredOnce = false;
+    let videoDuration = 0;
 
     const metaScript = [
       { at: 0,   text: 'Capítulo I · O incêndio invisível' },
@@ -288,10 +281,10 @@
       return m + ':' + r;
     }
 
-    function updateMeta() {
+    function updateMeta(currentTime) {
       let active = metaScript[0];
       for (const m of metaScript) if (currentTime >= m.at) active = m;
-      if (playerMeta.dataset.last !== active.text) {
+      if (playerMeta && playerMeta.dataset.last !== active.text) {
         playerMeta.style.opacity = '0';
         setTimeout(() => {
           playerMeta.textContent = active.text;
@@ -301,94 +294,105 @@
       }
     }
 
-    function tick() {
-      currentTime = Math.min(currentTime + 1, TOTAL_SECONDS);
-      localStorage.setItem(STORAGE_KEY, currentTime);
-      render();
-      if (currentTime >= TOTAL_SECONDS) pause();
+    function fireReveal(source) {
+      if (revealFiredOnce) return;
+      revealFiredOnce = true;
+      revealZone.classList.add('unlocked');
+      revealZone.setAttribute('aria-hidden', 'false');
+      console.info('[reveal] DISPARADO. source=' + source);
+      if (window.fbq) { try { fbq('trackCustom', 'VSLReveal', { source }); } catch(_) {} }
+      if (window.dataLayer) window.dataLayer.push({ event: 'vsl_reveal', source });
     }
 
-    function render() {
-      progressFill.style.width = (currentTime / TOTAL_SECONDS * 100) + '%';
-      timeDisplay.textContent = fmt(currentTime);
-      updateMeta();
-      if (currentTime >= REVEAL_AT) {
-        revealZone.classList.add('unlocked');
-        revealZone.setAttribute('aria-hidden', 'false');
-        if (!revealFiredOnce) {
-          revealFiredOnce = true;
-          if (window.fbq) { try { fbq('trackCustom', 'VSLReveal'); } catch(_) {} }
-          if (window.dataLayer) window.dataLayer.push({ event: 'vsl_reveal' });
-        }
-      } else {
-        revealZone.classList.remove('unlocked');
-        revealZone.setAttribute('aria-hidden', 'true');
+    // Threshold efetivo: se vídeo for menor que REVEAL_AT, ajusta pra 95% da duração
+    function effectiveThreshold() {
+      if (videoDuration > 0 && videoDuration < REVEAL_AT) {
+        return Math.max(videoDuration * 0.95, 5);
       }
+      return REVEAL_AT;
     }
 
-    function play() {
-      if (playing) return;
-      playing = true;
-      player.classList.add('playing');
-      interval = setInterval(tick, 1000);
-      if (window.fbq) { try { fbq('trackCustom', 'VSLPlayed'); } catch(_) {} }
-      if (window.dataLayer) window.dataLayer.push({ event: 'vsl_played' });
-    }
-    function pause() {
-      playing = false;
-      player.classList.remove('playing');
-      clearInterval(interval);
+    function updateProgress(currentTime, total) {
+      const pctTotal = total || (REVEAL_AT * 2);
+      progressFill.style.width = Math.min(currentTime / pctTotal * 100, 100) + '%';
+      timeDisplay.textContent = fmt(currentTime);
+      updateMeta(currentTime);
     }
 
-    if (playBtn) playBtn.addEventListener('click', play);
-    if (playerContent) {
-      playerContent.addEventListener('click', (e) => {
-        if (e.target.closest('.play-btn')) return;
-        if (playing) pause(); else play();
+    // Atalhos via URL
+    const params = new URLSearchParams(location.search);
+
+    // ?reveal=true revela imediatamente sem esperar o vídeo
+    if (params.has('reveal')) {
+      fireReveal('url_param');
+    }
+
+    // ?dev=true mostra controles de skip/reset
+    const devControls = document.getElementById('devControls');
+    if (params.has('dev')) devControls?.classList.add('visible');
+    document.getElementById('skipBtn')?.addEventListener('click', () => fireReveal('dev_skip'));
+    document.getElementById('resetBtn')?.addEventListener('click', () => {
+      revealFiredOnce = false;
+      revealZone.classList.remove('unlocked');
+      progressFill.style.width = '0%';
+      timeDisplay.textContent = '00:00';
+      if (playerMeta) playerMeta.textContent = 'Capítulo I · O incêndio invisível';
+    });
+
+    // Vimeo Player SDK — listener de timeupdate
+    function attachVimeo() {
+      if (typeof Vimeo === 'undefined') {
+        attachVimeo.attempts = (attachVimeo.attempts || 0) + 1;
+        if (attachVimeo.attempts > 30) {
+          console.warn('[reveal] Vimeo SDK não carregou. Fallback timer ativo.');
+          // Fallback: setTimeout 6 min revela mesmo assim
+          setTimeout(() => fireReveal('fallback_no_sdk'), 360_000);
+          return;
+        }
+        setTimeout(attachVimeo, 200);
+        return;
+      }
+
+      if (!iframe) return;
+      const player = new Vimeo.Player(iframe);
+      console.info('[reveal] Vimeo Player criado, listeners ativos.');
+
+      player.getDuration().then(d => {
+        videoDuration = d;
+        console.info('[reveal] Duração do vídeo: ' + d.toFixed(1) + 's. Threshold efetivo: ' + effectiveThreshold().toFixed(1) + 's.');
+      }).catch(err => console.warn('[reveal] getDuration falhou:', err));
+
+      player.on('play', () => {
+        console.info('[reveal] vídeo: play');
+        if (window.fbq) { try { fbq('trackCustom', 'VSLPlayed'); } catch(_) {} }
+        if (window.dataLayer) window.dataLayer.push({ event: 'vsl_played' });
+      });
+
+      player.on('timeupdate', (data) => {
+        updateProgress(data.seconds, videoDuration);
+        if (data.seconds >= effectiveThreshold()) fireReveal('timeupdate');
+      });
+
+      player.on('seeked', (data) => {
+        if (data.seconds >= effectiveThreshold()) fireReveal('seeked');
+      });
+
+      player.on('ended', () => {
+        console.info('[reveal] vídeo: ended');
+        fireReveal('video_ended');
       });
     }
+    attachVimeo();
 
-    render();
-    if (currentTime > 0 && currentTime < TOTAL_SECONDS) {
-      player.classList.add('playing');
-      if (playerMeta) playerMeta.style.opacity = '1';
-    }
+    // Safety net final: se nada disparar em 6 min, revela
+    setTimeout(() => {
+      if (!revealFiredOnce) fireReveal('fallback_timeout');
+    }, 360_000);
 
-    // Dev controls — visíveis com ?dev=true
-    const devControls = document.getElementById('devControls');
-    const params = new URLSearchParams(location.search);
-    if (params.has('dev')) devControls?.classList.add('visible');
-
-    document.getElementById('skipBtn')?.addEventListener('click', () => {
-      currentTime = REVEAL_AT;
-      localStorage.setItem(STORAGE_KEY, currentTime);
-      play();
-      render();
-    });
-    document.getElementById('resetBtn')?.addEventListener('click', () => {
-      pause();
-      currentTime = 0;
-      localStorage.setItem(STORAGE_KEY, 0);
-      render();
-      if (playerMeta) {
-        playerMeta.textContent = 'Toque para iniciar a transmissão';
-        playerMeta.dataset.last = '';
-      }
-      player.classList.remove('playing');
-    });
-
-    // Atalho extra: ?reveal=true revela imediatamente sem precisar tocar play
-    if (params.has('reveal')) {
-      currentTime = REVEAL_AT;
-      localStorage.setItem(STORAGE_KEY, currentTime);
-      render();
-    }
-
-    // Indicador visual de que o JS rodou (debug)
-    console.info('[reveal] inicializado. currentTime=' + currentTime + 's. dev=' + params.has('dev'));
+    console.info('[reveal] inicializado. dev=' + params.has('dev') + ' reveal=' + params.has('reveal'));
   })();
   </script>
 
-  <script src="tracking.js?v=20260507h" defer></script>
+  <script src="tracking.js?v=20260507i" defer></script>
 </body>
 </html>
