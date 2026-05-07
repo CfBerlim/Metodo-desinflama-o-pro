@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" role="img" aria-label="Método Desinflamação · Monograma">
+  <title>Método Desinflamação · Monograma M</title>
+  <desc>M em Italiana dentro de moldura dupla circular. Selo da marca.</desc>
+  <style>
+    .accent { fill: none; stroke: var(--logo-accent, #A88B4A); }
+    .accent-text { fill: var(--logo-accent, #A88B4A); }
+    .italiana { font-family: 'Italiana', serif; font-weight: 400; }
+  </style>
+
+  <!-- Círculo externo: diâmetro 110, centrado em 60,60. Raio 55, opacidade 0.5 -->
+  <circle class="accent" cx="60" cy="60" r="55" stroke-width="1" opacity="0.5"/>
+
+  <!-- Círculo interno: inset de 6, raio 49, opacidade 0.18 -->
+  <circle class="accent" cx="60" cy="60" r="49" stroke-width="1" opacity="0.18"/>
+
+  <!-- Letra M centralizada. Italiana font-size 56, baseline ajustada para centro óptico -->
+  <text class="accent-text italiana" x="60" y="80" text-anchor="middle" font-size="56">M</text>
+</svg>
