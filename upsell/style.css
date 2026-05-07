@@ -328,3 +328,42 @@ body::after {
   .offer-product { font-size: 36px; }
   .price-installment-up { font-size: 64px; }
 }
+
+/* === PROGRESS BAR + LOCK NOTE === */
+.upsell-progress {
+  margin-top: 12px;
+  display: flex; align-items: center; gap: 10px;
+  color: var(--ink-noir-faint);
+  font-family: var(--ff-smallcaps);
+  font-size: 9px;
+  letter-spacing: 0.3em;
+}
+.upsell-progress-track { flex: 1; height: 1px; background: rgba(216,184,120,0.18); position: relative; }
+.upsell-progress-fill {
+  position: absolute; inset: 0 auto 0 0;
+  width: 0%;
+  background: linear-gradient(90deg, var(--gold-500), var(--gold-200));
+  transition: width 0.4s linear;
+  box-shadow: 0 0 8px rgba(216,184,120,0.6);
+}
+.upsell-lock-note {
+  margin: 12px 0 28px;
+  font-family: var(--ff-editorial);
+  font-style: italic;
+  font-size: 13px;
+  color: rgba(216,184,120,0.78);
+  transition: opacity 400ms ease-out;
+}
+
+/* === REVEAL — escondido ate 1:30 ou ?reveal=true === */
+#upsellReveal {
+  display: none;
+}
+#upsellReveal.unlocked {
+  display: block;
+  animation: upsellRevealUnlock 1.4s var(--ease-dramatic) both;
+}
+@keyframes upsellRevealUnlock {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}

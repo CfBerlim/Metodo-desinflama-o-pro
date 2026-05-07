@@ -48,57 +48,72 @@
     <div class="upsell-player">
       <span class="upsell-corner-tr"></span>
       <span class="upsell-corner-bl"></span>
-      <div class="content">
-        <div class="grid-bg"></div>
-        <button class="upsell-play-btn" id="upPlayBtn">
-          <span class="upsell-play-circle"><span class="upsell-play-tri"></span></span>
-          <span class="upsell-play-label">Iniciar transmissão · 2:14</span>
-        </button>
+      <iframe
+        id="upsellVimeo"
+        src=""
+        allow="autoplay; fullscreen; picture-in-picture"
+        allowfullscreen
+        style="position:absolute;inset:0;width:100%;height:100%;border:0;background:#000;"
+        title="Upsell — Clube Vida Leve"></iframe>
+    </div>
+    <div class="upsell-progress" id="upsellProgress">
+      <span id="upTimeDisplay">00:00</span>
+      <div class="upsell-progress-track">
+        <div class="upsell-progress-fill" id="upProgressFill"></div>
       </div>
+      <span>03:00</span>
+    </div>
+    <div class="upsell-lock-note" id="upsellLockNote">
+      — A oferta é revelada após o vídeo —
     </div>
 
-    <section class="upsell-offer">
-      <div class="offer-tagline">— Adição exclusiva, somente nesta página —</div>
-      <h2 class="offer-product">Clube <em>Vida Leve</em><br/>365 dias de refeições</h2>
-    </section>
+    <!-- Bloco de reveal — escondido até 1:30 ou ?reveal=true -->
+    <div id="upsellReveal">
+      <section class="upsell-offer">
+        <div class="offer-tagline">— Adição exclusiva, somente nesta página —</div>
+        <h2 class="offer-product">Clube <em>Vida Leve</em><br/>365 dias de refeições</h2>
+      </section>
 
-    <section class="price-card">
-      <div class="price-was">de R$ 397,00</div>
-      <div class="price-line-sm">— por apenas, hoje —</div>
-      <div class="price-installment-up">
-        <span class="small">12×</span>R$&nbsp;14<span class="cents">,70</span>
-      </div>
-      <div class="price-cash-up">ou R$ 147,00 à vista</div>
-    </section>
+      <section class="price-card">
+        <div class="price-was">de R$ 397,00</div>
+        <div class="price-line-sm">— por apenas, hoje —</div>
+        <div class="price-installment-up">
+          <span class="small">12×</span>R$&nbsp;14<span class="cents">,70</span>
+        </div>
+        <div class="price-cash-up">ou R$ 147,00 à vista</div>
+      </section>
 
-    <section class="upsell-actions">
-      <a href="#" id="btnAccept" class="btn-accept" rel="noopener">
-        Sim, adicionar à minha ordem com 1 clique
-        <span class="arrow">→</span>
-      </a>
-      <a href="#" id="btnDecline" class="btn-decline" rel="noopener">
-        Não, obrigado — prefiro seguir sem o Clube
-      </a>
-    </section>
+      <section class="upsell-actions">
+        <a href="#" id="btnAccept" class="btn-accept" rel="noopener">
+          Sim, adicionar à minha ordem com 1 clique
+          <span class="arrow">→</span>
+        </a>
+        <a href="#" id="btnDecline" class="btn-decline" rel="noopener">
+          Não, obrigado — prefiro seguir sem o Clube
+        </a>
+      </section>
 
-    <p class="one-click-note">
-      Adição com 1 clique. Cobrança no mesmo cartão da ordem anterior.
-    </p>
+      <p class="one-click-note">
+        Adição com 1 clique. Cobrança no mesmo cartão da ordem anterior.
+      </p>
+    </div>
   </main>
 
-  <script src="content.js?v=20260507f"></script>
+  <script src="content.js?v=20260507j"></script>
+  <script src="https://player.vimeo.com/api/player.js"></script>
   <script>
     (function() {
       const cfg = window.UPSELL_CONFIG || {};
+      const REVEAL_AT = cfg.REVEAL_THRESHOLD_SECONDS || 90;  // 1:30
+      const VIDEO_ID = cfg.VIDEO_ID || '76979871';
+
+      // === Bind dos botoes ===
       const accept = document.getElementById('btnAccept');
       const decline = document.getElementById('btnDecline');
-
       if (accept && cfg.KIWIFY_ACCEPT_URL) {
         accept.href = cfg.KIWIFY_ACCEPT_URL;
         accept.addEventListener('click', () => {
-          if (window.fbq) {
-            try { fbq('track', 'Purchase', { value: cfg.UPSELL_VALUE, currency: cfg.UPSELL_CURRENCY, content_name: 'Clube Vida Leve' }); } catch(_) {}
-          }
+          if (window.fbq) { try { fbq('track', 'Purchase', { value: cfg.UPSELL_VALUE, currency: cfg.UPSELL_CURRENCY, content_name: 'Clube Vida Leve' }); } catch(_) {} }
           if (window.dataLayer) window.dataLayer.push({ event: 'upsell_accept', value: cfg.UPSELL_VALUE });
         });
       }
@@ -110,17 +125,108 @@
         });
       }
 
-      // Player feedback (apenas visual — vídeo real entra com Vimeo iframe quando produzido)
-      const playBtn = document.getElementById('upPlayBtn');
-      if (playBtn) {
-        playBtn.addEventListener('click', () => {
-          playBtn.style.opacity = '0.4';
-          const label = playBtn.querySelector('.upsell-play-label');
-          if (label) label.textContent = 'Reproduzindo…';
+      // === Configurar Vimeo iframe ===
+      const iframe = document.getElementById('upsellVimeo');
+      const upsellReveal = document.getElementById('upsellReveal');
+      const lockNote = document.getElementById('upsellLockNote');
+      const progressFill = document.getElementById('upProgressFill');
+      const timeDisplay = document.getElementById('upTimeDisplay');
+
+      if (iframe) {
+        iframe.src = 'https://player.vimeo.com/video/' + VIDEO_ID + '?title=0&byline=0&portrait=0&badge=0&color=C9A876&autopause=0&dnt=1';
+      }
+
+      let revealFiredOnce = false;
+      let videoDuration = 0;
+
+      function fmt(s) {
+        const m = Math.floor(s / 60).toString().padStart(2, '0');
+        const r = Math.floor(s % 60).toString().padStart(2, '0');
+        return m + ':' + r;
+      }
+
+      function fireReveal(source) {
+        if (revealFiredOnce) return;
+        revealFiredOnce = true;
+        upsellReveal.classList.add('unlocked');
+        if (lockNote) lockNote.style.opacity = '0';
+        console.info('[upsell-reveal] DISPARADO. source=' + source);
+        if (window.fbq) { try { fbq('trackCustom', 'UpsellReveal', { source }); } catch(_) {} }
+        if (window.dataLayer) window.dataLayer.push({ event: 'upsell_reveal', source });
+        setTimeout(() => {
+          upsellReveal.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 600);
+      }
+
+      function effectiveThreshold() {
+        if (videoDuration > 0 && videoDuration < REVEAL_AT) {
+          return Math.max(videoDuration * 0.95, 5);
+        }
+        return REVEAL_AT;
+      }
+
+      function updateProgress(currentTime) {
+        const total = videoDuration > 0 ? videoDuration : 180;
+        if (progressFill) progressFill.style.width = Math.min(currentTime / total * 100, 100) + '%';
+        if (timeDisplay) timeDisplay.textContent = fmt(currentTime);
+      }
+
+      // Atalhos via URL
+      const params = new URLSearchParams(location.search);
+      if (params.has('reveal')) {
+        fireReveal('url_param');
+      }
+
+      // Vimeo Player SDK
+      function attachVimeo() {
+        if (typeof Vimeo === 'undefined') {
+          attachVimeo.attempts = (attachVimeo.attempts || 0) + 1;
+          if (attachVimeo.attempts > 30) {
+            console.warn('[upsell-reveal] Vimeo SDK não carregou. Fallback timer ativo.');
+            setTimeout(() => fireReveal('fallback_no_sdk'), 240_000);
+            return;
+          }
+          setTimeout(attachVimeo, 200);
+          return;
+        }
+
+        if (!iframe) return;
+        const player = new Vimeo.Player(iframe);
+        console.info('[upsell-reveal] Vimeo Player criado, listeners ativos.');
+
+        player.getDuration().then(d => {
+          videoDuration = d;
+          console.info('[upsell-reveal] Duração: ' + d.toFixed(1) + 's. Threshold efetivo: ' + effectiveThreshold().toFixed(1) + 's.');
+        }).catch(err => console.warn('[upsell-reveal] getDuration falhou:', err));
+
+        player.on('play', () => {
+          console.info('[upsell-reveal] vídeo: play');
           if (window.fbq) { try { fbq('trackCustom', 'UpsellPlayed'); } catch(_) {} }
           if (window.dataLayer) window.dataLayer.push({ event: 'upsell_played' });
         });
+
+        player.on('timeupdate', (data) => {
+          updateProgress(data.seconds);
+          if (data.seconds >= effectiveThreshold()) fireReveal('timeupdate');
+        });
+
+        player.on('seeked', (data) => {
+          if (data.seconds >= effectiveThreshold()) fireReveal('seeked');
+        });
+
+        player.on('ended', () => {
+          console.info('[upsell-reveal] vídeo: ended');
+          fireReveal('video_ended');
+        });
       }
+      attachVimeo();
+
+      // Safety net final
+      setTimeout(() => {
+        if (!revealFiredOnce) fireReveal('fallback_timeout');
+      }, 240_000);
+
+      console.info('[upsell-reveal] inicializado. reveal=' + params.has('reveal'));
     })();
   </script>
 </body>
