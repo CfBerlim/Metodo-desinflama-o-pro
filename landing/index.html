@@ -15,8 +15,8 @@
 
 <link rel="icon" type="image/svg+xml" href="../identity/logo/favicon.svg">
 
-<link rel="stylesheet" href="../identity/tokens.css?v=20260507i" />
-<link rel="stylesheet" href="style.css?v=20260507i" />
+<link rel="stylesheet" href="../identity/tokens.css?v=20260507j" />
+<link rel="stylesheet" href="style.css?v=20260507j" />
 </head>
 <body>
   <main class="page" data-screen-label="01 Landing Page (VSL Apothecary Noir)">
@@ -230,7 +230,7 @@
     <button id="resetBtn">Reiniciar</button>
   </div>
 
-  <script src="content.js?v=20260507i"></script>
+  <script src="content.js?v=20260507j"></script>
   <script src="https://player.vimeo.com/api/player.js"></script>
 
   <!-- Reveal logic INLINE com Vimeo Player SDK (vídeo real + reveal aos 4:00) -->
@@ -302,6 +302,11 @@
       console.info('[reveal] DISPARADO. source=' + source);
       if (window.fbq) { try { fbq('trackCustom', 'VSLReveal', { source }); } catch(_) {} }
       if (window.dataLayer) window.dataLayer.push({ event: 'vsl_reveal', source });
+
+      // Scroll suave pra cerimônia/oferta — espera 600ms pra animação revealUnlock começar
+      setTimeout(() => {
+        revealZone.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 600);
     }
 
     // Threshold efetivo: se vídeo for menor que REVEAL_AT, ajusta pra 95% da duração
@@ -393,6 +398,6 @@
   })();
   </script>
 
-  <script src="tracking.js?v=20260507i" defer></script>
+  <script src="tracking.js?v=20260507j" defer></script>
 </body>
 </html>
