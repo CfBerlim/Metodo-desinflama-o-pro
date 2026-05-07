@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Styleguide · Identidade Bio-Premium · Método Desinflamação Pro</title>
+  <link rel="icon" type="image/svg+xml" href="logo/favicon.svg">
+
+  <!-- Google Fonts: Italiana, Cormorant Garamond, Marcellus SC, Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,300;1,400;1,500&family=Inter:wght@200;300;400;500;600&family=Italiana&family=Marcellus+SC&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="tokens.css">
+
+  <style>
+    *,*::before,*::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: #0a0c0d;
+      color: #d8d4c6;
+      font-family: var(--font-body);
+      font-weight: 300;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* === Navegação fixa === */
+    .nav {
+      position: fixed; top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: rgba(10,12,13,0.92);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid rgba(168,139,74,0.18);
+      padding: 14px 32px;
+      display: flex; justify-content: space-between; align-items: center;
+      gap: 24px;
+    }
+    .nav .brand {
+      font-family: var(--font-display);
+      font-size: 18px; color: #ebe3d0; letter-spacing: 0.02em;
+    }
+    .nav ul { list-style: none; display: flex; gap: 22px; }
+    .nav a {
+      font-family: var(--font-marca); font-size: 10px;
+      letter-spacing: 0.3em; color: #a88b4a;
+      text-decoration: none; text-transform: none;
+    }
+    .nav a:hover { color: #ebe3d0; }
+
+    /* === Section base === */
+    section {
+      padding: 96px 32px;
+      min-height: 100vh;
+    }
+    section .container { max-width: 1200px; margin: 0 auto; }
+    section .roman {
+      font-family: var(--font-marca); font-size: 11px;
+      letter-spacing: 0.32em; color: #a88b4a;
+      margin-bottom: 14px;
+    }
+    section h2 {
+      font-family: var(--font-display); font-weight: 400;
+      font-size: 48px; line-height: 1.05; color: #ebe3d0;
+      margin-bottom: 20px; letter-spacing: 0.005em;
+    }
+    section h2 em { font-family: var(--font-editorial); font-style: italic; color: #a88b4a; }
+    section .lede {
+      font-family: var(--font-editorial); font-style: italic;
+      font-size: 18px; color: rgba(235,227,208,0.7);
+      max-width: 640px; line-height: 1.65;
+      margin-bottom: 56px;
+    }
+
+    /* === Section: DNA === */
+    #dna .grid {
+      display: grid; grid-template-columns: 1.2fr 1fr; gap: 48px;
+      margin-bottom: 56px;
+    }
+    @media (max-width: 900px) { #dna .grid { grid-template-columns: 1fr; } }
+
+    #dna .lockup-frame, #dna .monogram-frame {
+      background: var(--core-emerald);
+      padding: 56px 40px;
+      border-radius: var(--radius-card);
+      display: flex; align-items: center; justify-content: center;
+      min-height: 320px;
+      --logo-accent: var(--core-gold);
+      --logo-text: var(--core-ivory);
+    }
+    #dna .lockup-frame svg { max-width: 480px; width: 100%; height: auto; }
+    #dna .monogram-frame svg { max-width: 200px; width: 100%; height: auto; }
+
+    #dna .frame-label {
+      font-family: var(--font-marca); font-size: 10px;
+      letter-spacing: 0.32em; color: #a88b4a;
+      margin-bottom: 12px;
+    }
+
+    #dna .type-scale {
+      border-top: 1px solid rgba(168,139,74,0.18);
+      padding-top: 32px;
+      margin-bottom: 56px;
+    }
+    #dna .type-row {
+      display: grid; grid-template-columns: 140px 1fr;
+      gap: 24px; align-items: baseline;
+      padding: 14px 0; border-bottom: 1px solid rgba(168,139,74,0.08);
+    }
+    #dna .type-row:last-child { border-bottom: none; }
+    #dna .type-meta {
+      font-family: var(--font-marca); font-size: 10px;
+      letter-spacing: 0.28em; color: #a88b4a;
+    }
+    #dna .type-meta small { display: block; font-size: 8px; color: rgba(168,139,74,0.6); margin-top: 4px; }
+
+    #dna .palette-core {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+    }
+    @media (max-width: 700px) { #dna .palette-core { grid-template-columns: 1fr; } }
+    #dna .swatch {
+      background: #11161a;
+      border: 1px solid rgba(168,139,74,0.14);
+      border-radius: var(--radius-card);
+      padding: 24px;
+    }
+    #dna .swatch-chip {
+      width: 100%; height: 120px; margin-bottom: 16px;
+    }
+    #dna .swatch-name {
+      font-family: var(--font-editorial); font-style: italic;
+      font-size: 18px; color: #ebe3d0; margin-bottom: 4px;
+    }
+    #dna .swatch-hex {
+      font-family: var(--font-body); font-weight: 300;
+      font-size: 12px; color: rgba(235,227,208,0.5);
+      letter-spacing: 0.18em;
+    }
+
+    /* === Section: Heritage === */
+    #heritage .stage {
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      padding: 80px 56px;
+      border-radius: var(--radius-card);
+      position: relative;
+      min-height: 480px;
+    }
+    #heritage .stage::before {
+      content: ''; position: absolute;
+      top: 24px; left: 24px; right: 24px; bottom: 24px;
+      border: 1px solid var(--hairline);
+      pointer-events: none;
+    }
+    #heritage .stage-inner { position: relative; z-index: 1; text-align: center; }
+    #heritage .lockup-svg {
+      display: inline-block; margin-bottom: 56px;
+    }
+    #heritage .lockup-svg svg { width: 360px; height: auto; }
+    #heritage .tagline {
+      font-family: var(--font-editorial); font-style: italic;
+      font-size: 28px; color: var(--accent);
+      line-height: 1.4; margin-bottom: 56px;
+    }
+    #heritage .tagline strong {
+      font-family: var(--font-display); font-style: normal; font-weight: 400;
+      color: var(--text-primary);
+    }
+    #heritage .stage-footer {
+      display: flex; justify-content: space-between;
+      font-family: var(--font-marca); font-size: 11px;
+      letter-spacing: 0.32em; color: var(--accent-muted);
+      padding-top: 56px;
+      border-top: 1px solid var(--hairline);
+    }
+
+    .palette-mode {
+      margin-top: 32px;
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px;
+    }
+    .palette-mode .chip {
+      height: 80px; border-radius: 2px;
+      display: flex; align-items: flex-end; padding: 8px;
+      font-family: var(--font-body); font-size: 10px; font-weight: 300;
+      letter-spacing: 0.1em;
+    }
+
+    /* === Section: Apothecary === */
+    #apothecary .stage {
+      background: linear-gradient(180deg, var(--bg-deep) 0%, var(--bg-primary) 100%);
+      color: var(--text-primary);
+      padding: 48px 56px 56px;
+      border-radius: var(--radius-card);
+      min-height: 580px;
+    }
+    #apothecary .top-bar {
+      display: flex; justify-content: space-between; align-items: center;
+      padding-bottom: 24px;
+      border-bottom: 1px solid var(--hairline);
+      margin-bottom: 48px;
+    }
+    #apothecary .mini-lockup {
+      display: flex; align-items: center; gap: 16px;
+    }
+    #apothecary .mini-lockup svg { height: 32px; width: auto; }
+    #apothecary .nav-meta {
+      font-family: var(--font-marca); font-size: 10px;
+      letter-spacing: 0.32em; color: var(--accent);
+    }
+    #apothecary .eyebrow-vsl {
+      font-family: var(--font-marca); font-size: 11px;
+      letter-spacing: 0.32em; color: var(--accent);
+      margin-bottom: 18px;
+    }
+    #apothecary .h1-vsl {
+      font-family: var(--font-display); font-weight: 400;
+      font-size: 56px; line-height: 1.05;
+      margin-bottom: 20px; letter-spacing: 0.005em;
+    }
+    #apothecary .h1-vsl em {
+      font-family: var(--font-editorial); font-style: italic;
+      color: var(--accent);
+    }
+    #apothecary .lede-vsl {
+      font-family: var(--font-editorial); font-style: italic;
+      font-size: 20px; line-height: 1.6;
+      color: var(--text-muted); margin-bottom: 36px; max-width: 600px;
+    }
+    #apothecary .video-frame {
+      background: rgba(201,168,118,0.04);
+      border: 1px solid var(--accent-muted);
+      aspect-ratio: 16/9;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      gap: 16px;
+    }
+    #apothecary .play-circle {
+      width: 72px; height: 72px; border-radius: 50%;
+      border: 1px solid var(--accent);
+      display: flex; align-items: center; justify-content: center;
+    }
+    #apothecary .play-circle::after {
+      content: ''; width: 0; height: 0;
+      border-left: 16px solid var(--accent);
+      border-top: 10px solid transparent;
+      border-bottom: 10px solid transparent;
+      margin-left: 6px;
+    }
+    #apothecary .video-meta {
+      font-family: var(--font-marca); font-size: 9px;
+      letter-spacing: 0.4em; color: var(--accent-muted);
+    }
+    #apothecary .lock-note {
+      margin-top: 22px; text-align: center;
+      font-family: var(--font-editorial); font-style: italic;
+      font-size: 13px; color: var(--accent-muted);
+    }
+
+    /* === Section: Botanique === */
+    #botanique .stage {
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      padding: 56px 64px;
+      border-radius: var(--radius-card);
+      min-height: 600px;
+    }
+    #botanique .pdf-header {
+      display: flex; justify-content: space-between; align-items: baseline;
+      padding-bottom: 18px;
+      border-bottom: 1px solid var(--hairline);
+      margin-bottom: 40px;
+    }
+    #botanique .pdf-header .left {
+      font-family: var(--font-display); font-size: 22px;
+      letter-spacing: 0.02em; color: var(--text-primary);
+    }
+    #botanique .pdf-header .right {
+      font-family: var(--font-marca); font-size: 9px;
+      letter-spacing: 0.4em; color: var(--accent);
+    }
+    #botanique .chapter-num {
+      font-family: var(--font-editorial); font-style: italic;
+      font-size: 88px; color: var(--accent);
+      line-height: 1; margin-bottom: 8px;
+    }
+    #botanique .chapter-label {
+      font-family: var(--font-marca); font-size: 10px;
+      letter-spacing: 0.42em; color: var(--text-primary);
+      margin-bottom: 24px;
+    }
+    #botanique .h1-pdf {
+      font-family: var(--font-display); font-weight: 400;
+      font-size: 44px; line-height: 1.1; margin-bottom: 24px;
+      color: var(--text-primary);
+    }
+    #botanique .h1-pdf em {
+      font-family: var(--font-editorial); font-style: italic;
+      color: var(--accent); font-weight: 400;
+    }
+    #botanique .lede-pdf {
+      font-family: var(--font-editorial); font-style: italic;
+      font-size: 18px; line-height: 1.6;
+      color: var(--text-primary); margin-bottom: 32px;
+      padding-left: 18px; border-left: 2px solid var(--accent);
+    }
+    #botanique .body-pdf {
+      font-family: var(--font-body); font-weight: 300;
+      font-size: 14px; line-height: 1.7;
+      color: var(--text-muted);
+      column-count: 2; column-gap: 32px; margin-bottom: 40px;
+    }
+    #botanique .body-pdf p { margin-bottom: 12px; }
+    #botanique .body-pdf strong { font-weight: 500; color: var(--text-primary); }
+    #botanique .pdf-footer {
+      padding-top: 18px;
+      border-top: 1px solid var(--hairline);
+      display: flex; justify-content: space-between;
+      font-family: var(--font-marca); font-size: 9px;
+      letter-spacing: 0.4em; color: var(--accent);
+    }
+
+    /* === Section: Components === */
+    #components .modes-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+    }
+    @media (max-width: 1100px) { #components .modes-grid { grid-template-columns: 1fr; } }
+    #components .mode-card {
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      padding: 36px 32px;
+      border-radius: var(--radius-card);
+      display: flex; flex-direction: column; gap: 32px;
+    }
+    #components .mode-card .label {
+      font-family: var(--font-marca); font-size: 10px;
+      letter-spacing: 0.32em; color: var(--accent);
+      padding-bottom: 14px;
+      border-bottom: 1px solid var(--hairline);
+    }
+
+    .btn-primary {
+      display: inline-block; padding: 18px 48px;
+      background: var(--accent); color: var(--bg-primary);
+      font-family: var(--font-marca); font-size: 12px;
+      letter-spacing: 0.32em; text-decoration: none;
+      border: none; border-radius: var(--radius-button);
+      cursor: pointer; transition: filter 0.2s;
+    }
+    .btn-primary:hover { filter: brightness(1.05); }
+
+    .btn-ghost {
+      display: inline-block; padding: 18px 48px;
+      background: transparent; color: var(--accent);
+      font-family: var(--font-marca); font-size: 12px;
+      letter-spacing: 0.32em; text-decoration: none;
+      border: 1px solid var(--accent-muted);
+      border-radius: var(--radius-button);
+      cursor: pointer; transition: border-color 0.2s, background 0.2s;
+    }
+    .btn-ghost:hover {
+      border-color: var(--accent);
+      background: rgba(168,139,74,0.04);
+    }
+
+    .demo-block .eyebrow {
+      font-family: var(--font-marca); font-size: 11px;
+      letter-spacing: 0.32em; color: var(--accent);
+      margin-bottom: 14px;
+    }
+    .demo-block h3 {
+      font-family: var(--font-display); font-weight: 400;
+      font-size: 28px; line-height: 1.05; color: var(--text-primary);
+      margin-bottom: 18px;
+    }
+    .demo-block .demo-lede {
+      font-family: var(--font-editorial); font-style: italic;
+      font-size: 16px; line-height: 1.6; color: var(--text-muted);
+    }
+
+    .hairline-1 { height: 1px; background: var(--hairline); }
+    .hairline-2 { height: 1px; background: linear-gradient(90deg, transparent, var(--accent-muted), transparent); }
+    .hairline-label {
+      display: flex; align-items: center; gap: 14px;
+    }
+    .hairline-label::before, .hairline-label::after {
+      content: ''; flex: 1; height: 1px; background: var(--hairline);
+    }
+    .hairline-label span {
+      font-family: var(--font-marca); font-size: 9px;
+      letter-spacing: 0.32em; color: var(--accent);
+    }
+
+    .demo-form { display: flex; flex-direction: column; gap: 8px; }
+    .demo-form label {
+      font-family: var(--font-marca); font-size: 10px;
+      letter-spacing: 0.32em; color: var(--accent);
+    }
+    .demo-form input {
+      background: transparent; border: none;
+      border-bottom: 1px solid var(--accent-muted);
+      padding: 12px 0;
+      font-family: var(--font-body); font-size: 16px; font-weight: 400;
+      color: var(--text-primary);
+      outline: none; transition: border-bottom 0.2s;
+    }
+    .demo-form input:focus { border-bottom: 2px solid var(--accent); }
+    .demo-form input::placeholder { color: var(--text-muted); font-weight: 300; font-style: italic; }
+  </style>
+</head>
+<body>
+
+  <nav class="nav">
+    <span class="brand">Desinflamação · Sistema</span>
+    <ul>
+      <li><a href="#dna">I · DNA</a></li>
+      <li><a href="#heritage">II · Heritage</a></li>
+      <li><a href="#apothecary">III · Apothecary</a></li>
+      <li><a href="#botanique">IV · Botanique</a></li>
+      <li><a href="#components">V · Componentes</a></li>
+    </ul>
+  </nav>
+
+  <section id="dna">
+    <div class="container">
+      <div class="roman">I · DNA da Marca</div>
+      <h2>O que <em>nunca</em> muda.</h2>
+      <p class="lede">Lockup, monograma, tipografia e núcleo da paleta. Esses elementos são imutáveis em qualquer modo, qualquer superfície, qualquer canal.</p>
+
+      <div class="grid">
+        <div>
+          <div class="frame-label">Lockup Vertical · Marca-Mestra</div>
+          <div class="lockup-frame">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 260">
+              <style>.a { fill: var(--logo-accent); stroke: var(--logo-accent); } .t { fill: var(--logo-text); }</style>
+              <line class="a" x1="270" y1="62" x2="330" y2="62" stroke-width="1" opacity="0.7"/>
+              <text class="a" x="300" y="86" text-anchor="middle" font-size="11" font-family="Marcellus SC, serif" letter-spacing="5.5">ESTABELECIDO · MMXXVI</text>
+              <text class="t" x="300" y="170" text-anchor="middle" font-size="64" font-family="Italiana, serif" letter-spacing="0.96">Desinflamação</text>
+              <line class="a" x1="130" y1="208" x2="190" y2="208" stroke-width="1" opacity="0.7"/>
+              <line class="a" x1="410" y1="208" x2="470" y2="208" stroke-width="1" opacity="0.7"/>
+              <text class="t" x="300" y="213" text-anchor="middle" font-size="13" font-family="Marcellus SC, serif" letter-spacing="6.5">MÉTODO · PRO</text>
+            </svg>
+          </div>
+        </div>
+        <div>
+          <div class="frame-label">Monograma · Selo</div>
+          <div class="monogram-frame">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120">
+              <style>.a { fill: none; stroke: var(--logo-accent); } .at { fill: var(--logo-accent); }</style>
+              <circle class="a" cx="60" cy="60" r="55" stroke-width="1" opacity="0.5"/>
+              <circle class="a" cx="60" cy="60" r="49" stroke-width="1" opacity="0.18"/>
+              <text class="at" x="60" y="80" text-anchor="middle" font-size="56" font-family="Italiana, serif">M</text>
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      <div class="type-scale">
+        <div class="frame-label" style="margin-bottom: 24px;">Sistema Tipográfico</div>
+
+        <div class="type-row">
+          <div class="type-meta">Display XL<small>Italiana · 64px</small></div>
+          <div style="font-family: var(--font-display); font-size: 4rem; line-height: 1; color: #ebe3d0;">Desinflamação</div>
+        </div>
+        <div class="type-row">
+          <div class="type-meta">Display M<small>Italiana · 36px</small></div>
+          <div style="font-family: var(--font-display); font-size: 2.25rem; line-height: 1; color: #ebe3d0;">Renasça.</div>
+        </div>
+        <div class="type-row">
+          <div class="type-meta">Editorial L<small>Cormorant ital · 22px</small></div>
+          <div style="font-family: var(--font-editorial); font-style: italic; font-size: 1.375rem; color: #a88b4a;">A primeira semana de silêncio celular.</div>
+        </div>
+        <div class="type-row">
+          <div class="type-meta">Eyebrow<small>Marcellus SC · 11px</small></div>
+          <div style="font-family: var(--font-marca); font-size: 0.6875rem; letter-spacing: 0.32em; color: #a88b4a;">CAPÍTULO I · O MECANISMO</div>
+        </div>
+        <div class="type-row">
+          <div class="type-meta">Body L<small>Inter Light · 17px</small></div>
+          <div style="font-family: var(--font-body); font-weight: 300; font-size: 1.0625rem; color: rgba(235,227,208,0.85); max-width: 520px;">Reverter a inflamação celular crônica em 21 dias. Sem dietas restritivas. Sem fome. Apenas a biologia restaurada.</div>
+        </div>
+      </div>
+
+      <div>
+        <div class="frame-label" style="margin-bottom: 24px;">Núcleo da Paleta · presente em todos os modos</div>
+        <div class="palette-core">
+          <div class="swatch">
+            <div class="swatch-chip" style="background: var(--core-emerald);"></div>
+            <div class="swatch-name">Forest Emerald</div>
+            <div class="swatch-hex">#0F3D2E</div>
+          </div>
+          <div class="swatch">
+            <div class="swatch-chip" style="background: var(--core-gold);"></div>
+            <div class="swatch-name">Old Gold</div>
+            <div class="swatch-hex">#A88B4A</div>
+          </div>
+          <div class="swatch">
+            <div class="swatch-chip" style="background: var(--core-ivory);"></div>
+            <div class="swatch-name">Champagne Ivory</div>
+            <div class="swatch-hex">#EBE3D0</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="heritage">
+    <div class="container">
+      <div class="roman">II · Heritage</div>
+      <h2>O modo <em>institucional.</em></h2>
+      <p class="lede">A marca falando como joalheria suíça. Para áreas de marca, certificados, redes sociais oficiais, cabeçalho da área de membros.</p>
+
+      <div class="stage" data-mode="heritage">
+        <div class="stage-inner">
+          <div class="lockup-svg">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 260">
+              <style>.a { fill: var(--logo-accent); stroke: var(--logo-accent); } .t { fill: var(--logo-text); }</style>
+              <line class="a" x1="270" y1="62" x2="330" y2="62" stroke-width="1" opacity="0.7"/>
+              <text class="a" x="300" y="86" text-anchor="middle" font-size="11" font-family="Marcellus SC, serif" letter-spacing="5.5">ESTABELECIDO · MMXXVI</text>
+              <text class="t" x="300" y="170" text-anchor="middle" font-size="64" font-family="Italiana, serif" letter-spacing="0.96">Desinflamação</text>
+              <line class="a" x1="130" y1="208" x2="190" y2="208" stroke-width="1" opacity="0.7"/>
+              <line class="a" x1="410" y1="208" x2="470" y2="208" stroke-width="1" opacity="0.7"/>
+              <text class="t" x="300" y="213" text-anchor="middle" font-size="13" font-family="Marcellus SC, serif" letter-spacing="6.5">MÉTODO · PRO</text>
+            </svg>
+          </div>
+          <div class="tagline">
+            <strong>Desinflame.</strong><br>Renasça.<br><strong>Reine.</strong>
+          </div>
+          <div class="stage-footer">
+            <span>Protocolo Anti-Inflamatório</span>
+            <span>21 Dias</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="palette-mode">
+        <div class="chip" style="background: #0F3D2E; color: #EBE3D0;">bg.primary · #0F3D2E</div>
+        <div class="chip" style="background: #163F31; color: #EBE3D0;">bg.lift · #163F31</div>
+        <div class="chip" style="background: #A88B4A; color: #0F3D2E;">accent · #A88B4A</div>
+        <div class="chip" style="background: #EBE3D0; color: #0F3D2E;">text · #EBE3D0</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="apothecary">
+    <div class="container">
+      <div class="roman">III · Apothecary</div>
+      <h2>O modo <em>conversor.</em></h2>
+      <p class="lede">Imersão clínica que prende atenção em vídeo longo. VSL, página de vendas, upsell, checkout, anúncios.</p>
+
+      <div class="stage" data-mode="apothecary">
+        <div class="top-bar">
+          <div class="mini-lockup">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32">
+              <circle cx="16" cy="16" r="13" fill="none" stroke="var(--logo-accent)" stroke-width="1" opacity="0.6"/>
+              <text x="16" y="22" text-anchor="middle" font-size="18" font-family="Italiana, serif" fill="var(--logo-accent)">M</text>
+            </svg>
+            <span style="font-family: var(--font-display); font-size: 18px; color: var(--logo-text); letter-spacing: 0.02em;">Desinflamação</span>
+          </div>
+          <span class="nav-meta">CAP · I · O MECANISMO</span>
+        </div>
+
+        <div class="eyebrow-vsl">PARA QUEM CANSOU DE DIETAS</div>
+        <h1 class="h1-vsl">Desligue a inflamação.<br><em>O peso cai sozinho.</em></h1>
+        <p class="lede-vsl">A ciência por trás do incêndio invisível que está bloqueando o seu emagrecimento — e o protocolo de 21 dias para apagá-lo.</p>
+
+        <div class="video-frame">
+          <div class="play-circle"></div>
+          <div class="video-meta">VSL · 06:00 · ÁUDIO RECOMENDADO</div>
+        </div>
+        <div class="lock-note">— O acesso ao Método é revelado aos 4 minutos do vídeo —</div>
+      </div>
+
+      <div class="palette-mode">
+        <div class="chip" style="background: #07100C; color: #EFE7D2;">bg.primary · #07100C</div>
+        <div class="chip" style="background: #0A1410; color: #EFE7D2;">bg.lift · #0A1410</div>
+        <div class="chip" style="background: #C9A876; color: #07100C;">accent · #C9A876</div>
+        <div class="chip" style="background: #EFE7D2; color: #07100C;">text · #EFE7D2</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="botanique">
+    <div class="container">
+      <div class="roman">IV · Botanique</div>
+      <h2>O modo <em>editorial.</em></h2>
+      <p class="lede">A marca entregando o conteúdo. PDFs, e-mails transacionais, materiais escritos longos.</p>
+
+      <div class="stage" data-mode="botanique">
+        <div class="pdf-header">
+          <span class="left">Desinflamação · Pro</span>
+          <span class="right">CAPÍTULO III · PÁGINA 14</span>
+        </div>
+
+        <div class="chapter-num">III</div>
+        <div class="chapter-label">O DESAFIO DOS SEIS DIAS</div>
+
+        <h2 class="h1-pdf">A primeira semana<br><em>de silêncio celular.</em></h2>
+
+        <p class="lede-pdf">Antes de cortar qualquer coisa, vamos adicionar. A regra de ouro do reset começa pelo que entra — não pelo que sai.</p>
+
+        <div class="body-pdf">
+          <p>O corpo inflamado vive em <strong>alerta vermelho</strong>. Cada refeição é interpretada como uma ameaça, e o estoque de gordura se torna um mecanismo de defesa, não um excesso de calorias. Esse é o ponto que dietas tradicionais ignoram: o problema raramente é matemático.</p>
+          <p>Por isso o protocolo começa com <strong>seis dias de adição</strong> — três compostos bioativos por dia, todos da feira, todos baratos. Açafrão, gengibre, folhas verdes amargas. A inflamação cessa antes que a mente perceba.</p>
+          <p>No dia sete, sem cortar, sem contar, sem fome — o ponteiro da balança começa a se mover. Não é mágica. É biologia restaurada.</p>
+          <p>Lembre: a urgência aqui não é emagrecer. É <strong>desligar o incêndio</strong>. O peso cai como consequência.</p>
+        </div>
+
+        <div class="pdf-footer">
+          <span>MÉTODO DESINFLAMAÇÃO · PRO</span>
+          <span>RESET · DIA · 6</span>
+        </div>
+      </div>
+
+      <div class="palette-mode">
+        <div class="chip" style="background: #F2ECDD; color: #1F3D2E;">bg.primary · #F2ECDD</div>
+        <div class="chip" style="background: #E8DFC8; color: #1F3D2E;">bg.lift · #E8DFC8</div>
+        <div class="chip" style="background: #9C7C42; color: #F2ECDD;">accent · #9C7C42</div>
+        <div class="chip" style="background: #1F3D2E; color: #F2ECDD;">text · #1F3D2E</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="components">
+    <div class="container">
+      <div class="roman">V · Componentes</div>
+      <h2>Os elementos <em>compartilhados.</em></h2>
+      <p class="lede">Botões, hairlines, eyebrows, cards e formulários — em cada um dos três modos.</p>
+
+      <div class="modes-grid">
+
+        <div class="mode-card" data-mode="heritage">
+          <div class="label">I · HERITAGE</div>
+          <div>
+            <div style="font-family: var(--font-marca); font-size: 9px; letter-spacing: 0.32em; color: var(--accent); margin-bottom: 12px;">BOTÕES</div>
+            <div style="display: flex; flex-direction: column; gap: 12px;">
+              <button class="btn-primary">ACESSAR O MÉTODO</button>
+              <button class="btn-ghost">SABER MAIS</button>
+            </div>
+          </div>
+          <div class="demo-block">
+            <div class="eyebrow">CAPÍTULO I</div>
+            <h3>O Mecanismo.</h3>
+            <p class="demo-lede">A inflamação celular não é sintoma — é a causa raiz que dietas tradicionais nunca tocam.</p>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 14px;">
+            <div style="font-family: var(--font-marca); font-size: 9px; letter-spacing: 0.32em; color: var(--accent); margin-bottom: 4px;">HAIRLINES</div>
+            <div class="hairline-1"></div>
+            <div class="hairline-2"></div>
+            <div class="hairline-label"><span>SEÇÃO</span></div>
+          </div>
+          <div class="demo-form">
+            <label for="heritage-email">SEU MELHOR E-MAIL</label>
+            <input id="heritage-email" type="email" placeholder="nome@dominio.com">
+          </div>
+        </div>
+
+        <div class="mode-card" data-mode="apothecary">
+          <div class="label">II · APOTHECARY</div>
+          <div>
+            <div style="font-family: var(--font-marca); font-size: 9px; letter-spacing: 0.32em; color: var(--accent); margin-bottom: 12px;">BOTÕES</div>
+            <div style="display: flex; flex-direction: column; gap: 12px;">
+              <button class="btn-primary">QUERO O MÉTODO</button>
+              <button class="btn-ghost">CONTINUAR ASSISTINDO</button>
+            </div>
+          </div>
+          <div class="demo-block">
+            <div class="eyebrow">PARA QUEM CANSOU</div>
+            <h3>O incêndio invisível.</h3>
+            <p class="demo-lede">Você não está engordando. Está em alerta. Aprenda a desligar o switch que o seu corpo trava.</p>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 14px;">
+            <div style="font-family: var(--font-marca); font-size: 9px; letter-spacing: 0.32em; color: var(--accent); margin-bottom: 4px;">HAIRLINES</div>
+            <div class="hairline-1"></div>
+            <div class="hairline-2"></div>
+            <div class="hairline-label"><span>SEÇÃO</span></div>
+          </div>
+          <div class="demo-form">
+            <label for="apothecary-email">SEU MELHOR E-MAIL</label>
+            <input id="apothecary-email" type="email" placeholder="nome@dominio.com">
+          </div>
+        </div>
+
+        <div class="mode-card" data-mode="botanique">
+          <div class="label">III · BOTANIQUE</div>
+          <div>
+            <div style="font-family: var(--font-marca); font-size: 9px; letter-spacing: 0.32em; color: var(--accent); margin-bottom: 12px;">BOTÕES</div>
+            <div style="display: flex; flex-direction: column; gap: 12px;">
+              <button class="btn-primary">BAIXAR O GUIA</button>
+              <button class="btn-ghost">VER ÍNDICE</button>
+            </div>
+          </div>
+          <div class="demo-block">
+            <div class="eyebrow">CAPÍTULO III</div>
+            <h3>Desafio dos Seis Dias.</h3>
+            <p class="demo-lede">Três compostos por dia. Da feira. Sem cortar nada. A balança se move sozinha no sétimo dia.</p>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 14px;">
+            <div style="font-family: var(--font-marca); font-size: 9px; letter-spacing: 0.32em; color: var(--accent); margin-bottom: 4px;">HAIRLINES</div>
+            <div class="hairline-1"></div>
+            <div class="hairline-2"></div>
+            <div class="hairline-label"><span>SEÇÃO</span></div>
+          </div>
+          <div class="demo-form">
+            <label for="botanique-email">SEU MELHOR E-MAIL</label>
+            <input id="botanique-email" type="email" placeholder="nome@dominio.com">
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+</body>
+</html>
