@@ -1,0 +1,16 @@
+{
+  "prompt": "Cinematic editorial product photography, a cluster of small antique apothecary glass jars and ceramic vessels of varying sizes arranged in a triangular composition on a weathered dark stone surface — suggesting abundance, a year of curated meals. Each vessel contains different ingredients: amber-honey liquid in one, dried herbs in another, ground turmeric and saffron threads in others, small dried chili pods in another. Single warm gold key light from upper-left at 45 degrees creating sharp specular highlights along the glass shoulders and brass-tinted falloff into deep shadow on the right side. Background is deeply gradient near-black with subtle emerald undertone (#0F1B15 fading to #050A07), volumetric haze suggesting cool forest air at twilight. Visible imperfections: tiny dust particles drifting in the light beam, mild fingerprint smudges on glass, light wear on cork stoppers, micro-shadows under each vessel. Shot on Hasselblad H6D-100c, 80mm f/2.8 lens, ISO 200, shallow depth of field with focus locked on the central jar. Rich shadow detail, deep blacks not crushed. Mood: rare apothecary collection in a longevity clinic library at dusk. No human, no text, no smiles, no fitness equipment, no brightly colored food, no commercial gloss. Documentary realism, restrained, slow.",
+  "negative_prompt": "no human, no smile, no fitness gym equipment, no smoothie bowls, no bright colored food, no clinical antibiotic clean surfaces, plastic skin, skin smoothing, beautification filters, airbrushed texture, oversaturated colors, depth flattening, CGI, cartoon, illustration, painting, blurry, distorted, overexposed, no studio key light unless described, no glossy reflections unless described, no perfectly clean surfaces, watermark, text overlay, logo overlay, more realistic reinterpretation",
+  "api_parameters": {
+    "resolution": "2K",
+    "output_format": "jpg",
+    "aspect_ratio": "16:9"
+  },
+  "settings": {
+    "style": "cinematic editorial product photography, abundance still life, silent luxury",
+    "lighting": "single warm gold key light from upper-left at 45 degrees, deep falloff into shadow",
+    "camera_angle": "slight tabletop high-angle, triangular composition",
+    "depth_of_field": "shallow, f/2.8, focus on central jar",
+    "quality": "high detail, rich shadow detail, deep blacks not crushed"
+  }
+}
