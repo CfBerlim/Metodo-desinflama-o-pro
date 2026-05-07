@@ -5,12 +5,40 @@
 nano-banana2/.env
 nano-banana2/__pycache__/
 
+# Variaveis de ambiente
+.env
+.env.local
+.env.*.local
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+.pytest_cache/
+
 # OS
 .DS_Store
 Thumbs.db
+desktop.ini
 
-# Editors
+# Editores
 .vscode/
 .idea/
 .claude/
 *.swp
+*.swo
+*~
+
+# Logs
+*.log
+npm-debug.log*
+
+# Build (caso futuro)
+dist/
+build/
+node_modules/
+
+# Backups
+*.bak
+*.orig
