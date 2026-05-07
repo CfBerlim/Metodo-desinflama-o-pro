@@ -1,0 +1,16 @@
+{
+  "prompt": "Luxury hardcover book mockup photographed on a deep emerald-green velvet surface (#0F3D2E). Book is closed at slight angle showing the front cover and a sliver of spine. Cover material is matte deep emerald cloth-bound, with title 'Receitas 15 Minutos de Poder' embossed in gold foil using an elegant Italiana-style serif italic, and below it a subtitle in small caps gold foil reading '30 RECEITAS · COZINHA RÁPIDA'. Single warm gold key light from upper-right at 50 degrees creating sharp specular along the gold foil letters and soft falloff to the left side of the cover. Visible imperfections: tiny dust particles on the velvet, slight fingerprint near the corner of the cover, mild wear on the corners suggesting the book has been opened many times, micro-shadow under the book edge, faint creases along the spine. Book is the only object in frame, no other props. Shot on Phase One IQ4, 100mm f/2.8 lens, ISO 100, shallow depth of field with focus locked on the title text. Background is a continuation of the emerald velvet with subtle natural vignette. Mood: rare antique apothecary manual rediscovered in a longevity clinic library. Documentary realism. Do not beautify, do not add commercial gloss.",
+  "negative_prompt": "no human hands, no surrounding clutter, no plant decorations, no glossy varnish, no commercial product look, plastic skin, skin smoothing, beautification filters, airbrushed texture, oversaturated colors, depth flattening, CGI, cartoon, illustration, painting, blurry, distorted, overexposed, watermark, text overlay outside the cover, modern publisher logo, ISBN barcode",
+  "api_parameters": {
+    "resolution": "2K",
+    "output_format": "jpg",
+    "aspect_ratio": "3:4"
+  },
+  "settings": {
+    "style": "editorial product photography, antique book hero shot",
+    "lighting": "single warm gold key light upper-right at 50 degrees",
+    "camera_angle": "slight tabletop high-angle, book at slight tilt",
+    "depth_of_field": "shallow, f/2.8, focus on title text",
+    "quality": "high detail, gold foil specular highlight, rich shadow detail"
+  }
+}

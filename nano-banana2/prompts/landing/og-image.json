@@ -1,0 +1,16 @@
+{
+  "prompt": "Cinematic horizontal composition for social media share, deep emerald-tinted carbon background gradient flowing from upper-left (#0F1B15) to lower-right (#050A07). Centered subject in the lower-left third: a single small antique apothecary glass vial with translucent amber-honey liquid placed on weathered dark stone, catching a sharp specular highlight from a warm gold key light at upper-left. The right two-thirds of the frame is intentional negative space with subtle volumetric haze and a soft gold radial glow at center-top suggesting an unseen light source above. The composition is asymmetric, leaving a clean rectangular zone on the right side for typography overlay (which will be added later — image must contain no text). Single warm gold key light at 45 degrees from upper-left, deep falloff into shadow on the right. Visible imperfections: dust particles drifting in the light beam, micro-scratches on the vial's anodized cap, tiny fingerprint smudge on the lower glass. Shot on Hasselblad H6D-100c, 80mm f/2.8 lens, ISO 200, shallow depth of field with focus locked on the vial. Background has subtle horizontal volumetric gradient suggesting forest air at twilight. Rich shadow detail, deep blacks not crushed. Mood: silent expensive longevity clinic at twilight, restrained, slow. No human, no smile, no fitness equipment, no commercial gloss. Documentary realism.",
+  "negative_prompt": "no human, no smile, no fitness gym equipment, no text overlay, no logo, no watermark, no commercial product photography, plastic skin, skin smoothing, beautification filters, airbrushed texture, oversaturated colors, depth flattening, CGI, cartoon, illustration, painting, blurry, distorted, overexposed, no studio key light unless described, no glossy reflections unless described, more realistic reinterpretation",
+  "api_parameters": {
+    "resolution": "2K",
+    "output_format": "jpg",
+    "aspect_ratio": "16:9"
+  },
+  "settings": {
+    "style": "cinematic editorial composition for social share, asymmetric subject placement",
+    "lighting": "single warm gold key light upper-left, gold radial glow upper-center",
+    "camera_angle": "slight tabletop high-angle, asymmetric off-center composition",
+    "depth_of_field": "shallow, f/2.8, focus on vial",
+    "quality": "high detail, rich shadow detail, clean negative space for text overlay, deep blacks not crushed"
+  }
+}

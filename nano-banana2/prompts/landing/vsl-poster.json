@@ -1,0 +1,16 @@
+{
+  "prompt": "Cinematic editorial product photography, single small antique apothecary glass vial filled with translucent amber-honey liquid resting on a weathered dark stone surface. Single warm gold key light from upper-left at 45 degrees creating sharp specular highlight on the glass shoulder and soft falloff into deep shadow on the right side. Background is a deeply gradient near-black surface with subtle emerald undertone (#0F1B15 fading to #050A07), volumetric haze suggesting cool forest air at twilight in an Alpine longevity retreat. The vial has a hand-applied label with thin gold hairlines, slightly off-center placement, micro-scratches on the cork, dust particles drifting in the light beam. Tiny condensation droplets on the lower glass curve. Shot on Hasselblad H6D-100c, 80mm f/2.8 lens, ISO 200, shallow depth of field with focus locked on the vial label. Rich shadow detail, deep blacks not crushed. The mood is silent expensive longevity clinic at dusk. No human, no text, no smiles, no fitness equipment, no brightly colored food, no antibiotic-clean surfaces. Documentary realism, restrained, slow. Do not beautify or stylize. No commercial product gloss.",
+  "negative_prompt": "no human, no smile, no fitness gym equipment, no smoothie bowls, no bright colored food, no clinical antibiotic clean surfaces, plastic skin, skin smoothing, beautification filters, airbrushed texture, oversaturated colors, depth flattening, CGI, cartoon, illustration, painting, blurry, distorted, overexposed, no studio key light unless described, no glossy reflections unless described, no perfectly clean surfaces, watermark, text overlay, logo overlay, more realistic reinterpretation",
+  "api_parameters": {
+    "resolution": "2K",
+    "output_format": "jpg",
+    "aspect_ratio": "16:9"
+  },
+  "settings": {
+    "style": "cinematic editorial product photography, silent luxury",
+    "lighting": "single warm gold key light from upper-left at 45 degrees, deep falloff into shadow",
+    "camera_angle": "slight tabletop high-angle",
+    "depth_of_field": "shallow, f/2.8",
+    "quality": "high detail, rich shadow detail, deep blacks not crushed"
+  }
+}
