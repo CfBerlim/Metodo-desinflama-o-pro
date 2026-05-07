@@ -1,0 +1,155 @@
+/* ==========================================================================
+   LANDING PAGE — Método Desinflamação Pro
+   Importa: ../identity/tokens.css (DNA + 3 modos)
+   Modo ativo: Apothecary (data-mode="apothecary" no <body>)
+   ========================================================================== */
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+html, body { min-height: 100vh; }
+body {
+  background: var(--bg-stage);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  font-weight: 300;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* ==========================================================================
+   HERO — fase imersão (visível 100% do tempo)
+   ========================================================================== */
+.hero {
+  min-height: max(640px, 90svh);
+  padding: 32px 32px 56px;
+  display: flex; flex-direction: column;
+  position: relative;
+}
+
+/* Top bar minimalista — apenas mini-lockup à esquerda */
+.hero-topbar {
+  display: flex; justify-content: flex-start; align-items: center;
+  padding-bottom: 20px;
+  border-bottom: 1px solid rgba(201, 168, 118, 0.30);
+  margin-bottom: 56px;
+  position: relative; z-index: 2;
+}
+.hero-topbar .mini-lockup {
+  display: flex; align-items: center; gap: 14px;
+}
+.hero-topbar .mini-monogram {
+  width: 32px; height: 32px;
+  border-radius: 50%;
+  border: 1px solid var(--accent);
+  display: flex; align-items: center; justify-content: center;
+  color: var(--accent);
+  font-family: var(--font-display);
+  font-size: 18px; line-height: 1;
+}
+.hero-topbar .mini-wordmark {
+  font-family: var(--font-display);
+  font-size: 18px; color: var(--text-primary);
+  letter-spacing: 0.02em;
+}
+
+/* Hairline gold luminoso na base do hero (separador visual) */
+.hero::after {
+  content: '';
+  position: absolute; bottom: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg,
+    transparent 15%,
+    rgba(201, 168, 118, 0.22) 50%,
+    transparent 85%);
+  pointer-events: none;
+}
+
+/* Hero content centralizado, max-width controlado */
+.hero-content {
+  max-width: 1080px;
+  margin: 0 auto;
+  width: 100%;
+  display: flex; flex-direction: column; align-items: center;
+  text-align: center;
+  position: relative; z-index: 1;
+  flex: 1;
+}
+
+.hero-eyebrow {
+  font-family: var(--font-marca);
+  font-size: var(--size-eyebrow);
+  letter-spacing: var(--tracking-eyebrow);
+  color: var(--accent);
+  margin-bottom: 24px;
+  text-shadow: var(--ambient-text-glow);
+}
+
+.hero-manchete {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(36px, 6vw, 64px);
+  line-height: 1.05;
+  color: var(--text-primary);
+  letter-spacing: var(--tracking-display);
+  max-width: 920px;
+  margin-bottom: 24px;
+  text-shadow: 0 0 32px rgba(201, 168, 118, 0.10);
+}
+
+.hero-subtitulo {
+  font-family: var(--font-editorial);
+  font-style: italic;
+  font-size: clamp(16px, 2vw, 22px);
+  line-height: 1.55;
+  color: rgba(239, 231, 210, 0.78);
+  max-width: 720px;
+  margin-bottom: 48px;
+}
+
+/* Player Vimeo — moldura cinematográfica */
+.hero-video-wrapper {
+  width: 100%;
+  max-width: 960px;
+  margin-bottom: 28px;
+}
+.hero-video-frame {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  border: 1px solid rgba(201, 168, 118, 0.45);
+  background:
+    radial-gradient(ellipse at 50% 50%,
+      rgba(201, 168, 118, 0.08) 0%,
+      transparent 70%),
+    rgba(201, 168, 118, 0.025);
+  box-shadow:
+    0 0 80px rgba(201, 168, 118, 0.14),
+    0 0 0 1px rgba(201, 168, 118, 0.18),
+    inset 0 1px 0 rgba(239, 231, 210, 0.06);
+  overflow: hidden;
+}
+.hero-video-frame iframe {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  border: 0;
+}
+
+.hero-lock-note {
+  font-family: var(--font-editorial);
+  font-style: italic;
+  font-size: 13px;
+  color: rgba(201, 168, 118, 0.78);
+  text-align: center;
+  margin-top: 8px;
+  transition: opacity 400ms ease-out;
+}
+
+/* Mobile adjustments */
+@media (max-width: 700px) {
+  .hero { padding: 20px 20px 40px; }
+  .hero-topbar { margin-bottom: 36px; padding-bottom: 16px; }
+  .hero-content { padding: 0; }
+  .hero-eyebrow { margin-bottom: 18px; }
+  .hero-manchete { margin-bottom: 18px; }
+  .hero-subtitulo { margin-bottom: 32px; }
+}
