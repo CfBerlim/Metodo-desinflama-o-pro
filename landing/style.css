@@ -256,27 +256,34 @@ body::after {
   transition: opacity 0.4s ease;
 }
 
-/* === ZONA REVEAL === */
+/* === ZONA REVEAL ===
+   ANTES do reveal: display:none — fora do fluxo de layout, NÃO consome scroll.
+   DEPOIS: display:block + animation cinematográfica.
+   (Antes usava opacity:0 que mantém o espaço de layout — bug.)
+*/
 .reveal-zone {
+  display: none;
   margin-top: 36px;
-  opacity: 0;
-  transform: translateY(20px);
-  pointer-events: none;
-  transition: opacity 1.6s var(--ease-dramatic), transform 1.6s var(--ease-dramatic);
 }
 .reveal-zone.unlocked {
-  opacity: 1;
-  transform: translateY(0);
-  pointer-events: auto;
+  display: block;
+  animation: revealUnlock 1.6s var(--ease-dramatic) both;
+}
+@keyframes revealUnlock {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 .reveal-zone .ceremony {
   text-align: center;
   margin-bottom: 28px;
-  opacity: 0;
-  transform: translateY(10px);
-  transition: all 1.2s var(--ease-dramatic) 0.3s;
 }
-.reveal-zone.unlocked .ceremony { opacity: 1; transform: translateY(0); }
+.reveal-zone.unlocked .ceremony {
+  animation: ceremonyFade 1.2s var(--ease-dramatic) 0.3s both;
+}
+@keyframes ceremonyFade {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
 .ceremony-rule {
   width: 1px; height: 36px;
   background: linear-gradient(to bottom, transparent, var(--gold-300));
