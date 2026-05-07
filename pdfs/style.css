@@ -1,0 +1,529 @@
+/* ==========================================================================
+   PDF TEMPLATES — Modo Botanique
+   Importa: ../identity/tokens.css (DNA + 3 modos)
+   Output esperado: A5 portrait, print-to-PDF via browser
+   ========================================================================== */
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { width: 100%; }
+body {
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 12pt;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* @page para PDF — formato A5 (148×210mm) com margens generosas */
+@page {
+  size: A5 portrait;
+  margin: 18mm 16mm 20mm 16mm;
+}
+
+/* Cada .page é uma página visual do livro */
+.page {
+  width: 148mm;
+  min-height: 210mm;
+  padding: 18mm 16mm 20mm 16mm;
+  margin: 0 auto 16px;
+  background: var(--bg-primary);
+  page-break-after: always;
+  position: relative;
+  display: flex; flex-direction: column;
+}
+.page:last-child { page-break-after: auto; }
+
+/* Em tela: simula página A5 com sombra suave para inspeção visual.
+   Print: remove a sombra. */
+@media screen {
+  body { background: #1a1715; padding: 24px 0; }
+  .page {
+    box-shadow: 0 8px 40px rgba(0, 0, 0, 0.4);
+    border-radius: 1px;
+  }
+}
+@media print {
+  body { background: var(--bg-primary); padding: 0; }
+  .page { box-shadow: none; margin: 0; padding: 0; }
+}
+
+/* ==========================================================================
+   COVER — capa do livro
+   ========================================================================== */
+.cover {
+  background: var(--core-emerald);
+  color: var(--core-ivory);
+  display: flex; flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24mm 16mm;
+  position: relative;
+}
+.cover::before {
+  content: '';
+  position: absolute;
+  inset: 12mm;
+  border: 1px solid rgba(168, 139, 74, 0.45);
+  pointer-events: none;
+}
+.cover-top {
+  font-family: var(--font-marca);
+  font-size: 9pt;
+  letter-spacing: 0.42em;
+  color: var(--core-gold);
+  text-align: center;
+  margin-top: 18mm;
+}
+.cover-main {
+  text-align: center;
+  flex: 1;
+  display: flex; flex-direction: column; justify-content: center;
+  gap: 12mm;
+}
+.cover-volume {
+  font-family: var(--font-editorial);
+  font-style: italic;
+  font-size: 14pt;
+  color: var(--core-gold);
+}
+.cover-titulo {
+  font-family: var(--font-display);
+  font-size: 32pt;
+  line-height: 1.1;
+  color: var(--core-ivory);
+  letter-spacing: 0.005em;
+}
+.cover-subtitulo {
+  font-family: var(--font-marca);
+  font-size: 9pt;
+  letter-spacing: 0.5em;
+  color: var(--core-gold);
+  margin-top: 8mm;
+}
+.cover-autoria {
+  font-family: var(--font-editorial);
+  font-style: italic;
+  font-size: 10pt;
+  color: rgba(235, 227, 208, 0.7);
+  margin-top: 10mm;
+}
+.cover-bottom {
+  font-family: var(--font-marca);
+  font-size: 8pt;
+  letter-spacing: 0.5em;
+  color: rgba(168, 139, 74, 0.7);
+  text-align: center;
+  margin-bottom: 16mm;
+}
+.cover-monogram {
+  width: 24mm; height: 24mm;
+  border-radius: 50%;
+  border: 1px solid rgba(168, 139, 74, 0.5);
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-display);
+  font-size: 18pt;
+  color: var(--core-gold);
+  margin: 0 auto 8mm;
+  position: relative;
+}
+.cover-monogram::before {
+  content: '';
+  position: absolute; inset: 1.5mm;
+  border: 1px solid rgba(168, 139, 74, 0.18);
+  border-radius: 50%;
+}
+
+/* ==========================================================================
+   FRONTISPIECE — página do depois-da-capa (epígrafe / dedicatória)
+   ========================================================================== */
+.frontispiece {
+  display: flex; flex-direction: column;
+  justify-content: center; align-items: center;
+  text-align: center;
+  padding: 40mm 20mm;
+  gap: 10mm;
+}
+.frontispiece .quote {
+  font-family: var(--font-editorial);
+  font-style: italic;
+  font-size: 13pt;
+  line-height: 1.55;
+  color: var(--text-primary);
+  max-width: 100mm;
+}
+.frontispiece .attribution {
+  font-family: var(--font-marca);
+  font-size: 8pt;
+  letter-spacing: 0.32em;
+  color: var(--accent);
+  margin-top: 4mm;
+}
+.frontispiece .ornament {
+  width: 30mm; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--accent), transparent);
+  margin: 8mm auto;
+}
+
+/* ==========================================================================
+   TOC — sumário
+   ========================================================================== */
+.toc-titulo {
+  font-family: var(--font-display);
+  font-size: 24pt;
+  color: var(--text-primary);
+  margin-bottom: 4mm;
+}
+.toc-titulo em {
+  font-family: var(--font-editorial);
+  font-style: italic;
+  color: var(--accent);
+}
+.toc-eyebrow {
+  font-family: var(--font-marca);
+  font-size: 8pt;
+  letter-spacing: 0.32em;
+  color: var(--accent);
+  margin-bottom: 14mm;
+}
+.toc-list { list-style: none; }
+.toc-list li {
+  display: grid;
+  grid-template-columns: 18mm 1fr auto;
+  gap: 6mm;
+  padding: 4mm 0;
+  border-bottom: 1px dashed rgba(31, 61, 46, 0.18);
+  align-items: baseline;
+}
+.toc-roman {
+  font-family: var(--font-editorial);
+  font-style: italic;
+  color: var(--accent);
+  font-size: 14pt;
+}
+.toc-titulo-cap {
+  font-family: var(--font-display);
+  font-size: 12pt;
+  color: var(--text-primary);
+  letter-spacing: 0.005em;
+}
+.toc-titulo-cap small {
+  display: block;
+  font-family: var(--font-body);
+  font-style: italic;
+  font-size: 9pt;
+  color: rgba(31, 61, 46, 0.65);
+  letter-spacing: 0;
+  margin-top: 1mm;
+}
+.toc-pagina {
+  font-family: var(--font-marca);
+  font-size: 9pt;
+  letter-spacing: 0.18em;
+  color: var(--accent);
+}
+
+/* ==========================================================================
+   CHAPTER — abertura de capítulo
+   ========================================================================== */
+.chapter-opener {
+  display: flex; flex-direction: column;
+  justify-content: center; align-items: flex-start;
+  padding: 30mm 16mm;
+  min-height: 174mm;
+}
+.chapter-roman {
+  font-family: var(--font-editorial);
+  font-style: italic;
+  font-size: 96pt;
+  line-height: 1;
+  color: var(--accent);
+  margin-bottom: 4mm;
+}
+.chapter-eyebrow {
+  font-family: var(--font-marca);
+  font-size: 9pt;
+  letter-spacing: 0.42em;
+  color: var(--text-primary);
+  margin-bottom: 8mm;
+}
+.chapter-titulo {
+  font-family: var(--font-display);
+  font-size: 28pt;
+  line-height: 1.1;
+  color: var(--text-primary);
+  letter-spacing: 0.005em;
+  margin-bottom: 10mm;
+  max-width: 100mm;
+}
+.chapter-titulo em {
+  font-family: var(--font-editorial);
+  font-style: italic;
+  color: var(--accent);
+}
+.chapter-lede {
+  font-family: var(--font-editorial);
+  font-style: italic;
+  font-size: 12pt;
+  line-height: 1.55;
+  color: var(--text-primary);
+  padding-left: 8mm;
+  border-left: 0.5mm solid var(--accent);
+  max-width: 110mm;
+}
+
+/* ==========================================================================
+   CONTENT PAGE — corpo de texto (com header e footer)
+   ========================================================================== */
+.content-page {
+  padding-top: 12mm;
+}
+.page-header {
+  display: flex; justify-content: space-between; align-items: baseline;
+  padding-bottom: 6mm;
+  border-bottom: 1px solid rgba(31, 61, 46, 0.18);
+  margin-bottom: 10mm;
+  font-family: var(--font-marca);
+  font-size: 8pt;
+  letter-spacing: 0.32em;
+  color: var(--accent);
+}
+.page-header .esquerda { color: var(--text-primary); }
+.page-footer {
+  margin-top: auto;
+  padding-top: 6mm;
+  border-top: 1px solid rgba(31, 61, 46, 0.18);
+  display: flex; justify-content: space-between;
+  font-family: var(--font-marca);
+  font-size: 8pt;
+  letter-spacing: 0.32em;
+  color: var(--accent);
+}
+
+/* Corpo de texto */
+.content {
+  flex: 1;
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 11pt;
+  line-height: 1.7;
+  color: var(--text-primary);
+}
+.content h2 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 20pt;
+  line-height: 1.1;
+  color: var(--text-primary);
+  margin: 8mm 0 4mm;
+}
+.content h2 em {
+  font-family: var(--font-editorial);
+  font-style: italic;
+  color: var(--accent);
+}
+.content h3 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 14pt;
+  line-height: 1.15;
+  color: var(--text-primary);
+  margin: 6mm 0 3mm;
+}
+.content h4 {
+  font-family: var(--font-marca);
+  font-size: 9pt;
+  letter-spacing: 0.32em;
+  color: var(--accent);
+  margin: 6mm 0 2mm;
+}
+.content p { margin-bottom: 4mm; }
+.content p strong { font-weight: 500; color: var(--text-primary); }
+.content em {
+  font-family: var(--font-editorial);
+  font-style: italic;
+  color: var(--accent);
+}
+
+/* Capitular (drop-cap) — primeira letra do primeiro parágrafo */
+.content > p:first-of-type::first-letter {
+  font-family: var(--font-display);
+  font-size: 48pt;
+  line-height: 0.85;
+  float: left;
+  padding: 0 3mm 0 0;
+  color: var(--accent);
+}
+
+/* Lista de ingredientes / lista numerada */
+.list-ingredients {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 3mm 8mm;
+  margin: 6mm 0;
+}
+.list-ingredients li {
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 10pt;
+  padding-left: 5mm;
+  position: relative;
+}
+.list-ingredients li::before {
+  content: '–';
+  position: absolute;
+  left: 0; color: var(--accent);
+}
+.list-ingredients li strong {
+  font-weight: 500;
+  color: var(--text-primary);
+}
+.list-ingredients li small {
+  display: block;
+  font-family: var(--font-editorial);
+  font-style: italic;
+  font-size: 9pt;
+  color: rgba(31, 61, 46, 0.6);
+  margin-top: 0.5mm;
+}
+
+/* Pull-quote estilo livro */
+.pullquote {
+  font-family: var(--font-editorial);
+  font-style: italic;
+  font-size: 14pt;
+  line-height: 1.5;
+  color: var(--accent);
+  text-align: center;
+  margin: 10mm auto;
+  max-width: 100mm;
+  padding: 6mm 0;
+  border-top: 0.5mm solid var(--accent);
+  border-bottom: 0.5mm solid var(--accent);
+}
+
+/* Tabela de receita / planner */
+.table-recipe {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 6mm 0;
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 10pt;
+}
+.table-recipe th {
+  font-family: var(--font-marca);
+  font-size: 8pt;
+  letter-spacing: 0.28em;
+  color: var(--accent);
+  text-align: left;
+  padding: 3mm 0;
+  border-bottom: 0.5mm solid var(--accent);
+}
+.table-recipe td {
+  padding: 2.5mm 0;
+  border-bottom: 1px solid rgba(31, 61, 46, 0.12);
+  vertical-align: top;
+}
+.table-recipe td.titulo {
+  font-weight: 500;
+  color: var(--text-primary);
+  width: 38%;
+}
+.table-recipe td.detail {
+  color: rgba(31, 61, 46, 0.78);
+}
+
+/* Bloco TODO (placeholder editorial) */
+.todo-block {
+  margin: 8mm 0;
+  padding: 6mm 8mm;
+  border: 0.5mm dashed var(--accent);
+  background: var(--bg-lift);
+  border-radius: 1mm;
+  text-align: center;
+}
+.todo-block .label {
+  font-family: var(--font-marca);
+  font-size: 8pt;
+  letter-spacing: 0.42em;
+  color: var(--accent);
+  margin-bottom: 3mm;
+}
+.todo-block .desc {
+  font-family: var(--font-editorial);
+  font-style: italic;
+  font-size: 11pt;
+  color: var(--text-primary);
+  line-height: 1.55;
+}
+.todo-block .desc small {
+  display: block;
+  font-family: var(--font-body);
+  font-style: normal;
+  font-size: 9pt;
+  color: rgba(31, 61, 46, 0.65);
+  margin-top: 2mm;
+  letter-spacing: 0;
+}
+
+/* ==========================================================================
+   BACK COVER
+   ========================================================================== */
+.back-cover {
+  background: var(--core-emerald);
+  color: var(--core-ivory);
+  display: flex; flex-direction: column;
+  justify-content: center; align-items: center;
+  padding: 30mm 18mm;
+  text-align: center;
+  position: relative;
+}
+.back-cover::before {
+  content: '';
+  position: absolute;
+  inset: 12mm;
+  border: 1px solid rgba(168, 139, 74, 0.45);
+  pointer-events: none;
+}
+.back-cover .seal {
+  width: 30mm; height: 30mm;
+  border-radius: 50%;
+  border: 1px solid rgba(168, 139, 74, 0.5);
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-display);
+  font-size: 22pt;
+  color: var(--core-gold);
+  margin-bottom: 10mm;
+  position: relative;
+}
+.back-cover .seal::before {
+  content: '';
+  position: absolute; inset: 2mm;
+  border: 1px solid rgba(168, 139, 74, 0.18);
+  border-radius: 50%;
+}
+.back-cover .est {
+  font-family: var(--font-marca);
+  font-size: 8pt;
+  letter-spacing: 0.5em;
+  color: rgba(168, 139, 74, 0.75);
+  margin-bottom: 14mm;
+}
+.back-cover .quote {
+  font-family: var(--font-editorial);
+  font-style: italic;
+  font-size: 12pt;
+  line-height: 1.5;
+  color: var(--core-ivory);
+  max-width: 100mm;
+  margin-bottom: 10mm;
+}
+.back-cover .attribution {
+  font-family: var(--font-marca);
+  font-size: 8pt;
+  letter-spacing: 0.42em;
+  color: rgba(168, 139, 74, 0.85);
+}
