@@ -821,3 +821,155 @@ Após todos os steps acima:
 
 ---
 
+## Lista consolidada de placeholders
+
+Tudo que precisa ser substituído antes do go-live, em ordem de aparição no código. **Anote os valores reais conforme você passa pelas fases — depois usa essa tabela como roteiro de Find & Replace na Fase X.**
+
+### `landing/content.js`
+
+| Linha aprox | Placeholder atual | Vira | Fonte (de qual fase pegar) |
+|---|---|---|---|
+| 8 | `VIDEO_ID: '76979871'` | ID do Vimeo Pro do VSL | Após upload do VSL no Vimeo |
+| 13 | `META_PIXEL_ID: 'XXXXXXXXXXXX'` | 16 dígitos do Pixel ID | Fase VII step 3 |
+| 14 | `GTM_ID: 'GTM-XXXXXXX'` | `GTM-<seu-ID>` | Fase VII step 9 |
+| 17 | `KIWIFY_CHECKOUT_URL: '...SUBSTITUIR_COM_LINK_REAL'` | URL completa do checkout do Método | Fase I step 10 |
+
+### `upsell/content.js`
+
+| Linha aprox | Placeholder atual | Vira | Fonte |
+|---|---|---|---|
+| 8 | `VIDEO_ID: '76979871'` | ID do Vimeo Pro do upsell video (2-3min) | Após produção do upsell video |
+| 13 | `META_PIXEL_ID: 'XXXXXXXXXXXX'` | mesmo da landing | Fase VII |
+| 14 | `GTM_ID: 'GTM-XXXXXXX'` | mesmo da landing | Fase VII |
+| 17 | `KIWIFY_ACCEPT_URL: '...SUBSTITUIR_LINK_UPSELL_ACEITAR_1CLICK'` | URL real de aceite 1-click | Fase III step 10 |
+| 18 | `KIWIFY_DECLINE_URL: 'https://desinflamacao.com.br/membros/?skip_upsell=1'` | URL da área de membros | Fase IX step 8 |
+
+### `landing/index.html`
+
+| Onde | Placeholder atual | Vira | Fonte |
+|---|---|---|---|
+| `<script type="application/ld+json">` JSON-LD `"url"` | `"https://desinflamacao.com.br/"` | URL real do domínio | Fase VI |
+| `<script type="application/ld+json">` JSON-LD `"image"` | `"https://desinflamacao.com.br/landing/assets/og-image.jpg"` | URL real do og-image | Fase VI |
+| `<link rel="canonical">` | `href="https://desinflamacao.com.br/"` | URL real | Fase VI |
+| GTM `<noscript>` no `<body>` | `id=GTM-XXXXXXX` | `GTM-<seu-ID>` | Fase VII |
+
+### Cache-busting (recomendado bumpar antes do go-live)
+
+Em ambos `landing/index.html` e `upsell/index.html`, todos os imports usam `?v=20260507d`. Antes do go-live, trocar para `?v=PROD-<data-do-go-live>` pra forçar refresh em qualquer cliente que tenha visitado versões dev anteriormente.
+
+Comando rápido (substitua a data):
+
+```bash
+sed -i 's/?v=20260507d/?v=PROD-20260520/g' landing/index.html upsell/index.html
+git add landing/index.html upsell/index.html
+git commit -m "chore: bump cache-bust antes do go-live"
+git push
+```
+
+---
+
+## Anexos
+
+### Anexo A: Cartão de teste Kiwify (modo Sandbox)
+
+```
+Número:    4111 1111 1111 1111
+CVV:       123
+Validade:  qualquer data futura (ex: 12/2030)
+Nome:      qualquer nome
+CPF:       000.000.000-00 (Kiwify aceita CPFs inválidos no sandbox)
+```
+
+⚠ Esses dados só funcionam em **modo Sandbox**. Para ativar:
+- Kiwify > Configurações > Modo Sandbox: `Ativado`
+- Após smoke test, **desativar**: Modo Sandbox: `Desativado`
+
+### Anexo B: Texto pronto pro Order Bump (Xícara de Ouro)
+
+Copiar e colar no campo "Texto exibido no checkout" da Fase II:
+
+```
+Adicione 15 receitas exclusivas de chás termogênicos anti-inflamatórios, testados pelo método. PDF + entregue junto com o curso.
+```
+
+(140 caracteres exatos, testado em copy testes — não modificar.)
+
+### Anexo C: Prompt nano-banana2 pro poster do Order Bump
+
+Salvar em `nano-banana2/prompts/landing/order-bump-xicara.json`:
+
+```json
+{
+  "prompt": "Cinematic editorial photography of a small antique porcelain teacup filled with steaming amber-honey colored herbal infusion, single warm gold key light from upper-left at 45 degrees, deep emerald-tinted carbon background (#0F1B15 to #050A07), micro-scratches on cup rim suggesting wear, faint steam vapor catching the gold light beam, dust particles drifting in the light, weathered dark stone surface beneath, shot on Hasselblad H6D-100c 80mm f/2.8 ISO 200, shallow depth of field with focus on the teacup rim, rich shadow detail with deep blacks not crushed, mood of silent expensive longevity clinic at dusk. No human, no text overlay, no commercial gloss, no oversaturated colors, documentary realism, restrained composition.",
+  "negative_prompt": "no human, no text overlay, no logo, no commercial product look, plastic skin, beautification filters, oversaturated colors, depth flattening, CGI, cartoon, illustration, painting, blurry, distorted, overexposed, watermark, more realistic reinterpretation",
+  "api_parameters": {
+    "resolution": "2K",
+    "output_format": "jpg",
+    "aspect_ratio": "1:1"
+  },
+  "settings": {
+    "style": "cinematic editorial product photography Bio-Premium",
+    "lighting": "single warm gold key light upper-left 45 degrees, deep falloff",
+    "camera_angle": "slight tabletop high-angle",
+    "depth_of_field": "shallow f/2.8",
+    "quality": "high detail, rich shadow detail, deep blacks not crushed"
+  }
+}
+```
+
+Rodar:
+```bash
+python nano-banana2/scripts/generate_kie.py nano-banana2/prompts/landing/order-bump-xicara.json nano-banana2/images/landing/order-bump-xicara.jpg "1:1"
+```
+
+### Anexo D: Como exportar os PDFs em Botanique
+
+Os 3 PDFs (Guia, Planner, Receitas) são gerados pelos templates HTML em `pdfs/`. Para exportar como PDF de verdade pra upload na área de membros:
+
+1. Abrir o template no navegador:
+   ```
+   http://localhost:8082/pdfs/guia-compras.html
+   http://localhost:8082/pdfs/planner-6-dias.html
+   http://localhost:8082/pdfs/receitas-15min.html
+   ```
+2. `Ctrl+P` (ou `Cmd+P` no Mac)
+3. Destino: `Salvar como PDF`
+4. Layout: `Retrato`
+5. Margens: `Padrão` (já configurado no `@page`)
+6. Em "Mais configurações":
+   - Desabilitar `Cabeçalhos e rodapés`
+   - **Manter habilitado** `Plano de fundo` (preserva a paleta Botanique parchment)
+7. Salvar como:
+   - `metodo-desinflamacao-bonus-1-guia-compras.pdf`
+   - `metodo-desinflamacao-bonus-2-planner-6-dias.pdf`
+   - `metodo-desinflamacao-bonus-3-receitas-15min.pdf`
+
+Quando os capítulos II-IV do Guia, dias III-VI do Planner e receitas 3-30 forem produzidos, repetir o export para a versão final.
+
+### Anexo E: Referências cruzadas
+
+- **Spec deste checklist:** `docs/superpowers/specs/2026-05-07-checklist-kiwify-hotmart-design.md`
+- **Plano de execução deste checklist:** `docs/superpowers/plans/2026-05-07-checklist-kiwify-implementation.md`
+- **Currículo das 26 aulas:** `docs/curriculo-metodo-desinflamacao.md`
+- **Roteiro completo da VSL:** `docs/roteiro-vsl-metodo-desinflamacao.md`
+- **Sistema visual Bio-Premium:** `docs/superpowers/specs/2026-05-07-identidade-visual-bio-premium-design.md`
+- **Spec da landing page:** `docs/superpowers/specs/2026-05-07-landing-page-vsl-design.md`
+- **Templates dos PDFs:** `pdfs/style.css`, `pdfs/guia-compras.html`, `pdfs/planner-6-dias.html`, `pdfs/receitas-15min.html`
+
+### Anexo F: Domínio sugerido
+
+Algumas opções defensáveis para registro:
+
+- `desinflamacao.com.br` — direto, descritivo, alinhado com a marca
+- `metododesinflamacao.com.br` — mais formal, talvez longo demais
+- `protocolodesinflamacao.com.br` — formal
+- `desinflame.com.br` — verbal, imperativo, ousado
+- `silenciocelular.com.br` — conceitual, mais reservado
+
+Verificar disponibilidade em `https://registro.br`. Custo médio: R$ 40/ano para `.com.br`.
+
+---
+
+**Fim do checklist.** Após Fase XI bem-sucedida, você está formalmente em produção. Bem-vindo ao ar.
+
+
