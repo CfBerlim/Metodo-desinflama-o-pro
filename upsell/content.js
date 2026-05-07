@@ -4,6 +4,12 @@
    ========================================================================== */
 
 window.UPSELL_CONFIG = {
+  // Video Vimeo — placeholder publico ate produzir o real
+  VIDEO_ID: '76979871',
+
+  // Threshold de reveal — segundos no video pra liberar oferta+preco+botoes
+  REVEAL_THRESHOLD_SECONDS: 90,  // 1:30
+
   // URLs Kiwify — substituir antes do deploy
   KIWIFY_ACCEPT_URL: 'https://pay.kiwify.com.br/SUBSTITUIR_LINK_UPSELL_ACEITAR_1CLICK',
   KIWIFY_DECLINE_URL: 'https://desinflamacaopro.com.br/membros/?skip_upsell=1',
