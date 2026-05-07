@@ -1,0 +1,10 @@
+{
+  "prompt": "Use the reference image as the absolute identity lock — keep the man's face, head, hair, eyebrows, eyes, nose, mouth, chin, skin tone, body, chest hair, and the exact same distressed light-tan leather wide-brim Australian outback hat 100% identical. Do not stylize, beautify, slim, or rejuvenate him. Same calm closed-mouth expression. New scene: he is standing knee-deep in clear shallow turquoise tropical sea water on a Brazilian northeast beach, both hands gripping a freshly caught live blacktip shark about 1.3 meters long held horizontally across his chest, water dripping off the shark, splashes around his thighs. Background: blurred coconut palms, thatched-roof beach kiosk, blue and yellow shade sails, white sand. Shot on 35mm DSLR, 50mm prime, f/4, ISO 200, natural midday tropical sunlight from upper left, sharp shadow under the hat brim, candid documentary realism, unposed, real skin pores and texture, real water physics.",
+  "negative_prompt": "different person, face swap, younger man, slimmer face, idealized face, model face, different eyes, light eyes, thin eyebrows, different nose, beard, different hat, plastic skin, skin smoothing, beautification, CGI, cartoon, illustration, blurry, distorted face, extra fingers, overexposed, fake shark, rubber shark, oversaturated, fantasy lighting, model body, six-pack abs",
+  "image_input": ["https://files.catbox.moe/iyel2l.jpg"],
+  "api_parameters": {
+    "resolution": "2K",
+    "output_format": "jpg",
+    "aspect_ratio": "4:3"
+  }
+}

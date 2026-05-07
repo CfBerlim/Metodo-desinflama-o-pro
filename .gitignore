@@ -1,0 +1,15 @@
+# Visual companion working files
+.superpowers/
+
+# Nano-banana toolchain
+nano-banana2/.env
+nano-banana2/__pycache__/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editors
+.vscode/
+.idea/
+*.swp

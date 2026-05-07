@@ -1,0 +1,16 @@
+{
+  "prompt": "Ultra-realistic close-up product shot of a single 300ml clear glass bottle filled with vibrant green detox juice — visible texture variation in the liquid suggesting freshly blended kale, ginger and apple, with tiny natural pulp particles suspended throughout. The bottle has a matte black screw cap and a clean unbranded glass body with subtle condensation droplets clinging to the cold surface, sliding down in irregular trails. Sitting on a worn light oak wood surface with visible grain, a few specks of dust and a faint ring stain near the bottle base. Soft directional natural light from a window on the left producing a gentle gradient highlight on the bottle's left edge and a soft realistic shadow falling to the right. Shallow depth of field. 85mm lens, f/2.8, ISO 200. Documentary food photography, candid, unretouched, the kind of shot a small wellness brand would actually post. Do not over-polish. No studio key light. No artificial syrup sheen.",
+  "negative_prompt": "plastic skin, glossy syrup overlay, unnatural sheen, oversaturated colors, editorial restaurant lighting, studio key light, fantasy lighting, over-sharpened leaves, CGI, cartoon, illustration, painting, blurry, low resolution, overexposed, beautification filters, airbrushed texture, depth flattening, perfectly clean surface, mirror-finish reflections, fake water droplets",
+  "api_parameters": {
+    "resolution": "1K",
+    "output_format": "jpg",
+    "aspect_ratio": "4:5"
+  },
+  "settings": {
+    "style": "documentary food photography",
+    "lighting": "soft natural daylight from window, left side",
+    "camera_angle": "eye-level, slight three-quarter view",
+    "depth_of_field": "shallow",
+    "quality": "high detail, unretouched, candid"
+  }
+}
