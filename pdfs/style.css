@@ -7,9 +7,9 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html, body { width: 100%; }
 body {
-  background: var(--bg-primary);
-  color: var(--text-primary);
-  font-family: var(--font-body);
+  background: var(--parchment);
+  color: var(--ink-light);
+  font-family: var(--ff-body);
   font-weight: 300;
   font-size: 12pt;
   line-height: 1.65;
@@ -28,7 +28,7 @@ body {
   min-height: 210mm;
   padding: 18mm 16mm 20mm 16mm;
   margin: 0 auto 16px;
-  background: var(--bg-primary);
+  background: var(--parchment);
   page-break-after: always;
   position: relative;
   display: flex; flex-direction: column;
@@ -45,7 +45,7 @@ body {
   }
 }
 @media print {
-  body { background: var(--bg-primary); padding: 0; }
+  body { background: var(--parchment); padding: 0; }
   .page { box-shadow: none; margin: 0; padding: 0; }
 }
 
@@ -53,8 +53,8 @@ body {
    COVER — capa do livro
    ========================================================================== */
 .cover {
-  background: var(--core-emerald);
-  color: var(--core-ivory);
+  background: var(--emerald-700);
+  color: var(--champagne);
   display: flex; flex-direction: column;
   justify-content: space-between;
   align-items: center;
@@ -69,10 +69,10 @@ body {
   pointer-events: none;
 }
 .cover-top {
-  font-family: var(--font-marca);
+  font-family: var(--ff-smallcaps);
   font-size: 9pt;
   letter-spacing: 0.42em;
-  color: var(--core-gold);
+  color: var(--gold-500);
   text-align: center;
   margin-top: 18mm;
 }
@@ -83,34 +83,34 @@ body {
   gap: 12mm;
 }
 .cover-volume {
-  font-family: var(--font-editorial);
+  font-family: var(--ff-editorial);
   font-style: italic;
   font-size: 14pt;
-  color: var(--core-gold);
+  color: var(--gold-500);
 }
 .cover-titulo {
-  font-family: var(--font-display);
+  font-family: var(--ff-display);
   font-size: 32pt;
   line-height: 1.1;
-  color: var(--core-ivory);
+  color: var(--champagne);
   letter-spacing: 0.005em;
 }
 .cover-subtitulo {
-  font-family: var(--font-marca);
+  font-family: var(--ff-smallcaps);
   font-size: 9pt;
   letter-spacing: 0.5em;
-  color: var(--core-gold);
+  color: var(--gold-500);
   margin-top: 8mm;
 }
 .cover-autoria {
-  font-family: var(--font-editorial);
+  font-family: var(--ff-editorial);
   font-style: italic;
   font-size: 10pt;
   color: rgba(235, 227, 208, 0.7);
   margin-top: 10mm;
 }
 .cover-bottom {
-  font-family: var(--font-marca);
+  font-family: var(--ff-smallcaps);
   font-size: 8pt;
   letter-spacing: 0.5em;
   color: rgba(168, 139, 74, 0.7);
@@ -122,9 +122,9 @@ body {
   border-radius: 50%;
   border: 1px solid rgba(168, 139, 74, 0.5);
   display: flex; align-items: center; justify-content: center;
-  font-family: var(--font-display);
+  font-family: var(--ff-display);
   font-size: 18pt;
-  color: var(--core-gold);
+  color: var(--gold-500);
   margin: 0 auto 8mm;
   position: relative;
 }
@@ -146,23 +146,23 @@ body {
   gap: 10mm;
 }
 .frontispiece .quote {
-  font-family: var(--font-editorial);
+  font-family: var(--ff-editorial);
   font-style: italic;
   font-size: 13pt;
   line-height: 1.55;
-  color: var(--text-primary);
+  color: var(--ink-light);
   max-width: 100mm;
 }
 .frontispiece .attribution {
-  font-family: var(--font-marca);
+  font-family: var(--ff-smallcaps);
   font-size: 8pt;
   letter-spacing: 0.32em;
-  color: var(--accent);
+  color: var(--gold-700);
   margin-top: 4mm;
 }
 .frontispiece .ornament {
   width: 30mm; height: 1px;
-  background: linear-gradient(90deg, transparent, var(--accent), transparent);
+  background: linear-gradient(90deg, transparent, var(--gold-700), transparent);
   margin: 8mm auto;
 }
 
@@ -170,21 +170,21 @@ body {
    TOC — sumário
    ========================================================================== */
 .toc-titulo {
-  font-family: var(--font-display);
+  font-family: var(--ff-display);
   font-size: 24pt;
-  color: var(--text-primary);
+  color: var(--ink-light);
   margin-bottom: 4mm;
 }
 .toc-titulo em {
-  font-family: var(--font-editorial);
+  font-family: var(--ff-editorial);
   font-style: italic;
-  color: var(--accent);
+  color: var(--gold-700);
 }
 .toc-eyebrow {
-  font-family: var(--font-marca);
+  font-family: var(--ff-smallcaps);
   font-size: 8pt;
   letter-spacing: 0.32em;
-  color: var(--accent);
+  color: var(--gold-700);
   margin-bottom: 14mm;
 }
 .toc-list { list-style: none; }
@@ -197,20 +197,20 @@ body {
   align-items: baseline;
 }
 .toc-roman {
-  font-family: var(--font-editorial);
+  font-family: var(--ff-editorial);
   font-style: italic;
-  color: var(--accent);
+  color: var(--gold-700);
   font-size: 14pt;
 }
 .toc-titulo-cap {
-  font-family: var(--font-display);
+  font-family: var(--ff-display);
   font-size: 12pt;
-  color: var(--text-primary);
+  color: var(--ink-light);
   letter-spacing: 0.005em;
 }
 .toc-titulo-cap small {
   display: block;
-  font-family: var(--font-body);
+  font-family: var(--ff-body);
   font-style: italic;
   font-size: 9pt;
   color: rgba(31, 61, 46, 0.65);
@@ -218,10 +218,10 @@ body {
   margin-top: 1mm;
 }
 .toc-pagina {
-  font-family: var(--font-marca);
+  font-family: var(--ff-smallcaps);
   font-size: 9pt;
   letter-spacing: 0.18em;
-  color: var(--accent);
+  color: var(--gold-700);
 }
 
 /* ==========================================================================
@@ -234,42 +234,42 @@ body {
   min-height: 174mm;
 }
 .chapter-roman {
-  font-family: var(--font-editorial);
+  font-family: var(--ff-editorial);
   font-style: italic;
   font-size: 96pt;
   line-height: 1;
-  color: var(--accent);
+  color: var(--gold-700);
   margin-bottom: 4mm;
 }
 .chapter-eyebrow {
-  font-family: var(--font-marca);
+  font-family: var(--ff-smallcaps);
   font-size: 9pt;
   letter-spacing: 0.42em;
-  color: var(--text-primary);
+  color: var(--ink-light);
   margin-bottom: 8mm;
 }
 .chapter-titulo {
-  font-family: var(--font-display);
+  font-family: var(--ff-display);
   font-size: 28pt;
   line-height: 1.1;
-  color: var(--text-primary);
+  color: var(--ink-light);
   letter-spacing: 0.005em;
   margin-bottom: 10mm;
   max-width: 100mm;
 }
 .chapter-titulo em {
-  font-family: var(--font-editorial);
+  font-family: var(--ff-editorial);
   font-style: italic;
-  color: var(--accent);
+  color: var(--gold-700);
 }
 .chapter-lede {
-  font-family: var(--font-editorial);
+  font-family: var(--ff-editorial);
   font-style: italic;
   font-size: 12pt;
   line-height: 1.55;
-  color: var(--text-primary);
+  color: var(--ink-light);
   padding-left: 8mm;
-  border-left: 0.5mm solid var(--accent);
+  border-left: 0.5mm solid var(--gold-700);
   max-width: 110mm;
 }
 
@@ -284,76 +284,76 @@ body {
   padding-bottom: 6mm;
   border-bottom: 1px solid rgba(31, 61, 46, 0.18);
   margin-bottom: 10mm;
-  font-family: var(--font-marca);
+  font-family: var(--ff-smallcaps);
   font-size: 8pt;
   letter-spacing: 0.32em;
-  color: var(--accent);
+  color: var(--gold-700);
 }
-.page-header .esquerda { color: var(--text-primary); }
+.page-header .esquerda { color: var(--ink-light); }
 .page-footer {
   margin-top: auto;
   padding-top: 6mm;
   border-top: 1px solid rgba(31, 61, 46, 0.18);
   display: flex; justify-content: space-between;
-  font-family: var(--font-marca);
+  font-family: var(--ff-smallcaps);
   font-size: 8pt;
   letter-spacing: 0.32em;
-  color: var(--accent);
+  color: var(--gold-700);
 }
 
 /* Corpo de texto */
 .content {
   flex: 1;
-  font-family: var(--font-body);
+  font-family: var(--ff-body);
   font-weight: 300;
   font-size: 11pt;
   line-height: 1.7;
-  color: var(--text-primary);
+  color: var(--ink-light);
 }
 .content h2 {
-  font-family: var(--font-display);
+  font-family: var(--ff-display);
   font-weight: 400;
   font-size: 20pt;
   line-height: 1.1;
-  color: var(--text-primary);
+  color: var(--ink-light);
   margin: 8mm 0 4mm;
 }
 .content h2 em {
-  font-family: var(--font-editorial);
+  font-family: var(--ff-editorial);
   font-style: italic;
-  color: var(--accent);
+  color: var(--gold-700);
 }
 .content h3 {
-  font-family: var(--font-display);
+  font-family: var(--ff-display);
   font-weight: 400;
   font-size: 14pt;
   line-height: 1.15;
-  color: var(--text-primary);
+  color: var(--ink-light);
   margin: 6mm 0 3mm;
 }
 .content h4 {
-  font-family: var(--font-marca);
+  font-family: var(--ff-smallcaps);
   font-size: 9pt;
   letter-spacing: 0.32em;
-  color: var(--accent);
+  color: var(--gold-700);
   margin: 6mm 0 2mm;
 }
 .content p { margin-bottom: 4mm; }
-.content p strong { font-weight: 500; color: var(--text-primary); }
+.content p strong { font-weight: 500; color: var(--ink-light); }
 .content em {
-  font-family: var(--font-editorial);
+  font-family: var(--ff-editorial);
   font-style: italic;
-  color: var(--accent);
+  color: var(--gold-700);
 }
 
 /* Capitular (drop-cap) — primeira letra do primeiro parágrafo */
 .content > p:first-of-type::first-letter {
-  font-family: var(--font-display);
+  font-family: var(--ff-display);
   font-size: 48pt;
   line-height: 0.85;
   float: left;
   padding: 0 3mm 0 0;
-  color: var(--accent);
+  color: var(--gold-700);
 }
 
 /* Lista de ingredientes / lista numerada */
@@ -365,7 +365,7 @@ body {
   margin: 6mm 0;
 }
 .list-ingredients li {
-  font-family: var(--font-body);
+  font-family: var(--ff-body);
   font-weight: 300;
   font-size: 10pt;
   padding-left: 5mm;
@@ -374,15 +374,15 @@ body {
 .list-ingredients li::before {
   content: '–';
   position: absolute;
-  left: 0; color: var(--accent);
+  left: 0; color: var(--gold-700);
 }
 .list-ingredients li strong {
   font-weight: 500;
-  color: var(--text-primary);
+  color: var(--ink-light);
 }
 .list-ingredients li small {
   display: block;
-  font-family: var(--font-editorial);
+  font-family: var(--ff-editorial);
   font-style: italic;
   font-size: 9pt;
   color: rgba(31, 61, 46, 0.6);
@@ -391,17 +391,17 @@ body {
 
 /* Pull-quote estilo livro */
 .pullquote {
-  font-family: var(--font-editorial);
+  font-family: var(--ff-editorial);
   font-style: italic;
   font-size: 14pt;
   line-height: 1.5;
-  color: var(--accent);
+  color: var(--gold-700);
   text-align: center;
   margin: 10mm auto;
   max-width: 100mm;
   padding: 6mm 0;
-  border-top: 0.5mm solid var(--accent);
-  border-bottom: 0.5mm solid var(--accent);
+  border-top: 0.5mm solid var(--gold-700);
+  border-bottom: 0.5mm solid var(--gold-700);
 }
 
 /* Tabela de receita / planner */
@@ -409,18 +409,18 @@ body {
   width: 100%;
   border-collapse: collapse;
   margin: 6mm 0;
-  font-family: var(--font-body);
+  font-family: var(--ff-body);
   font-weight: 300;
   font-size: 10pt;
 }
 .table-recipe th {
-  font-family: var(--font-marca);
+  font-family: var(--ff-smallcaps);
   font-size: 8pt;
   letter-spacing: 0.28em;
-  color: var(--accent);
+  color: var(--gold-700);
   text-align: left;
   padding: 3mm 0;
-  border-bottom: 0.5mm solid var(--accent);
+  border-bottom: 0.5mm solid var(--gold-700);
 }
 .table-recipe td {
   padding: 2.5mm 0;
@@ -429,7 +429,7 @@ body {
 }
 .table-recipe td.titulo {
   font-weight: 500;
-  color: var(--text-primary);
+  color: var(--ink-light);
   width: 38%;
 }
 .table-recipe td.detail {
@@ -440,28 +440,28 @@ body {
 .todo-block {
   margin: 8mm 0;
   padding: 6mm 8mm;
-  border: 0.5mm dashed var(--accent);
-  background: var(--bg-lift);
+  border: 0.5mm dashed var(--gold-700);
+  background: var(--parchment-dark);
   border-radius: 1mm;
   text-align: center;
 }
 .todo-block .label {
-  font-family: var(--font-marca);
+  font-family: var(--ff-smallcaps);
   font-size: 8pt;
   letter-spacing: 0.42em;
-  color: var(--accent);
+  color: var(--gold-700);
   margin-bottom: 3mm;
 }
 .todo-block .desc {
-  font-family: var(--font-editorial);
+  font-family: var(--ff-editorial);
   font-style: italic;
   font-size: 11pt;
-  color: var(--text-primary);
+  color: var(--ink-light);
   line-height: 1.55;
 }
 .todo-block .desc small {
   display: block;
-  font-family: var(--font-body);
+  font-family: var(--ff-body);
   font-style: normal;
   font-size: 9pt;
   color: rgba(31, 61, 46, 0.65);
@@ -473,8 +473,8 @@ body {
    BACK COVER
    ========================================================================== */
 .back-cover {
-  background: var(--core-emerald);
-  color: var(--core-ivory);
+  background: var(--emerald-700);
+  color: var(--champagne);
   display: flex; flex-direction: column;
   justify-content: center; align-items: center;
   padding: 30mm 18mm;
@@ -493,9 +493,9 @@ body {
   border-radius: 50%;
   border: 1px solid rgba(168, 139, 74, 0.5);
   display: flex; align-items: center; justify-content: center;
-  font-family: var(--font-display);
+  font-family: var(--ff-display);
   font-size: 22pt;
-  color: var(--core-gold);
+  color: var(--gold-500);
   margin-bottom: 10mm;
   position: relative;
 }
@@ -506,23 +506,23 @@ body {
   border-radius: 50%;
 }
 .back-cover .est {
-  font-family: var(--font-marca);
+  font-family: var(--ff-smallcaps);
   font-size: 8pt;
   letter-spacing: 0.5em;
   color: rgba(168, 139, 74, 0.75);
   margin-bottom: 14mm;
 }
 .back-cover .quote {
-  font-family: var(--font-editorial);
+  font-family: var(--ff-editorial);
   font-style: italic;
   font-size: 12pt;
   line-height: 1.5;
-  color: var(--core-ivory);
+  color: var(--champagne);
   max-width: 100mm;
   margin-bottom: 10mm;
 }
 .back-cover .attribution {
-  font-family: var(--font-marca);
+  font-family: var(--ff-smallcaps);
   font-size: 8pt;
   letter-spacing: 0.42em;
   color: rgba(168, 139, 74, 0.85);
