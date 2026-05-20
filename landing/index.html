@@ -207,6 +207,65 @@
           Se em sete dias o protocolo não cumprir o que promete, basta um e-mail e devolvemos cada centavo. O risco é nosso.
         </p>
       </section>
+
+      <!-- ============================================================
+           PROVA SOCIAL (DEPOIMENTOS)
+           ============================================================ -->
+      <section class="testimonials">
+        <header class="testimonials-header">
+          <span class="label">— Relatos de renascimento —</span>
+          <div class="title">Quem experimentou o <em style="font-family: var(--ff-editorial); font-style: italic;">reset</em></div>
+        </header>
+        <div class="testimonial-cards">
+          <div class="testimonial-card">
+            <div class="test-body">"Depois dos 40, eu achava que acordar cansada e com o corpo inchado era normal da idade. No quarto dia do reset de bioativos, meu intestino funcionou como há anos não funcionava. Perdi 4kg de puro inchaço em duas semanas."</div>
+            <div class="test-author">Helena M., 44 anos · Curitiba</div>
+          </div>
+          <div class="testimonial-card">
+            <div class="test-body">"Sempre fui cético com essas receitas de internet, mas o mecanismo científico faz total sentido. É simples de seguir e os ingredientes custam quase nada na feira. Minha energia voltou a ser o que era aos 25 anos."</div>
+            <div class="test-author">Roberto S., 52 anos · São Paulo</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================================================
+           FAQ (ACORDEÃO INTERATIVO)
+           ============================================================ -->
+      <section class="faq-section">
+        <header class="faq-header">
+          <span class="label">— Dúvidas frequentes —</span>
+          <div class="title">Respostas sinceras</div>
+        </header>
+        <div class="faq-accordion">
+          <div class="faq-item">
+            <button class="faq-trigger">
+              <span>Preciso comprar suplementos caros?</span>
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-answer">
+              <p>Não. Cem por cento dos compostos recomendados no protocolo são alimentos reais e temperos que você compra em qualquer feira livre por centavos. O segredo está na combinação exata e no horário de consumo para desativar a inflamação celular.</p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-trigger">
+              <span>Como funciona a garantia de 7 dias?</span>
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-answer">
+              <p>É muito simples. Você entra hoje, experimenta as primeiras aulas e os primeiros dias do protocolo. Se por qualquer motivo achar que não é para você, basta enviar um e-mail para o suporte dentro do prazo de 7 dias e devolvemos todo o seu dinheiro. Sem perguntas e sem burocracia.</p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-trigger">
+              <span>Por quanto tempo tenho acesso ao método?</span>
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-answer">
+              <p>O seu acesso é vitalício. Isso significa que você pode fazer o protocolo no seu ritmo, rever as aulas sempre que quiser e usar os guias práticos de compras e receitas para manter o estilo de vida anti-inflamatório pelos próximos anos.</p>
+            </div>
+          </div>
+        </div>
+      </section>
     </section>
 
     <footer class="compliance">
@@ -391,7 +450,26 @@
         fireReveal('video_ended');
       });
     }
-    attachVimeo();
+    // FAQ Accordion Interactivity
+    const faqItems = document.querySelectorAll('.faq-item');
+    faqItems.forEach(item => {
+      const trigger = item.querySelector('.faq-trigger');
+      if (trigger) {
+        trigger.addEventListener('click', () => {
+          const active = item.classList.contains('active');
+          faqItems.forEach(i => {
+            i.classList.remove('active');
+            const icon = i.querySelector('.faq-icon');
+            if (icon) icon.textContent = '+';
+          });
+          if (!active) {
+            item.classList.add('active');
+            const icon = item.querySelector('.faq-icon');
+            if (icon) icon.textContent = '−';
+          }
+        });
+      }
+    });
 
     // Safety net final: se nada disparar em 6 min, revela
     setTimeout(() => {
