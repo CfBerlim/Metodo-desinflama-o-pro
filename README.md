@@ -1,6 +1,6 @@
-# Método Desinflamação Pro
+# Protocolo Destrave Celular
 
-Ecossistema completo do funil **Bio-Premium** para o infoproduto _Método Desinflamação Pro_ (alternativamente, _Protocolo Reset Anti-Inflamatório_). Padrão estético de **luxo silencioso** — referências Patek Philippe, Hermès, Aman, Augustinus Bader. Mobile-first.
+Ecossistema completo do funil **Bio-Premium** para o infoproduto _Protocolo Destrave Celular_ (alternativamente, _Protocolo Reset Anti-Inflamatório_). Padrão estético de **luxo silencioso** — referências Patek Philippe, Hermès, Aman, Augustinus Bader. Mobile-first.
 
 > Big Idea: _"Você não engorda por ser guloso ou preguiçoso — seu corpo está cronicamente inflamado."_
 
