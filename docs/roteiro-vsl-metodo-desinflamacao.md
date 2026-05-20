@@ -62,6 +62,37 @@
 
 ---
 
+## 3.5. Alternativas de Ganchos (Padrão de Conversão dos EUA)
+
+Se você for rodar anúncios pagos (Facebook/Instagram/YouTube Ads) ou quiser testar variações de ganchos iniciais com taxas de retenção ainda maiores, utilize uma destas 3 alternativas avançadas:
+
+### Opção A — O Gancho do "Vazamento Inflamatório Silencioso" (Foco: Saúde Intestinal & Fadiga)
+*   **Visual:** Uma gota de líquido dourado penetrando lentamente em uma folha verde escura, com fumaça subindo ao fundo.
+*   **Locução:**
+    > Se você sente aquele cansaço inexplicável logo depois de comer... a causa real não é o glúten, nem a lactose.
+    > É um vazamento silencioso na sua barreira intestinal que está despejando toxinas diretamente na sua corrente sanguínea.
+    > Toda vez que você come, suas células entram em modo de emergência imunológica, provocando um 'incêndio' químico silencioso que drena sua energia e bloqueia o seu metabolismo.
+    > Nos próximos minutos, você vai descobrir como um ritual de centavos desliga esse sinal de vazamento e limpa o seu sangue.
+
+### Opção B — O Gancho da "Célula Zumbi" (Foco: Anti-aging e Metabolismo Travado)
+*   **Visual:** Gravura médica vintage (`vsl-celula-gravura-inflamada.jpg`) com halos vermelhos piscando lentamente no núcleo.
+*   **Locução:**
+    > Cientistas de Harvard recentemente isolaram a causa real pela qual pessoas com mais de 35 anos têm tanta dificuldade para perder peso e manter a energia.
+    > Não é o envelhecimento natural... são as chamadas 'Células Zumbis'.
+    > Células velhas que se recusam a morrer e ficam secretando agentes químicos inflamatórios que 'contagiam' as células saudáveis ao redor.
+    > Esse ciclo vicioso trava a sua tireoide e o seu fígado.
+    > Hoje, eu vou te mostrar o protocolo prático de feira de bairro que atua como uma 'limpeza celular' para varrer essas células zumbis e liberar o seu metabolismo travado.
+
+### Opção C — O Gancho da "Mentira da Salada" (Foco: Contrarian / Padrão Interrompido)
+*   **Visual:** Uma salada genérica de alface em tons cinza opacos, coberta por poeira digital em fade.
+*   **Locução:**
+    > A pior coisa que você pode fazer pelo seu fígado inflamado hoje é comer uma salada de alface e tomate insossa com peito de frango seco.
+    > Dietas de restrição só dizem para o seu cérebro que você está passando por uma grande fome histórica. O resultado? Seu corpo desacelera e acumula gordura nas regiões mais teimosas para te proteger.
+    > Você não precisa comer menos. Você precisa comer o que cura.
+    > Vou te provar como adicionar temperos e ervas de centavos é dez vezes mais eficiente para desinflamar suas células do que cortar o seu carboidrato.
+
+---
+
 ## 4. ATO I · O Gancho (0:00 – 0:45)
 
 ### Cena de abertura (0:00 – 0:08)
