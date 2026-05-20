@@ -4,7 +4,7 @@ Este arquivo é carregado automaticamente pelo Gemini CLI quando você entra em 
 
 ## Sobre o projeto
 
-Funil de vendas Bio-Premium para o infoproduto **Método Desinflamação Pro**. Padrão estético de luxo silencioso (Patek Philippe, Hermès, Aman, Augustinus Bader). Mobile-first. Vanilla HTML/CSS/JS, zero build, zero framework.
+Funil de vendas Bio-Premium para o infoproduto **Protocolo Destrave Celular**. Padrão estético de luxo silencioso (Patek Philippe, Hermès, Aman, Augustinus Bader). Mobile-first. Vanilla HTML/CSS/JS, zero build, zero framework.
 
 Para o panorama completo (arquitetura do funil, todas as superfícies, mecânica de _reveal_, como rodar), leia `README.md` na raiz **antes** de começar qualquer tarefa.
 
