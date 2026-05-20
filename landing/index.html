@@ -216,6 +216,42 @@
           <span class="label">— Relatos de renascimento —</span>
           <div class="title">Quem experimentou o <em style="font-family: var(--ff-editorial); font-style: italic;">reset</em></div>
         </header>
+        <div class="video-testimonials-wrapper">
+          <div class="video-card" onclick="openVideoModal('https://d8j0ntlcm91z4.cloudfront.net/user_3DeCZhwIy5o5mwy3ULex3BW6cAd/hf_20260520_210841_1b43dc9e-38ac-492e-9869-10c4f353bb65.mp4')">
+            <div class="video-thumb" style="background-image: url('https://cdn.higgsfield.ai/marketing_studio_avatar/cd4c64ff-555d-4387-bedb-73ee12629a2b.webp')">
+              <div class="play-overlay">
+                <div class="play-icon-wrap">
+                  <svg viewBox="0 0 24 24" class="play-icon-svg">
+                    <path d="M8 5v14l11-7z"/>
+                  </svg>
+                </div>
+              </div>
+            </div>
+            <div class="video-info">
+              <span class="video-tag">Relato de Aluna</span>
+              <h4 class="video-title">Sofia, 35 anos</h4>
+              <p class="video-subtitle">"Minha energia voltou a ser o que era aos 25 anos"</p>
+            </div>
+          </div>
+
+          <div class="video-card" onclick="openVideoModal('https://d8j0ntlcm91z4.cloudfront.net/user_3DeCZhwIy5o5mwy3ULex3BW6cAd/hf_20260520_211149_558797d8-d93c-4a5a-b21a-48a23f8fef81.mp4')">
+            <div class="video-thumb" style="background-image: url('https://cdn.higgsfield.ai/marketing_studio_avatar/638f1fc1-7010-47ae-b016-e83fc55d91a5.webp')">
+              <div class="play-overlay">
+                <div class="play-icon-wrap">
+                  <svg viewBox="0 0 24 24" class="play-icon-svg">
+                    <path d="M8 5v14l11-7z"/>
+                  </svg>
+                </div>
+              </div>
+            </div>
+            <div class="video-info">
+              <span class="video-tag">Explicação Científica</span>
+              <h4 class="video-title">Stefan, Especialista</h4>
+              <p class="video-subtitle">Como desativar a causa raiz do metabolismo travado</p>
+            </div>
+          </div>
+        </div>
+
         <div class="testimonial-cards">
           <div class="testimonial-card">
             <div class="test-body">"Depois dos 40, eu achava que acordar cansada e com o corpo inchado era normal da idade. No quarto dia do reset de bioativos, meu intestino funcionou como há anos não funcionava. Perdi 4kg de puro inchaço em duas semanas."</div>
@@ -478,9 +514,44 @@
       if (!revealFiredOnce) fireReveal('fallback_timeout');
     }, 360_000);
 
+    // Video Modal Interactivity
+    window.openVideoModal = function(videoSrc) {
+      const modal = document.getElementById('videoModal');
+      const video = document.getElementById('modalVideo');
+      if (modal && video) {
+        video.src = videoSrc;
+        modal.classList.add('active');
+        modal.setAttribute('aria-hidden', 'false');
+        video.play().catch(err => {
+          console.warn('[video] Autoplay bloqueado:', err);
+        });
+      }
+    };
+
+    window.closeVideoModal = function() {
+      const modal = document.getElementById('videoModal');
+      const video = document.getElementById('modalVideo');
+      if (modal && video) {
+        video.pause();
+        video.src = '';
+        modal.classList.remove('active');
+        modal.setAttribute('aria-hidden', 'true');
+      }
+    };
+
     console.info('[reveal] inicializado. dev=' + params.has('dev') + ' reveal=' + params.has('reveal'));
   })();
   </script>
+
+  <!-- Modal Flutuante para os Vídeos -->
+  <div id="videoModal" class="video-modal" aria-hidden="true" onclick="closeVideoModal()">
+    <div class="modal-content" onclick="event.stopPropagation()">
+      <button class="close-btn" aria-label="Fechar" onclick="closeVideoModal()">&times;</button>
+      <div class="video-container">
+        <video id="modalVideo" src="" controls playsinline></video>
+      </div>
+    </div>
+  </div>
 
   <script src="tracking.js?v=20260507j" defer></script>
 </body>
