@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Inter:wght@200;300;400;500;600&family=Italiana&family=Marcellus+SC&display=swap');
+
 /* ==========================================================================
    PDF TEMPLATES — Modo Botanique
    Importa: ../identity/tokens.css (DNA + 3 modos)
@@ -5,7 +7,11 @@
    ========================================================================== */
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html, body { width: 100%; }
+html, body {
+  width: 100%;
+  -webkit-print-color-adjust: exact !important;
+  print-color-adjust: exact !important;
+}
 body {
   background: var(--parchment);
   color: var(--ink-light);
@@ -14,6 +20,8 @@ body {
   font-size: 12pt;
   line-height: 1.65;
   -webkit-font-smoothing: antialiased;
+  -webkit-print-color-adjust: exact !important;
+  print-color-adjust: exact !important;
 }
 
 /* @page para PDF — formato A5 (148×210mm) com margens generosas */
@@ -32,6 +40,8 @@ body {
   page-break-after: always;
   position: relative;
   display: flex; flex-direction: column;
+  -webkit-print-color-adjust: exact !important;
+  print-color-adjust: exact !important;
 }
 .page:last-child { page-break-after: auto; }
 
@@ -45,8 +55,20 @@ body {
   }
 }
 @media print {
-  body { background: var(--parchment); padding: 0; }
-  .page { box-shadow: none; margin: 0; padding: 0; }
+  body {
+    background: var(--parchment) !important;
+    padding: 0;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+  .page {
+    box-shadow: none;
+    margin: 0;
+    padding: 0;
+    background: var(--parchment) !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
 }
 
 /* ==========================================================================
