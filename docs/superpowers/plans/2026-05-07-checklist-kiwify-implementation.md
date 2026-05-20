@@ -136,7 +136,7 @@ git commit -m "docs(checklist): setup inicial - header + TOC 11 fases + warning 
 
 Appendar ao final do arquivo (substitui o comentário "(As 11 fases são adicionadas em tasks subsequentes 2-12)") com seção completa cobrindo:
 
-- **Goal:** Produto "Método Desinflamação Pro" cadastrado na Kiwify, com URL de checkout pública pronta para uso
+- **Goal:** Produto "Protocolo Destrave Celular" cadastrado na Kiwify, com URL de checkout pública pronta para uso
 - **Pré-req:** Conta Kiwify verificada
 - **Tempo:** 30 min
 - **Steps detalhados (8-10 steps):**
@@ -231,7 +231,7 @@ git commit -m "docs(checklist): Fase II - Order Bump Xicara de Ouro"
 
 Conteúdo cobrindo:
 
-- **Goal:** "Clube Vida Leve" cadastrado como produto separado, R$ 297, com 1-click upsell habilitado e linkado ao Método Desinflamação Pro como produto-pai
+- **Goal:** "Clube Vida Leve" cadastrado como produto separado, R$ 297, com 1-click upsell habilitado e linkado ao Protocolo Destrave Celular como produto-pai
 - **Pré-req:** Fase I concluída
 - **Tempo:** 25 min
 - **Steps detalhados:**
@@ -276,11 +276,11 @@ git commit -m "docs(checklist): Fase III - cadastro produto upsell Clube Vida Le
 
 Conteúdo cobrindo:
 
-- **Goal:** Após pagamento aprovado do Método Desinflamação Pro, Kiwify redireciona o cliente para `seudominio.com.br/upsell/`
+- **Goal:** Após pagamento aprovado do Protocolo Destrave Celular, Kiwify redireciona o cliente para `seudominio.com.br/upsell/`
 - **Pré-req:** Fase I concluída + Fase III concluída + saber qual será o domínio (Fase VI)
 - **Tempo:** 15 min
 - **Steps detalhados:**
-  1. Kiwify > Produtos > Método Desinflamação Pro > Configurações de Checkout > Pós-compra
+  1. Kiwify > Produtos > Protocolo Destrave Celular > Configurações de Checkout > Pós-compra
   2. Destino do redirect: "URL externa"
   3. URL: `https://seudominio.com.br/upsell/` (substituir pelo domínio real após Fase VI)
   4. Tempo de espera: 0 segundos (redirect imediato)
@@ -425,7 +425,7 @@ Conteúdo cobrindo:
 
   **Pixel Meta:**
   1. Acessar `business.facebook.com/events_manager`
-  2. Criar pixel (se ainda não existir): nome "Método Desinflamação Pro"
+  2. Criar pixel (se ainda não existir): nome "Protocolo Destrave Celular"
   3. Pegar Pixel ID (16 dígitos) → anotar pra Fase X
   4. Em Kiwify > Configurações > Integrações > Meta Pixel: colar Pixel ID
   5. Ativar eventos: Lead, InitiateCheckout, AddPaymentInfo, Purchase
@@ -433,7 +433,7 @@ Conteúdo cobrindo:
 
   **GTM:**
   7. Acessar `tagmanager.google.com`
-  8. Criar conta + container: nome "Desinflamação Pro Web"
+  8. Criar conta + container: nome "Protocolo Destrave Celular Web"
   9. Pegar GTM ID (formato `GTM-XXXXXXX`) → anotar pra Fase X
   10. (Opcional, mas recomendado) Em GTM, configurar tags básicas: GA4, Google Ads conversion
 
