@@ -1,4 +1,4 @@
-# Protocolo Destrave Celular
+# Protocolo Destrave Celular ( PDC )
 
 Ecossistema completo do funil **Bio-Premium** para o infoproduto _Protocolo Destrave Celular_ (alternativamente, _Protocolo Reset Anti-Inflamatório_). Padrão estético de **luxo silencioso** — referências Patek Philippe, Hermès, Aman, Augustinus Bader. Mobile-first.
 
