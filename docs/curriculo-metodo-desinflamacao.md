@@ -1,5 +1,4 @@
-# Currículo Detalhado — Método Desinflamação Pro
-
+# Currículo Detalhado — Protocolo Destrave Celular
 **Data:** 2026-05-07
 **Total:** 5 módulos · 26 aulas · ~3h47 de vídeo
 **Formato:** Vídeo-aulas curtas (6-12 min cada) faceless cinematográficas, com locução persuasiva, no padrão Apothecary do sistema visual
